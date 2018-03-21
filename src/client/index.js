@@ -7,7 +7,7 @@ document.body.appendChild(root)
 
 render(<App />, root)
 
-document.body.style.background = 'red';
+document.body.style.background = 'white';
 
 if (process.env.NODE_ENV === 'development') {
     const webpackHotMiddleware = require('webpack-hot-middleware/client');
