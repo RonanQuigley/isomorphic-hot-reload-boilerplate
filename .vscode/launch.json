@@ -8,7 +8,7 @@
             "type": "node",
             "request": "launch",
             "name": "Debug Dev Build",
-            "program": "${workspaceFolder}/build/server.js",
+            "program": "${workspaceFolder}/dist/server.js",
             "skipFiles": [
                 "${workspaceRoot}/node_modules/**/*.js",
                 "<node_internals>/**/*.js"
@@ -27,7 +27,7 @@
             "type": "node",
             "request": "launch",
             "name": "Debug Prod Build",
-            "program": "${workspaceFolder}/build/server.js",
+            "program": "${workspaceFolder}/dist/server.js",
             "skipFiles": [
                 "${workspaceRoot}/node_modules/**/*.js",
                 "<node_internals>/**/*.js"

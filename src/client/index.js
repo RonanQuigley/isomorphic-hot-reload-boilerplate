@@ -1,5 +1,13 @@
-import '../common/index';
-import './example-file';
+import React from 'react'
+import { render } from 'react-dom'
+import App from './app'
+
+const root = document.createElement('div')
+document.body.appendChild(root)
+
+render(<App />, root)
+
+document.body.style.background = 'red';
 
 if (process.env.NODE_ENV === 'development') {
     const webpackHotMiddleware = require('webpack-hot-middleware/client');
@@ -10,13 +18,7 @@ if (process.env.NODE_ENV === 'development') {
     })
 }
 
-// if (module.hot) {
-//     console.log(module.hot.status());
-// }
 
-// module.hot.addStatusHandler(status => {
-//     console.log('status has changed: ' + status);
-// })
-
-
-
+if(module.hot){
+    module.hot.accept();
+}
