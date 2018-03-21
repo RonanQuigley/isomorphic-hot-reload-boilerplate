@@ -1,7 +1,8 @@
-var webpack = require('webpack');
+const webpack = require('webpack');
 const path = require('path');
-
 const dist = path.join(__dirname, '../dist');
+const HardSource = require('hard-source-webpack-plugin');
+
 module.exports = {
     name: 'client',
     mode: 'development',
@@ -14,10 +15,10 @@ module.exports = {
         path: dist,
         filename: 'client.js'
     },
-    devtool: 'source-map',
+    devtool: 'cheap-eval-source-map',
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
-        new webpack.NamedModulesPlugin()
+        new webpack.NamedModulesPlugin(),        
     ],
     module: {
         rules: [

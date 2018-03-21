@@ -17,4 +17,4 @@ router.use(
     dynamic('foo')
 )
 
-export default () => router; 
+export default () => router;

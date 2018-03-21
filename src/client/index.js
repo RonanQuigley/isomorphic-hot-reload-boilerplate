@@ -2,12 +2,11 @@ import React from 'react'
 import { render } from 'react-dom'
 import App from './app'
 
-const root = document.createElement('div')
-document.body.appendChild(root)
+const root = document.getElementById('root');
 
 render(<App />, root)
 
-document.body.style.background = 'white';
+document.body.style.background = 'yellow';
 
 if (process.env.NODE_ENV === 'development') {
     const webpackHotMiddleware = require('webpack-hot-middleware/client');
@@ -17,7 +16,6 @@ if (process.env.NODE_ENV === 'development') {
         }
     })
 }
-
 
 if(module.hot){
     module.hot.accept();

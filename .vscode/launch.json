@@ -47,15 +47,13 @@
             "request": "launch",
             "name": "Debug Dev",
             "smartStep": true,
-            "program": "${workspaceFolder}\\index.js",
+            "program": "${workspaceFolder}\\src/index.js",
             "skipFiles": [
                 "${workspaceRoot}/node_modules/**/*.js",
                 "<node_internals>/**/*.js"
             ],
             "env": {
-                "DEBUG" : "true",
-                "NODE_ENV" : "development",
-                "IS_BUILD" : "false"            
+                "NODE_ENV" : "development",        
             },
             "runtimeArgs": [
                 "--nolazy",
