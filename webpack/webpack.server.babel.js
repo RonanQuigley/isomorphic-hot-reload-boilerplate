@@ -1,7 +1,7 @@
-const webpack = require("webpack");
-const path = require("path");
-const nodeExternals = require("webpack-node-externals");
-const CleanWebpackPlugin = require('clean-webpack-plugin');
+import webpack from "webpack";
+import path from "path";
+import nodeExternals from "webpack-node-externals";
+import CleanWebpackPlugin from 'clean-webpack-plugin';
 const dist = path.join(__dirname, '../dist');
 const root = path.join(__dirname, '../');
 let entry = '';
@@ -14,7 +14,7 @@ else {
     entry = './src/index';
 }
 
-module.exports = {
+export default {
     name: 'server',
     mode: process.env.NODE_ENV,
     target: 'node',

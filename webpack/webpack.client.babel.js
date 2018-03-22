@@ -1,9 +1,10 @@
-const webpack = require('webpack');
-const path = require('path');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
+import webpack from 'webpack';
+import path from 'path';
+import CleanWebpackPlugin from 'clean-webpack-plugin';
 const dist = path.join(__dirname, '../dist');
 const root = path.join(__dirname, '../');
-module.exports = {
+
+export default {
     name: 'client',
     mode: 'development',
     target: 'web',
