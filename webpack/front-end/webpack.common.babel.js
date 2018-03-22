@@ -1,8 +1,6 @@
 import webpack from 'webpack';
 import path from 'path';
-import CleanWebpackPlugin from 'clean-webpack-plugin';
-const dist = path.join(__dirname, '../dist');
-const root = path.join(__dirname, '../');
+const dist = path.join(__dirname, '../../dist');
 
 export default {
     name: 'client',
@@ -12,9 +10,6 @@ export default {
         filename: 'client.js'
     },
     plugins : [
-        new CleanWebpackPlugin(dist, {
-            root: root,
-        }),
         new webpack.NamedModulesPlugin(),      
     ],
     module: {

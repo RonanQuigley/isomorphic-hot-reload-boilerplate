@@ -1,9 +1,7 @@
 import webpack from "webpack";
 import path from "path";
 import nodeExternals from "webpack-node-externals";
-import CleanWebpackPlugin from 'clean-webpack-plugin';
-const dist = path.join(__dirname, '../dist');
-const root = path.join(__dirname, '../');
+const dist = path.join(__dirname, '../../dist');
 
 export default {
     name: 'server',
@@ -15,11 +13,6 @@ export default {
     node: {
         __dirname: false
     },
-    plugins: [
-        new CleanWebpackPlugin(dist, {
-            root: root,
-        }),
-    ],
     externals: nodeExternals(),
     module: {
         rules: [
