@@ -1,8 +1,9 @@
 const webpack = require("webpack");
 const path = require("path");
 const nodeExternals = require("webpack-node-externals");
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 const dist = path.join(__dirname, '../dist');
-const CleanWebpack = require('clean-webpack-plugin');
+const root = path.join(__dirname, '../');
 let entry = '';
 
 
@@ -31,8 +32,8 @@ module.exports = {
         __dirname: false
     },
     plugins: [
-        new CleanWebpack(dist, {
-            root : __dirname + '../'
+        new CleanWebpackPlugin(dist, {
+            root: root,
         }),
         new webpack.EnvironmentPlugin({
             NODE_ENV: process.env.NODE_ENV
