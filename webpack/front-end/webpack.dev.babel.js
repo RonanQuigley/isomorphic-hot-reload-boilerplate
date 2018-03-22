@@ -10,7 +10,7 @@ const dev = {
     ],
     devtool: 'cheap-eval-source-map',
     plugins: [
-        new webpack.HotModuleReplacementPlugin(),  
+        new webpack.HotModuleReplacementPlugin(), 
     ],
 };
 

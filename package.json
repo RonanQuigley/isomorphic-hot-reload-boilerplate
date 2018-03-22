@@ -21,6 +21,7 @@
     "cache-loader": "^1.2.2",
     "chokidar": "^2.0.2",
     "clean-webpack-plugin": "^0.1.19",
+    "colors": "^1.2.1",
     "express": "^4.16.3",
     "express-generator": "^4.15.5",
     "express-handlebars": "^3.0.0",
@@ -43,15 +44,11 @@
     "webpack-node-externals": "^1.6.0"
   },
   "scripts": {
-    "build:back-end:dev": "webpack --config webpack/back-end/webpack.dev.babel.js",
-    "build:back-end:prod": "webpack --config webpack/back-end/webpack.prod.babel.js",
-    "build:front-end:dev": "webpack --config webpack/front-end/webpack.dev.babel.js",
-    "build:front-end:prod": "webpack --config webpack/front-end/webpack.prod.babel.js",
-    "build:full-stack:dev": "webpack --config webpack/full-stack/webpack.dev.babel.js",
-    "build:full-stack:prod": "webpack --config webpack/full-stack/webpack.prod.babel.js",
-    "start:dev-build": "npm-run-all -s build:full-stack:dev start:build",
-    "start:prod-build": "npm-run-all -s build:full-stack:prod start:build",
-    "start:build": "node ./dist/server.js",
+    "build:back-end": "webpack -p --config webpack/back-end/webpack.prod.babel.js",
+    "build:front-end": "webpack --config webpack/front-end/webpack.prod.babel.js",
+    "build:full-stack": "webpack --config webpack/full-stack/webpack.babel.js",
+    "build:full-stack:start": "npm-run-all -s build:full-stack start:prod",
+    "start:prod": "node ./dist/server.js",
     "start": "cross-env NODE_ENV=development node --require @babel/register --require dotenv/config ./src/index.js"
   },
   "bugs": {

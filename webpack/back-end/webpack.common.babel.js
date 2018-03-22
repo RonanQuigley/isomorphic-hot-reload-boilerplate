@@ -16,10 +16,7 @@ export default {
     },
     externals: nodeExternals(),
     plugins: [
-        new DotEnv({
-            path: path.join(__dirname, '../../.env'),
-            systemvars: true
-        }),
+        new DotEnv(),
     ],
     module: {
         rules: [

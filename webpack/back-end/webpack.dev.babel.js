@@ -5,9 +5,13 @@ import merge from 'webpack-merge';
 const dev = {
     mode: 'development',
     target: 'node',
-    entry: './src/server',
+    entry: './src/server/index',
     devtool: 'cheap-eval-source-map',
-    plugins : [
+    plugins: [
+        // need to specify NODE_ENV otherwise it will show undefined in code
+        new webpack.EnvironmentPlugin({
+            NODE_ENV: 'development',
+        })
     ]
 };
 
