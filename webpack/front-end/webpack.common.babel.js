@@ -6,23 +6,16 @@ const root = path.join(__dirname, '../');
 
 export default {
     name: 'client',
-    mode: 'development',
     target: 'web',
-    entry: [
-        'webpack-hot-middleware/client',
-        './src/client',
-    ],
     output: {
         path: dist,
         filename: 'client.js'
     },
-    devtool: 'cheap-eval-source-map',
-    plugins: [
+    plugins : [
         new CleanWebpackPlugin(dist, {
             root: root,
         }),
-        new webpack.HotModuleReplacementPlugin(),
-        new webpack.NamedModulesPlugin(),        
+        new webpack.NamedModulesPlugin(),      
     ],
     module: {
         rules: [
@@ -33,4 +26,4 @@ export default {
             },
         ],
     },
-};
+}

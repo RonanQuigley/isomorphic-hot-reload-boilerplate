@@ -43,10 +43,10 @@
     "webpack-node-externals": "^1.6.0"
   },
   "scripts": {
-    "build:back-end:dev": "cross-env NODE_ENV=development webpack --config webpack/webpack.server.js",
-    "build:back-end:prod": "cross-env NODE_ENV=production webpack --config webpack/webpack.server.js",
-    "build:front-end:dev": "cross-env NODE_ENV=development webpack --config webpack/webpack.client.js",
-    "build:front-end:prod": "cross-env NODE_ENV=production webpack --config webpack/webpack.client.js",
+    "build:back-end:dev": "cross-env NODE_ENV=development webpack --config webpack/back-end/webpack.dev.babel.js",
+    "build:back-end:prod": "cross-env NODE_ENV=production webpack --config webpack/back-end/webpack.prod.babel.js",
+    "build:front-end:dev": "cross-env NODE_ENV=development webpack --config webpack/front-end/webpack.dev.babel.js",
+    "build:front-end:prod": "cross-env NODE_ENV=production webpack --config webpack/front-end/webpack.prod.babel.js",
     "build:full-stack:dev": "npm-run-all -p build:back-end:dev build:front-end:dev",
     "build:full-stack:prod": "npm-run-all -p build:back-end:prod build:front-end:prod", 
     "start:dev-build": "npm-run-all -s build:full-stack:dev start:build",

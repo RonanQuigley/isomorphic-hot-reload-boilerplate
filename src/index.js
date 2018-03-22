@@ -4,13 +4,13 @@ import server from './server';
 const app = express();
 
 if (process.env.NODE_ENV === 'development') {
-    // dont' try to import this; issue with webpack bundle
     app.use(
         dev
     );
 }
 else {
     app.use(
+        // allow express to access our public assets in the dist
         express.static(__dirname),
         server
     );
