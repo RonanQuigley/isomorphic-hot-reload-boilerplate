@@ -14,7 +14,6 @@
                 "<node_internals>/**/*.js"
             ],
             "env": {
-                "DEBUG" : "true",
                 "NODE_ENV" : "development",
                 "IS_BUILD" : "true"
             },

@@ -6,12 +6,9 @@ const dev = {
     mode: 'development',
     target: 'node',
     entry: './src/server',
-    plugins: [
-        new webpack.EnvironmentPlugin({
-            NODE_ENV: 'development'
-        }),
-    ],
     devtool: 'cheap-eval-source-map',
+    plugins : [
+    ]
 };
 
 export default merge(common, dev);

@@ -12,7 +12,7 @@ import serverConfig from '../../webpack/back-end/webpack.dev.babel';
 const router = express.Router();
 const clientCompiler = webpack(clientConfig);
 const mergedCompilers = webpack([clientConfig, serverConfig]);
-const serverDir = path.resolve(__dirname, '../server'),
+const serverDir = path.resolve(__dirname, '../server');
 const watcher = chokidar.watch(serverDir);
 
 const builtDevServer = devMiddleware(mergedCompilers, {

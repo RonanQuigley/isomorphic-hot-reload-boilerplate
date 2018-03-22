@@ -9,11 +9,6 @@ const prod = {
     // optimization: {
     //     minimize: false
     // },
-    plugins: [
-        new webpack.EnvironmentPlugin({
-            NODE_ENV: 'production'
-        })
-    ],
     devtool: 'source-map',
 };
 

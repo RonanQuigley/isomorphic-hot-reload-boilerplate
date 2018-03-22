@@ -1,14 +1,28 @@
 import express from 'express';
 import dev from './dev'
 import server from './server';
+import morgan from 'morgan';
+const debugFormat = 'dev';
 const app = express();
 
+function debug(format) {
+    return morgan(format);
+}
+
 if (process.env.NODE_ENV === 'development') {
-    app.use(
-        dev
-    );
+    if (process.env.DEBUG === "true") {
+        // morgan must be used by the app first
+        app.use(debug(debugFormat))
+    }
+    app.use(dev);
 }
 else {
+    if (process.env.DEBUG === 'true') {
+        // morgan must be used by the app first
+        app.use(
+            debug(debugFormat)
+        )
+    }
     app.use(
         // allow express to access our public assets in the dist
         express.static(__dirname),

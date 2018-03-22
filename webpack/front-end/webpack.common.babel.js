@@ -9,8 +9,8 @@ export default {
         path: dist,
         filename: 'client.js'
     },
-    plugins : [
-        new webpack.NamedModulesPlugin(),      
+    plugins: [
+        new webpack.NamedModulesPlugin(),
     ],
     module: {
         rules: [
@@ -19,6 +19,9 @@ export default {
                 test: /\.js$/,
                 use: 'babel-loader',
             },
+            {
+                sideEffects: false // tells webpack our code is pure for dead code elimination 
+            }
         ],
     },
 }

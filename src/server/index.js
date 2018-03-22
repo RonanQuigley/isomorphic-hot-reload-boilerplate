@@ -17,4 +17,7 @@ router.use(
     dynamic('foo')
 )
 
+console.log(process.env.PORT);
+
+// export a function for hot server middleware purposes
 export default () => router;

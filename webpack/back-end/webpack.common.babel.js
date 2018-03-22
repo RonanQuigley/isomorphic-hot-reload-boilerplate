@@ -1,5 +1,6 @@
 import webpack from "webpack";
 import path from "path";
+import DotEnv from 'dotenv-webpack';
 import nodeExternals from "webpack-node-externals";
 const dist = path.join(__dirname, '../../dist');
 
@@ -14,6 +15,12 @@ export default {
         __dirname: false
     },
     externals: nodeExternals(),
+    plugins: [
+        new DotEnv({
+            path: path.join(__dirname, '../../.env'),
+            systemvars: true
+        }),
+    ],
     module: {
         rules: [
             {
