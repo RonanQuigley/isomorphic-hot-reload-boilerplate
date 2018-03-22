@@ -2,7 +2,9 @@ const webpack = require("webpack");
 const path = require("path");
 const nodeExternals = require("webpack-node-externals");
 const dist = path.join(__dirname, '../dist');
+const CleanWebpack = require('clean-webpack-plugin');
 let entry = '';
+
 
 if (process.env.NODE_ENV === 'development') {
     entry = './src/server';
@@ -29,6 +31,9 @@ module.exports = {
         __dirname: false
     },
     plugins: [
+        new CleanWebpack(dist, {
+            root : __dirname + '../'
+        }),
         new webpack.EnvironmentPlugin({
             NODE_ENV: process.env.NODE_ENV
         })
