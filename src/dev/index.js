@@ -5,7 +5,7 @@ import clientConfig from '../../webpack/front-end/webpack.dev.babel';
 import serverConfig from '../../webpack/back-end/webpack.dev.babel';
 import hotMiddleware from 'webpack-hot-middleware';
 import devMiddleware from 'webpack-dev-middleware';
-import hotServer from 'webpack-hot-server-middleware';
+import hotServerMiddleware from 'webpack-hot-server-middleware';
 import open from 'opn';
 import path from 'path';
 
@@ -21,7 +21,7 @@ const builtDevClient = devMiddleware(clientCompiler, {
     noInfo: true, publicPath: clientConfig.output.publicPath, stats: 'none'
 });
 
-const serverMiddleware = hotServer(mergedCompilers);
+const serverMiddleware = hotServerMiddleware(mergedCompilers);
 
 const builtHotClient = hotMiddleware(clientCompiler);
 
@@ -38,6 +38,7 @@ const watcher = chokidar.watch(
 // watch our server side files for changes
 watcher.on('ready', () => {
     watcher.on('all', () => {
+        // tell the client to reload the current page
         builtHotClient.publish({ reload: true });
     })
 });
@@ -51,7 +52,3 @@ router.use(builtHotClient)
 router.use(serverMiddleware);
 
 export default router;
-
-
-
-
