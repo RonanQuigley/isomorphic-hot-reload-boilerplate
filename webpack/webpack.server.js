@@ -4,11 +4,11 @@ const nodeExternals = require("webpack-node-externals");
 const dist = path.join(__dirname, '../dist');
 let entry = '';
 
-if(process.env.NODE_ENV === 'development'){
+if (process.env.NODE_ENV === 'development') {
     entry = './src/server';
 }
-else{
-    entry = './src/index'; 
+else {
+    entry = './src/index';
 }
 
 module.exports = {
@@ -16,21 +16,21 @@ module.exports = {
     mode: process.env.NODE_ENV,
     target: 'node',
     entry: entry,
-    optimization : {
-        minimize : false
+    optimization: {
+        minimize: false
     },
-    externals : nodeExternals(),
+    externals: nodeExternals(),
     output: {
         path: dist,
         filename: 'server.js',
         libraryTarget: 'commonjs2'
     },
-    node : {
-        __dirname : false
+    node: {
+        __dirname: false
     },
-    plugins : [
+    plugins: [
         new webpack.EnvironmentPlugin({
-            NODE_ENV : process.env.NODE_ENV
+            NODE_ENV: process.env.NODE_ENV
         })
     ],
     devtool: 'source-map',
@@ -47,8 +47,11 @@ module.exports = {
                 exclude: /node_modules|packages/,
                 test: /\.hbs$/, use: [
                     "handlebars-loader"
-                ] 
+                ]
             },
+            { 
+                sideEffects: false // tells webpack our code is pure for dead code elimination 
+            } 
         ],
     },
 };

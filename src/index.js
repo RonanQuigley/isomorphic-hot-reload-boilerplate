@@ -1,15 +1,18 @@
 import express from 'express';
+import dev from './dev'
+import server from './server';
 const app = express();
 
 if (process.env.NODE_ENV === 'development') {
     // dont' try to import this; issue with webpack bundle
-    const dev = require('./dev').default;
-    app.use(dev);
+    app.use(
+        dev
+    );
 }
 else {
     app.use(
         express.static(__dirname),
-        require('./server')().default
+        server
     );
 }
 

@@ -1,7 +1,6 @@
 const webpack = require('webpack');
 const path = require('path');
 const dist = path.join(__dirname, '../dist');
-const HardSource = require('hard-source-webpack-plugin');
 
 module.exports = {
     name: 'client',
