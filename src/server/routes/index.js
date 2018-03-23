@@ -3,7 +3,7 @@ import express from 'express';
 import index from './views/index.hbs';
 import React from 'react';
 import {renderToString} from 'react-dom/server';
-import App from '../../client/app';
+import App from '../../common/app';
 const router = express.Router();
 
 router.get('/', (req, res, next) => {
