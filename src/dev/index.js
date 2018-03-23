@@ -16,11 +16,11 @@ const serverDir = path.resolve(__dirname, '../server');
 const watcher = chokidar.watch(serverDir);
 
 const builtDevServer = devMiddleware(mergedCompilers, {
-    serverSideRender: true, stats: 'none'
+    serverSideRender: true, stats: 'errors-only'
 });
 
 const builtDevClient = devMiddleware(clientCompiler, {
-    noInfo: true, publicPath: clientConfig.output.publicPath, stats: 'none'
+    noInfo: true, publicPath: clientConfig.output.publicPath, stats: 'errors-only'
 });
 
 const builtHotServer = hotServerMiddleware(mergedCompilers);
