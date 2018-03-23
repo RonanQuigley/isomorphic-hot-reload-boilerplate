@@ -7,25 +7,7 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "Debug Dev Build",
-            "program": "${workspaceFolder}/dist/server.js",
-            "skipFiles": [
-                "${workspaceRoot}/node_modules/**/*.js",
-                "<node_internals>/**/*.js"
-            ],
-            "env": {
-                "NODE_ENV" : "development",
-                "IS_BUILD" : "true"
-            },
-            "smartStep": true,
-            "outFiles": [
-                "${workspaceRoot}/build/*.{js,.js.map}"
-            ]
-        },
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "Debug Prod Build",
+            "name": "Debug Prod",
             "program": "${workspaceFolder}/dist/server.js",
             "skipFiles": [
                 "${workspaceRoot}/node_modules/**/*.js",
@@ -34,11 +16,10 @@
             "env": {
                 "DEBUG" : "true",
                 "NODE_ENV" : "production",
-                "IS_BUILD" : "true"
             },
             "smartStep": true,
             "outFiles": [
-                "${workspaceRoot}/build/*.{js,.js.map}"
+                "${workspaceRoot}/dist/*.{js,.js.map}"
             ]
         },
         {
@@ -52,6 +33,7 @@
                 "<node_internals>/**/*.js"
             ],
             "env": {
+                "DEBUG" : "true",
                 "NODE_ENV" : "development",        
             },
             "runtimeArgs": [
@@ -59,39 +41,6 @@
                 "--require",
                 "@babel/register"
             ],
-        },
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "Debug Prod",
-            "smartStep": true,
-            "program": "${workspaceFolder}\\index.js",
-            "skipFiles": [
-                "${workspaceRoot}/node_modules/**/*.js",
-                "<node_internals>/**/*.js"
-            ],
-            "env": {
-                "DEBUG" : "true",
-                "NODE_ENV" : "production",
-                "IS_BUILD" : "false"            
-            },
-            "runtimeArgs": [
-                "--nolazy",
-                "--require",
-                "@babel/register"
-            ],
-        },
-        {
-            "type": "node",
-            "request": "attach",
-            "name": "Attach",
-            "port": 9999
-        },
-        {
-            "type": "node",
-            "request": "attach",
-            "name": "Attach by Process ID",
-            "processId": "${command:PickProcess}"
         },
     ]
 }

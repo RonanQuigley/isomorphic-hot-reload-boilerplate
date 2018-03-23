@@ -39,7 +39,7 @@ The src directory holds all of your source files:
 - The common folder contains your shared client/server code. In this case, it has a tiny react app.js example.
 - The dev folder contains all of the hot reloading code for development.
 - The server folder contains your routes and whatever else you'd need to add for server-side.
-- 
+- The index file handles the express app generation and changes the middleware used based on whether your are in development or production
 
 I've added the .env file to the git repo, but for your own setup, it's best to add it to your .gitignore. It includes the following options: 
 
