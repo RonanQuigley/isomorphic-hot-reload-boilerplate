@@ -24,13 +24,6 @@ This boileplate solves those problems, and its primary aim is to maximise dev ef
 
 If you're looking for a speedier set up than using browser-sync or nodemon, then this might be for you.
 
-## Table of Contents
-
-- [Installation](#installation)
-- [Usage](#usage)
-- [Support](#support)
-- [Contributing](#contributing)
-
 ## Installation
 
 ```
@@ -40,11 +33,12 @@ yarn
 
 ## Usage
 
-The src directory holds all of your source files.
+The src directory holds all of your source files:
 
 - The client folder contains all client side code. It currently has a index file and a a tiny react app.js example.
 - The dev folder contains all of the hot reloading code for development.
-- The server folder contains your routes
+- The server folder contains your routes and whatever else you'd need to add for server-side.
+- 
 
 I've added the .env file to the git repo, but for your own setup, it's best to add it to your .gitignore. It includes the following options: 
 
