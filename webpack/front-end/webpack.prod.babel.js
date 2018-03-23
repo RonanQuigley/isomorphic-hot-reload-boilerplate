@@ -6,7 +6,9 @@ const prod = {
     entry: [
         './src/client',
     ],
-    devtool: 'source-map',
+    // if you need source maps, use eval-source-map
+    // chrome doesn't seem to work with source-map
+    devtool: false
 };
 
 export default merge(common, prod);
