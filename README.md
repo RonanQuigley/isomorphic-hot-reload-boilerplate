@@ -35,7 +35,8 @@ yarn
 
 The src directory holds all of your source files:
 
-- The client folder contains all client side code. It currently has a index file and a a tiny react app.js example.
+- The client folder contains all client side code. It currently has a simple index file. update the following line to your colour of choice to see changes reflected in your browser : ```document.body.style.background = 'white'```
+- The common folder contains your shared client/server code. In this case, it has a tiny react app.js example.
 - The dev folder contains all of the hot reloading code for development.
 - The server folder contains your routes and whatever else you'd need to add for server-side.
 - 
