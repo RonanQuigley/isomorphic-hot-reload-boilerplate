@@ -70,7 +70,7 @@
     "build:full-stack:start": "npm-run-all -s build:full-stack start:prod",
     "start:prod": "node ./dist/server.js",
     "start": "cross-env NODE_ENV=development node --require @babel/register --require dotenv/config ./src/index.js",
-    "watch:lint": "node node_modules/eslint-watch/bin/esw -w --fix --debug",
+    "watch:lint": "node node_modules/eslint-watch/bin/esw -w --fix",
     "test:front-end": "mocha-webpack --watch --webpack-config ./webpack/front-end/webpack.dev.js \"test/front-end/**/*.test.js\"",
     "test:back-end": "mocha-webpack --watch --webpack-config ./webpack/back-end/webpack.dev.js \"test/back-end/**/*.test.js\"",
     "test": "npm-run-all -p test:front-end test:back-end"
