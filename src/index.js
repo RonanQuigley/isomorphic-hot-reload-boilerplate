@@ -1,12 +1,14 @@
 import express from 'express';
 import morgan from 'morgan';
-import {green} from 'colors';
+// colors modifies the string prototype 
+// this will prevent eslint throwing no-unused-var errors
+import 'colors'; 
 const app = express();
 
 if (process.env.DEBUG === 'true') {
     console.log('DEBUG LOGGING ENABLED'.green);
     // morgan must be used by the app first
-    app.use(morgan('dev'))
+    app.use(morgan('dev'));
 }
 
 if (process.env.NODE_ENV === 'development') {
@@ -14,6 +16,7 @@ if (process.env.NODE_ENV === 'development') {
     // to prevent the dev code showing up in production
     app.use(require('./dev').default);
 }
+
 else {
     app.use(
         // allow express to access our public assets in the dist

@@ -7,8 +7,8 @@
   "license": "MIT",
   "dependencies": {
     "@babel/cli": "7.0.0-beta.40",
-    "@babel/node": "7.0.0-beta.40",
     "@babel/core": "7.0.0-beta.40",
+    "@babel/node": "7.0.0-beta.40",
     "@babel/plugin-proposal-class-properties": "7.0.0-beta.40",
     "@babel/plugin-transform-runtime": "7.0.0-beta.40",
     "@babel/preset-env": "7.0.0-beta.40",
@@ -51,6 +51,11 @@
     "cross-env": "^5.1.4",
     "dotenv": "^5.0.1",
     "dotenv-webpack": "^1.5.5",
+    "eslint": "^4.19.1",
+    "eslint-loader": "^2.0.0",
+    "eslint-plugin-mocha": "^4.12.1",
+    "eslint-plugin-react": "^7.7.0",
+    "eslint-watch": "^3.1.3",
     "handlebars-loader": "https://github.com/Waavi/handlebars-loader",
     "html-loader": "^0.5.5",
     "mocha": "^5.0.4",
@@ -65,8 +70,9 @@
     "build:full-stack:start": "npm-run-all -s build:full-stack start:prod",
     "start:prod": "node ./dist/server.js",
     "start": "cross-env NODE_ENV=development node --require @babel/register --require dotenv/config ./src/index.js",
-    "test:front-end" : "mocha-webpack --watch --webpack-config ./webpack/front-end/webpack.dev.babel.js \"test/front-end/**/*.test.js\"",
-    "test:back-end" : "mocha-webpack --watch --webpack-config ./webpack/back-end/webpack.dev.babel.js \"test/back-end/**/*.test.js\"",
+    "watch:lint": "node node_modules/eslint-watch/bin/esw -w --fix --debug",
+    "test:front-end": "mocha-webpack --watch --webpack-config ./webpack/front-end/webpack.dev.js \"test/front-end/**/*.test.js\"",
+    "test:back-end": "mocha-webpack --watch --webpack-config ./webpack/back-end/webpack.dev.js \"test/back-end/**/*.test.js\"",
     "test": "npm-run-all -p test:front-end test:back-end"
   },
   "bugs": {

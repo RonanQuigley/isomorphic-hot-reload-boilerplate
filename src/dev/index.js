@@ -31,11 +31,11 @@ const builtHotClient = hotClientMiddleware(clientCompiler);
 watcher.on('ready', () => {
     watcher.on('all', () => {
         builtHotClient.publish({ reload: true});
-    })
+    });
 });
 
 builtDevServer.waitUntilValid(() => {
-    open("http://localhost:" + (process.env.PORT || 3000), {
+    open('http://localhost:' + (process.env.PORT || 3000), {
         // app: ['chrome', '--incognito'] 
     });
 });
@@ -45,7 +45,7 @@ router.use(builtDevServer);
 // built client middleware must come before the hot server
 router.use(builtDevClient);
 
-router.use(builtHotClient)
+router.use(builtHotClient);
 
 router.use(builtHotServer);
 

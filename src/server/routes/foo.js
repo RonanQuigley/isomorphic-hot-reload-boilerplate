@@ -9,5 +9,4 @@ router.get('/foo', (req, res, next) => {
     }));
 });
 
-
 export default router;

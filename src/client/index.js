@@ -3,7 +3,7 @@ import { render } from 'react-dom';
 import App from './app';
 const root = document.getElementById('root');
 
-render(<App />, root)
+render(<App />, root);
 
 // change me to a different colour and see the changes reflected in browser
 document.body.style.background = 'white';
@@ -15,8 +15,9 @@ function checkForServerChanges() {
         if (message.reload === true) {
             window.location.reload();
         }
-    })
+    });
 }
+
 if (process.env.NODE_ENV === 'development') {
     checkForServerChanges();
 }

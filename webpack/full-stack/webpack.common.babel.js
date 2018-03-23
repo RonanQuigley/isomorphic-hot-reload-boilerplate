@@ -10,7 +10,7 @@ const clientPlugin = {
             exclude: ['server.js', 'server.js.map'],
         }),
     ],
-}
+};
 
 const serverPlugin = {
     plugins: [
@@ -19,9 +19,9 @@ const serverPlugin = {
             exclude: ['client.js', 'client.js.map'],
         }),
     ],
-}
+};
 
 export {
     serverPlugin,
     clientPlugin
-}
+};

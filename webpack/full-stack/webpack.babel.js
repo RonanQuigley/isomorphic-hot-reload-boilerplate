@@ -7,4 +7,5 @@ import {clientPlugin} from './webpack.common.babel';
 export default [
     merge(serverPlugin, server),
     merge(clientPlugin, client)
-]
+];
+
