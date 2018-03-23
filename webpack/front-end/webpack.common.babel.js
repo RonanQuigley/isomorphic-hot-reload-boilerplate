@@ -7,7 +7,10 @@ export default {
     target: 'web',
     output: {
         path: dist,
-        filename: 'client.js'
+        filename: 'client.js',
+        // workaround for a bug with webpack : 
+        // https://github.com/webpack/webpack/issues/6642
+        globalObject : 'this' 
     },
     plugins: [
         new webpack.NamedModulesPlugin(),

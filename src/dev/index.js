@@ -30,8 +30,7 @@ const builtHotClient = hotClientMiddleware(clientCompiler);
 // watch our server side files for changes
 watcher.on('ready', () => {
     watcher.on('all', () => {
-        // tell the client to reload the current page
-        builtHotClient.publish({ reload: true });
+        builtHotClient.publish({ reload: true});
     })
 });
 

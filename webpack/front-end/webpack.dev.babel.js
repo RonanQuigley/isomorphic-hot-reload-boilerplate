@@ -8,7 +8,7 @@ const dev = {
         'webpack-hot-middleware/client',
         './src/client',
     ],
-    devtool: 'cheap-eval-source-map',
+    devtool: 'inline-cheap-module-source-map',
     plugins: [
         new webpack.HotModuleReplacementPlugin(), 
     ],

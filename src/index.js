@@ -1,17 +1,12 @@
 import express from 'express';
 import morgan from 'morgan';
 import {green} from 'colors';
-const debugFormat = 'dev';
 const app = express();
 
-function debug(format) {
-    return morgan(format);
-}
-
 if (process.env.DEBUG === 'true') {
-    console.log('DEBUGGING ENABLED'.green); // rainbow
+    console.log('DEBUG LOGGING ENABLED'.green);
     // morgan must be used by the app first
-    app.use(debug(debugFormat))
+    app.use(morgan('dev'))
 }
 
 if (process.env.NODE_ENV === 'development') {
@@ -34,3 +29,5 @@ app.listen(process.env.PORT || 3000, 'localhost', function (err) {
     const addr = this.address();
     console.log('Listening at http://%s:%d', addr.address, addr.port);
 });
+
+export default app;

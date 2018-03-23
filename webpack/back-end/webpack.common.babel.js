@@ -20,6 +20,7 @@ export default {
     ],
     module: {
         rules: [
+
             {
                 exclude: /node_modules/,
                 test: /\.js$/,
@@ -29,13 +30,18 @@ export default {
             },
             {
                 exclude: /node_modules|packages/,
-                test: /\.hbs$/, use: [
-                    "handlebars-loader"
-                ]
+                test: /\.hbs$/,
+                loader: "handlebars-loader", 
+                query: {
+                    partialDirs: [
+                        path.join(__dirname, '../../src/server/routes/views', 'partials')
+                    ]
+                }
             },
             {
                 sideEffects: false // tells webpack our code is pure for dead code elimination 
-            }
+            },
         ],
+
     },
 }

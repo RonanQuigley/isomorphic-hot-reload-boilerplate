@@ -1,11 +1,13 @@
 {
-  "name": "hot-reloading-boilerplate-redux",
+  "name": "isomorphic-hot-reloading-boilerplate",
   "version": "1.0.0",
   "main": "index.js",
   "repository": "https://github.com/RonanQuigley/isomorphic-hot-reload-boilerplate.git",
   "author": "ronanquigley <info@ronanquigley.com>",
   "license": "MIT",
   "dependencies": {
+    "@babel/cli": "7.0.0-beta.40",
+    "@babel/node": "7.0.0-beta.40",
     "@babel/core": "7.0.0-beta.40",
     "@babel/plugin-proposal-class-properties": "7.0.0-beta.40",
     "@babel/plugin-transform-runtime": "7.0.0-beta.40",
@@ -19,6 +21,7 @@
     "@babel/runtime": "7.0.0-beta.40",
     "babel-loader": "^8.0.0-beta.0",
     "cache-loader": "^1.2.2",
+    "chai": "^4.1.2",
     "chokidar": "^2.0.2",
     "clean-webpack-plugin": "^0.1.19",
     "colors": "^1.2.1",
@@ -35,6 +38,7 @@
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-hot-loader": "^4.0.0",
+    "sinon": "^4.4.8",
     "source-map-support": "^0.5.4",
     "webpack": "^4.1.1",
     "webpack-cli": "^2.0.12",
@@ -43,27 +47,30 @@
     "webpack-merge": "^4.1.2",
     "webpack-node-externals": "^1.6.0"
   },
+  "devDependencies": {
+    "cross-env": "^5.1.4",
+    "dotenv": "^5.0.1",
+    "dotenv-webpack": "^1.5.5",
+    "handlebars-loader": "https://github.com/Waavi/handlebars-loader",
+    "html-loader": "^0.5.5",
+    "mocha": "^5.0.4",
+    "mocha-webpack": "^2.0.0-beta.0",
+    "webpack-bundle-analyzer": "^2.11.1",
+    "webpack-hot-server-middleware": "^0.5.0"
+  },
   "scripts": {
     "build:back-end": "webpack -p --config webpack/back-end/webpack.prod.babel.js",
     "build:front-end": "webpack --config webpack/front-end/webpack.prod.babel.js",
     "build:full-stack": "webpack --config webpack/full-stack/webpack.babel.js",
     "build:full-stack:start": "npm-run-all -s build:full-stack start:prod",
     "start:prod": "node ./dist/server.js",
-    "start": "cross-env NODE_ENV=development node --require @babel/register --require dotenv/config ./src/index.js"
+    "start": "cross-env NODE_ENV=development node --require @babel/register --require dotenv/config ./src/index.js",
+    "test:front-end" : "mocha-webpack --watch --webpack-config ./webpack/front-end/webpack.dev.babel.js \"test/front-end/**/*.test.js\"",
+    "test:back-end" : "mocha-webpack --watch --webpack-config ./webpack/back-end/webpack.dev.babel.js \"test/back-end/**/*.test.js\"",
+    "test": "npm-run-all -p test:front-end test:back-end"
   },
   "bugs": {
     "url": "https://github.com/RonanQuigley/isomorphic-hot-reload-boilerplate/issues"
   },
-  "homepage": "https://github.com/RonanQuigley/isomorphic-hot-reload-boilerplate#readme",
-  "devDependencies": {
-    "@babel/cli": "7.0.0-beta.40",
-    "@babel/node": "7.0.0-beta.40",
-    "cross-env": "^5.1.4",
-    "dotenv": "^5.0.1",
-    "dotenv-webpack": "^1.5.5",
-    "handlebars-loader": "https://github.com/Waavi/handlebars-loader",
-    "html-loader": "^0.5.5",
-    "webpack-bundle-analyzer": "^2.11.1",
-    "webpack-hot-server-middleware": "^0.5.0"
-  }
+  "homepage": "https://github.com/RonanQuigley/isomorphic-hot-reload-boilerplate#readme"
 }

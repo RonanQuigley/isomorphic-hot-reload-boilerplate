@@ -1,23 +1,13 @@
 
 import express from 'express';
-
+import index from './views/index.hbs';
 const router = express.Router();
 
 router.get('/', (req, res, next) => {
-    res.status(200).send(`
-    <!doctype html>
-    <html>
-    <head>
-        <title></title>
-    </head>
-    <body>       
-        Hello People
-        <div id="root"></div>
-        <script src="/client.js"></script>
-    </body>
-    </html>
-`);
-})
+    res.send(index({
+        title : 'Home Page'
+    }));
+});
 
 
 export default router;
