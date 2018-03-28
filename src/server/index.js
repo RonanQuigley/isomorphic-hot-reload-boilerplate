@@ -1,13 +1,12 @@
-
-import express from 'express';
-import index from './routes/index';
-import foo from './routes/foo';
+import express from "express";
+import index from "./routes/index";
+import foo from "./routes/foo";
 
 const router = express.Router();
 
 router.use(
     index,
-    foo,
+    foo
     // and any other pages you need
 );
 
