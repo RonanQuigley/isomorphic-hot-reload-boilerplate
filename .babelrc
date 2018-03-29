@@ -5,7 +5,11 @@
     "@babel/stage-0"
   ],
   "plugins": [
-    "react-hot-loader/babel"
+    "react-hot-loader/babel",
+    ["@babel/transform-runtime", {
+      "regenerator" : true, 
+      "polyfill" : true
+    }]
   ],
   "sourceMaps": true,
   "retainLines": true

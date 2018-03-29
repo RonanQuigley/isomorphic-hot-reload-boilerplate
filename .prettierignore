@@ -1,8 +1,8 @@
 **/node_modules
 **/dist 
 package.json
-**.lock
-**.log
-**.json
-**.babelrc
-**.env
+*.lock
+*.log
+*.json
+*.babelrc
+*.env
