@@ -50,6 +50,10 @@ I've added the .env file to the git repo, but for your own setup, it's best to a
 
 Port is your desired port number and the debug option is for enabling/disabling logging via morgan.
 
+## Known Issues
+
+Using paths with spaces i.e. C:/users/foo/project/my project/ may result in a 404 response when serving files in memory. Workaround is to ensure your project paths have no spaces in them.
+
 ## Support & Suggestions
 
 Please [open an issue](https://github.com/RonanQuigley/isomorphic-hot-reload-boilerplate/issues) for support.
