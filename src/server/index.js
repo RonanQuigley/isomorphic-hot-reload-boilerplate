@@ -14,7 +14,7 @@ if (process.env.DEBUG === "true") {
 if (process.env.NODE_ENV === "development") {
     // tree shaking doesn't work properly so use a require
     // to prevent the dev code showing up in production
-    app.use(require("../dev").default);
+    app.use(require("../middleware").default);
 } else {
     app.use(
         // allow express to access our public assets in the dist
