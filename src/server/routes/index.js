@@ -1,18 +1,14 @@
 import express from "express";
-import index from "./views/index.hbs";
-import React from "react";
-import { renderToString } from "react-dom/server";
-import App from "../../common/app";
+import index from "./views/index";
+import foo from "./views/foo";
+
 const router = express.Router();
 
-router.get("/", (req, res, next) => {
-    res.send(
-        index({
-            title: "Home Page",
-            // this will work in production
-            React: renderToString(<App />)
-        })
-    );
-});
+router.use(
+    index,
+    foo
+    // and any other pages you need
+);
 
-export default router;
+// export a function for hot server middleware purposes
+export default () => router;

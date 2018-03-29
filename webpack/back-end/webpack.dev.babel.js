@@ -5,7 +5,7 @@ import merge from "webpack-merge";
 const dev = {
     mode: "development",
     target: "node",
-    entry: "./src/server/index",
+    entry: "./src/server/routes",
     // needed for mocha-webpack
     devtool: "inline-cheap-eval-source-map",
     plugins: [

@@ -1,8 +1,10 @@
 import webpack from "webpack";
 import path from "path";
+import merge from "webpack-merge";
+import common from "../webpack.common";
 const dist = path.join(__dirname, "../../dist");
 
-export default {
+const frontEndCommon = {
     name: "client",
     target: "web",
     output: {
@@ -26,3 +28,5 @@ export default {
         ]
     }
 };
+
+export default merge(common, frontEndCommon);

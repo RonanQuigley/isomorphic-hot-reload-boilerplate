@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import App from "../common/app";
+import App from "common/app";
 const root = document.getElementById("root");
 
 // use render in development, hydrate in production

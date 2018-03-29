@@ -1,9 +1,11 @@
 import path from "path";
 import DotEnv from "dotenv-webpack";
 import nodeExternals from "webpack-node-externals";
+import merge from "webpack-merge";
+import common from "../webpack.common";
 const dist = path.join(__dirname, "../../dist");
 
-export default {
+const backEndCommon = {
     name: "server",
     output: {
         path: dist,
@@ -42,3 +44,5 @@ export default {
         ]
     }
 };
+
+export default merge(common, backEndCommon);

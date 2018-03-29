@@ -6,6 +6,7 @@ import path from "path";
 import devMiddleware from "webpack-dev-middleware";
 import hotClientMiddleware from "webpack-hot-middleware";
 import hotServerMiddleware from "webpack-hot-server-middleware";
+// import clientConfig from "../../webpack/front-end/webpack.dev.babel";
 import clientConfig from "../../webpack/front-end/webpack.dev.babel";
 import serverConfig from "../../webpack/back-end/webpack.dev.babel";
 

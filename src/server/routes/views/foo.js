@@ -1,5 +1,5 @@
 import express from "express";
-import foo from "./views/foo.hbs";
+import foo from "./foo.hbs";
 const router = express.Router();
 
 router.get("/foo", (req, res, next) => {
