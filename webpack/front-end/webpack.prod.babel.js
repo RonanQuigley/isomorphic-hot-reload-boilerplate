@@ -4,9 +4,24 @@ import common from "./webpack.common.babel";
 const prod = {
     mode: "production",
     entry: ["./src/client"],
-    // if you need source maps, use eval-source-map
-    // chrome doesn't seem to work with source-map
-    devtool: false
+    optimization: {
+        minimizer: [
+            // maintain source maps but strip comments
+            new UglifyJsPlugin({
+                sourceMap: true,
+                uglifyOptions: {
+                    output: {
+                        comments: false
+                    }
+                }
+            })
+        ]
+    },
+    plugins: [
+        new webpack.EnvironmentPlugin({
+            NODE_ENV: "production"
+        })
+    ]
 };
 
 export default merge(common, prod);

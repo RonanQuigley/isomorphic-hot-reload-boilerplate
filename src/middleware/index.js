@@ -16,6 +16,7 @@ const serverDir = path.resolve(__dirname, "../server");
 const watcher = chokidar.watch(serverDir);
 
 const builtDevServer = devMiddleware(mergedCompilers, {
+    noInfo: true,
     serverSideRender: true,
     stats: "errors-only"
 });
@@ -38,9 +39,9 @@ watcher.on("ready", () => {
 });
 
 builtDevServer.waitUntilValid(() => {
-    open("http://localhost:" + (process.env.PORT || 3000), {
-        // app: ['chrome', '--incognito']
-    });
+    // open('http://localhost:' + (process.env.PORT || 3000), {
+    //     app: ['chrome', '--remote-debugging-port=9222']
+    // });
 });
 
 router.use(builtDevServer);

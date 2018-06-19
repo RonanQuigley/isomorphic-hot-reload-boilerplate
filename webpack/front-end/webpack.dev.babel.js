@@ -6,7 +6,13 @@ const dev = {
     mode: "development",
     entry: ["webpack-hot-middleware/client", "./src/client"],
     devtool: "eval-source-map",
-    plugins: [new webpack.HotModuleReplacementPlugin()]
+    plugins: [
+        new webpack.HotModuleReplacementPlugin(),
+        new webpack.EnvironmentPlugin({
+            // we use this for hot reloading the client
+            NODE_ENV: "development"
+        })
+    ]
 };
 
 export default merge(common, dev);

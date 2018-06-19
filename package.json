@@ -74,8 +74,9 @@
     "start:prod": "node ./dist/server.js",
     "start": "cross-env NODE_ENV=development node --require @babel/register --require dotenv/config ./src/index.js",
     "watch:lint": "cross-env node node_modules/eslint-watch/bin/esw -w --fix",
-    "test:front-end": "mocha-webpack --watch --webpack-config ./webpack/front-end/webpack.dev.js \"test/front-end/**/*.test.js\"",
-    "test:back-end": "mocha-webpack --watch --webpack-config ./webpack/back-end/webpack.dev.js \"test/back-end/**/*.test.js\"",
+    "test:front": "mocha --watch --opts mocha.opts test/front-end/**/*.test.js",
+    "test:back": "mocha --watch --opts mocha.opts test/back-end/**/*.test.js",
+    "test:all": "mocha --watch --opts mocha.opts test/**/*.test.js",
     "test": "npm-run-all -p test:front-end test:back-end"
   },
   "bugs": {

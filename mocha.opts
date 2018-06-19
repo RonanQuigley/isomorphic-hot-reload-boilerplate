@@ -1,0 +1,5 @@
+--watch
+--require @babel/register
+--require mocha-clean
+--require mocha.setup.js
+--reporter nyan

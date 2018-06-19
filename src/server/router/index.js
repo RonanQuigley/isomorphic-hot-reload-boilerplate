@@ -1,12 +1,9 @@
 import express from "express";
 import index from "./views/index";
-import foo from "./views/foo";
-
 const router = express.Router();
 
 router.use(
-    index,
-    foo
+    index
     // and any other pages you need
 );
 

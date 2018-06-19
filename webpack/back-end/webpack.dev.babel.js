@@ -4,10 +4,9 @@ import merge from "webpack-merge";
 
 const dev = {
     mode: "development",
-    target: "node",
-    entry: "./src/server/routes",
-    // needed for mocha-webpack
-    devtool: "inline-cheap-eval-source-map",
+    /* in development we go straight to the express router 
+    as the initial hot reloading setup is done outside webpack */
+    entry: "./src/server/router",
     plugins: [
         // need to specify NODE_ENV otherwise it will show undefined in code
         new webpack.EnvironmentPlugin({
@@ -15,5 +14,4 @@ const dev = {
         })
     ]
 };
-
 export default merge(common, dev);
