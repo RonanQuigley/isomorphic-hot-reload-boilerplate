@@ -16,12 +16,7 @@ const prod = {
                 }
             })
         ]
-    },
-    plugins: [
-        new webpack.EnvironmentPlugin({
-            NODE_ENV: "production"
-        })
-    ]
+    }
 };
 
 export default merge(common, prod);

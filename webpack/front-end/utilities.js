@@ -1,27 +1,23 @@
 import path from "path";
-// workaround for a bug with webpack :
-// https://github.com/webpack/webpack/issues/6642
-const globalObject = "this";
 const dist = path.join(__dirname, "../../dist");
 
 export function setOutput() {
     if (process.env.NODE_ENV === "development") {
         return {
             path: dist,
-            /* allows for proper vscode chrome debugging */
+            // fixes vscode chrome debugger stepping into unrelated webpack code
+            // therefore: do not remove this!!!
             devtoolModuleFilenameTemplate(info) {
                 return `file:///${info.absoluteResourcePath.replace(
                     /\\/g,
                     "/"
                 )}`;
-            },
-            globalObject: globalObject
+            }
         };
     } else {
         // testing and production
         return {
-            path: dist,
-            globalObject: globalObject
+            path: dist
         };
     }
 }
@@ -36,19 +32,11 @@ export function setDevTool() {
         case "test":
             return "inline-cheap-module-source-map";
         case "development":
-            /* we use a second flag to decide our devtool choice : 
-                module-source-map: 
-                    -- slower rebuild
-                    -- much better debugging 
-                cheap-module-eval-source-map:
-                    -- faster rebuild
-                    -- chrome debugger will show errors in debug console, 
-                    however it still seems to work somewhat okay in use
-            */
-            return process.env.DEBUG === "true"
-                ? "source-map"
-                : "cheap-module-eval-source-map";
-
+            // using source-maps prevents "jumpy" breakpoints
+            // try cheap-module-source-map if rebuilds are slow
+            // but be warned : it will jump all over the place
+            // on successive rebuilds
+            return "cheap-module-eval-source-map";
         default:
             // production or undefined
             return "source-map";

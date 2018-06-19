@@ -8,6 +8,7 @@ export function setOutput() {
         return {
             path: dist,
             filename: filename,
+            // this is necessary for webpack hot server middleware
             libraryTarget: libraryTarget,
             /* fixes server side debugging issues for source maps */
             devtoolModuleFilenameTemplate(info) {

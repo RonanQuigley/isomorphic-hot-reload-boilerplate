@@ -1,0 +1,9 @@
+{
+    "compilerOptions": {
+        "baseUrl": "./",
+        "experimentalDecorators": true,
+    },
+    "exclude": [
+        "old-project-code/**/*", "node_modules/**/*", "dist/**/*", "coverage/**/*"
+    ]
+}

@@ -9,7 +9,6 @@ This boileplate solves those problems, and its primary aim is to maximise dev ef
 *   Webpack 4
 *   Express
 *   Morgan
-*   Handlebars (via loader)
 *   React
 *   React hot loader
 *   ES6 support
@@ -52,7 +51,7 @@ Port is your desired port number and the debug option is for enabling/disabling 
 
 ## Known Issues
 
-Using paths with spaces i.e. C:/users/foo/project/my project/ may result in a 404 response when serving files in memory. Workaround is to ensure your project paths have no spaces in them.
+Using paths with spaces i.e. C:/users/foo/project/my project/ may result in a 404 response when serving files in memory. Therefore, make sure your project paths have no spaces in them.
 
 ## Support & Suggestions
 

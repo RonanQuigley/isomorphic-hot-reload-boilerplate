@@ -2,9 +2,67 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "type": "chrome",
+            "request": "attach",
+            "name": "Attach to Client",
+            "port": 9222,
+            "timeout": 1000,
+            "smartStep": true,
+            "webRoot": "${workspaceFolder}",
+            "skipFiles": [
+                "${workspaceRoot}/node_modules/**/*.js",
+                "${workspaceRoot}/node_modules/**/*.*.js",
+            ],
+        },
+        {
+            "type": "node",
+            "request": "attach",
+            "name": "Attach to Server",
+            "processId": "${command:PickProcess}",
+            "protocol": "inspector",
+            "smartStep": true,
+            "sourceMaps": true,
+            "outFiles": [
+                "${workspaceRoot}/dist/*.{.js.map}"
+            ],
+            "skipFiles": [
+                "${workspaceRoot}/node_modules/**/*.js",
+                "<node_internals>/**/*.js",
+                "*.hbs",
+                "webpack:///webpack/bootstrap",
+                "webpack:\\webpack\\bootstrap",
+                "webpack://webpack/bootstrap",
+                "webpack/bootstrap",
+            ],
+        },
+        {
             "type": "node",
             "request": "launch",
-            "name": "Debug Prod",
+            "name": "Debug Dev Server Setup",
+            "smartStep": true,
+            "program": "${workspaceFolder}/src/index.js",
+            "skipFiles": [
+                "${workspaceRoot}/node_modules/**/*.js",
+                "<node_internals>/**/*.js"
+            ],
+            "envFile": "${workspaceFolder}/.env",
+            "env": {
+                "NODE_ENV" : "development",
+                "ENABLE_LOGGING" : "false"        
+            },
+            "runtimeArgs": [
+                "--lazy",
+                "--require",
+                "@babel/register"
+            ],
+            "outFiles": [
+                "${workspaceRoot}/dist/*.{js,.js.map}"
+            ]
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Debug Prod Build - Server",
             "smartStep": true,
             "program": "${workspaceFolder}/dist/server.js",
             "skipFiles": [
@@ -14,30 +72,9 @@
             "envFile": "${workspaceFolder}/.env",
             "env": {                
                 "NODE_ENV" : "production",
+                "ENABLE_LOGGING" : "false"
             },
-            "outFiles": [
-                "${workspaceRoot}/dist/*.{js,.js.map}"
-            ]
-        },
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "Debug Dev",
-            "smartStep": true,
-            "program": "${workspaceFolder}/src/index.js",
-            "skipFiles": [
-                "${workspaceRoot}/node_modules/**/*.js",
-                "<node_internals>/**/*.js"
-            ],
-            "envFile": "${workspaceFolder}/.env",
-            "env": {
-                "NODE_ENV" : "development",        
-            },
-            "runtimeArgs": [
-                "--nolazy",
-                "--require",
-                "@babel/register"
-            ],
-        },
+
+        }
     ]
 }
