@@ -33,9 +33,11 @@ export function setDevTool() {
             return "inline-cheap-module-source-map";
         case "development":
             // using source-maps prevents "jumpy" breakpoints
-            // try cheap-module-source-map if rebuilds are slow
+            // try cheap-module-eval-source-map if rebuilds are slow
             // but be warned : it will jump all over the place
-            // on successive rebuilds
+            // on successive rebuilds!
+            // I've tried every possible combination at this point
+            // to get around this, so don't waste your time future me!!!
             return "cheap-module-eval-source-map";
         default:
             // production or undefined
