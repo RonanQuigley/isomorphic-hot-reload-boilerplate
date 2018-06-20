@@ -1,26 +1,26 @@
 module.exports = {
     env: {
         browser: true,
-        commonjs: true,
-        es6: true,
-        node: true
+        node: true,
+        es6: true
     },
-    extends: ["plugin:prettier/recommended"],
+    parser: 'babel-eslint',
+    extends: ['prettier', 'plugin:react/recommended'],
     parserOptions: {
-        ecmaVersion: 8, // for supporting es7 - async/await etc.
+        sourceType: 'module',
+        ecmaVersion: 2018,
         ecmaFeatures: {
-            experimentalObjectRestSpread: true,
+            experimentalDecorators: true,
             jsx: true
         },
-        sourceType: "module"
+        sourceType: 'module'
     },
-    plugins: ["prettier", "react", "mocha"],
+    plugins: ['prettier', 'react', 'mocha'],
     rules: {
-        "prettier/prettier": "error",
-        "no-console": "off",
-        "no-unused-vars": ["error", { argsIgnorePattern: "next" }],
-        "react/jsx-uses-react": "error",
-        "react/jsx-uses-vars": "error",
-        "linebreak-style": ["error", "windows"]
+        strict: 0,
+        'prettier/prettier': 'error',
+        'no-console': 'off',
+        'no-unused-vars': ['warn', { argsIgnorePattern: 'next' }],
+        'linebreak-style': ['error', 'windows']
     }
 };

@@ -1,0 +1,15 @@
+{
+    "check-coverage": true,
+    "per-file": true,
+    "include": [
+    "./src/**/*.js"
+    ],
+    "reporter": [
+      "lcov",
+      "text"
+    ],
+    "cache": false,
+    "all": false,
+    "instruments" : false, 
+    "sourceMap": false
+}
