@@ -3,3 +3,5 @@
 yarn-error.log
 test.js
 yarn.lock
+.nyc_output
+coverage
