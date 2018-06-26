@@ -1,9 +1,11 @@
-import merge from "webpack-merge";
-import common from "./webpack.common.babel";
-
+import merge from 'webpack-merge';
+import common from './webpack.common.babel';
+import UglifyJsPlugin from 'uglifyjs-webpack-plugin';
 const prod = {
-    mode: "production",
-    entry: ["./src/client"],
+    mode: 'production',
+    entry: {
+        index: ['./src/client/pages/index/']
+    },
     optimization: {
         minimizer: [
             // maintain source maps but strip comments

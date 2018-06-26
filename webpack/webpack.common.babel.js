@@ -4,7 +4,8 @@ export default {
             {
                 exclude: /node_modules|packages/,
                 test: /\.js$/,
-                loader: "babel-loader?cacheDirectory=true"
+                loader: 'babel-loader?cacheDirectory=true',
+                sideEffects: false
             }
         ]
     }

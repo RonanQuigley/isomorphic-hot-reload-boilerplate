@@ -1,13 +1,13 @@
-import webpack from "webpack";
-import merge from "webpack-merge";
-import common from "./webpack.common.babel";
-import { setDevTool } from "./utilities";
+import webpack from 'webpack';
+import merge from 'webpack-merge';
+import common from './webpack.common.babel';
+import { setDevTool } from './utilities';
 
 const dev = {
-    mode: "development",
+    mode: 'development',
     entry: {
-        dev: ["./src/client/dev"],
-        index: ["webpack-hot-middleware/client", "./src/client/pages/index/"]
+        dev: ['./src/client/dev'],
+        index: ['webpack-hot-middleware/client', './src/client/pages/index/']
     },
     devtool: setDevTool(),
     plugins: [new webpack.HotModuleReplacementPlugin()]

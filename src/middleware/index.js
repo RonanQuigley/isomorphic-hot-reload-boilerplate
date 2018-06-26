@@ -1,39 +1,39 @@
-import chokidar from "chokidar";
-import express from "express";
-import webpack from "webpack";
-import open from "opn";
-import path from "path";
-import devMiddleware from "webpack-dev-middleware";
-import hotClientMiddleware from "webpack-hot-middleware";
-import hotServerMiddleware from "webpack-hot-server-middleware";
-import clientConfig from "../../webpack/front-end/webpack.dev.babel";
-import serverConfig from "../../webpack/back-end/webpack.dev.babel";
+import chokidar from 'chokidar';
+import express from 'express';
+import webpack from 'webpack';
+import open from 'opn';
+import path from 'path';
+import wpDevMiddleware from 'webpack-dev-middleware';
+import wphotClientMiddleware from 'webpack-hot-middleware';
+import wphotServerMiddleware from 'webpack-hot-server-middleware';
+import clientConfig from '../../webpack/front-end/webpack.dev.babel';
+import serverConfig from '../../webpack/back-end/webpack.dev.babel';
 
 const router = express.Router();
 const clientCompiler = webpack(clientConfig);
 const mergedCompilers = webpack([clientConfig, serverConfig]);
-const serverDir = path.resolve(__dirname, "../server");
+const serverDir = path.resolve(__dirname, '../server');
 const watcher = chokidar.watch(serverDir);
 
-const builtDevServer = devMiddleware(mergedCompilers, {
+const builtDevServer = wpDevMiddleware(mergedCompilers, {
     noInfo: true,
     serverSideRender: true,
-    stats: "errors-only"
+    stats: 'errors-only'
 });
 
-const builtDevClient = devMiddleware(clientCompiler, {
+const builtDevClient = wpDevMiddleware(clientCompiler, {
     noInfo: true,
     publicPath: clientConfig.output.publicPath,
-    stats: "errors-only"
+    stats: 'errors-only'
 });
 
-const builtHotServer = hotServerMiddleware(mergedCompilers);
+const builtHotServer = wphotServerMiddleware(mergedCompilers);
 
-const builtHotClient = hotClientMiddleware(clientCompiler);
+const builtHotClient = wphotClientMiddleware(clientCompiler);
 
 // watch our server side files for changes
-watcher.on("ready", () => {
-    watcher.on("all", () => {
+watcher.on('ready', () => {
+    watcher.on('all', () => {
         builtHotClient.publish({ reload: true });
     });
 });

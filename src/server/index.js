@@ -1,9 +1,9 @@
 import express from 'express';
 import morgan from 'morgan';
-// colors modifies the string prototype
-// this will prevent eslint throwing no-unused-var errors
-import 'colors';
+/*eslint no-unused-vars: [0]*/
+import { green } from 'colors';
 import bodyParser from 'body-parser';
+import router from './router';
 const app = express();
 
 app.use(bodyParser.json());
@@ -17,16 +17,14 @@ if (process.env.ENABLE_LOGGING === 'true') {
 }
 
 if (process.env.NODE_ENV === 'development') {
-    // tree shaking doesn't work properly so use a require
+    // tree shaking doesn't work properly so use dynamic import
     // to prevent the dev code showing up in production
-    app.use(require('../middleware').default);
+    import('../middleware').then(dev => app.use(dev.default));
 } else {
     app.use(
         // allow express to access our public assets in the dist
         express.static(__dirname),
-        // call default as function as it is exported
-        // that way for development purposes
-        require('./router').default()
+        router()
     );
 }
 
@@ -34,7 +32,7 @@ if (process.env.NODE_ENV === 'development') {
 if (process.env.NODE_ENV !== 'test') {
     const port = process.env.PORT || 3000;
     app.listen(port);
-    console.log('Server now listening at port: '.green + port);
+    console.log('Server now listening at port: '.green + port.green);
 }
 
 export default app;

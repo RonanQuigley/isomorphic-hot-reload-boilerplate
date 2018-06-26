@@ -9,7 +9,7 @@ export function render(req, res, next) {
     </head>
     <body>
         <div id="root"></div>
-        <script src="/index.js"></script>
+        <script src="index.js"></script>
     </body>
     </html>`);
 }

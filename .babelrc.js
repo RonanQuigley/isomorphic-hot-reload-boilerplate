@@ -4,7 +4,7 @@ module.exports = {
         ['@babel/stage-0', { decoratorsLegacy: true }],
         '@babel/preset-react'
     ],
-    plugins: ['react-hot-loader/babel'],
+    plugins: ['react-hot-loader/babel', 'dynamic-import-node'],
     // set retainLines and sourceMaps to true for proper debugging
     // otherwise you will get debugger errors for chrome
     retainLines: true,

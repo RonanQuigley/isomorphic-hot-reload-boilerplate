@@ -1,8 +1,8 @@
-import path from "path";
-const dist = path.join(__dirname, "../../dist");
+import path from 'path';
+const dist = path.join(__dirname, '../../dist');
 
 export function setOutput() {
-    if (process.env.NODE_ENV === "development") {
+    if (process.env.NODE_ENV === 'development') {
         return {
             path: dist,
             // fixes vscode chrome debugger stepping into unrelated webpack code
@@ -10,7 +10,7 @@ export function setOutput() {
             devtoolModuleFilenameTemplate(info) {
                 return `file:///${info.absoluteResourcePath.replace(
                     /\\/g,
-                    "/"
+                    '/'
                 )}`;
             }
         };
@@ -29,18 +29,18 @@ export function setDevTool() {
     mocha-webpack works best with cheap and inlined source maps
     */
     switch (process.env.NODE_ENV) {
-        case "test":
-            return "inline-cheap-module-source-map";
-        case "development":
+        case 'test':
+            return 'inline-cheap-module-source-map';
+        case 'development':
             // using source-maps prevents "jumpy" breakpoints
             // try cheap-module-eval-source-map if rebuilds are slow
             // but be warned : it will jump all over the place
             // on successive rebuilds!
             // I've tried every possible combination at this point
             // to get around this, so don't waste your time future me!!!
-            return "cheap-module-eval-source-map";
+            return 'cheap-module-eval-source-map';
         default:
             // production or undefined
-            return "source-map";
+            return 'source-map';
     }
 }
