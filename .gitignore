@@ -5,3 +5,4 @@ test.js
 yarn.lock
 .nyc_output
 coverage
+output.txt
