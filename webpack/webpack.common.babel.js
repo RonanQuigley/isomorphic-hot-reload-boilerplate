@@ -6,6 +6,15 @@ export default {
                 test: /\.js$/,
                 loader: 'babel-loader?cacheDirectory=true',
                 sideEffects: false
+            },
+            {
+                test: /\.(css|less|styl|scss|sass|sss)$/,
+                use: [
+                    'isomorphic-style-loader',
+                    `css-loader`,
+                    'postcss-loader?parser=postcss-scss',
+                    'sass-loader?sourceMap'
+                ]
             }
         ]
     }
