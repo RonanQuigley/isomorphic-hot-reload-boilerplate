@@ -32,7 +32,7 @@ if (process.env.NODE_ENV === 'development') {
 if (process.env.NODE_ENV !== 'test') {
     const port = process.env.PORT || 3000;
     app.listen(port);
-    console.log('Server now listening at port: '.green + port.green);
+    console.log('Server will be listening at port: '.green + port.green);
 }
 
 export default app;

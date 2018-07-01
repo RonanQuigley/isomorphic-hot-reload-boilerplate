@@ -8,6 +8,7 @@ const prod = {
     // for Math library extensions.
     entry: ['@babel/polyfill', './src/index'],
     optimization: {
+        minimize: false,
         minimizer: [
             // maintain source maps but strip comments
             new UglifyJsPlugin({

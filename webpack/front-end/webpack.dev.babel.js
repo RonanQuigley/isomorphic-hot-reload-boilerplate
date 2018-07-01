@@ -6,7 +6,7 @@ import { setDevTool } from './utilities';
 const dev = {
     mode: 'development',
     entry: {
-        dev: ['./src/client/dev'],
+        dev: ['./src/client/dev/index'],
         index: ['webpack-hot-middleware/client', './src/client/pages/index/']
     },
     devtool: setDevTool(),

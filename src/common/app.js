@@ -1,6 +1,12 @@
 import React from 'react';
 import { hot } from 'react-hot-loader';
+import withStyles from 'isomorphic-style-loader/lib/withStyles';
+import styles from './styles.scss';
 
-const App = () => <div>I am a react app! Change my text</div>;
-
-export default hot(module)(App);
+@hot(module)
+@withStyles(styles)
+export default class App extends React.Component {
+    render() {
+        return <div className={styles.react}>I am a react app</div>;
+    }
+}
