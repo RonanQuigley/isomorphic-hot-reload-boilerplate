@@ -12,6 +12,11 @@ export default class ContextProvider extends PureComponent {
     };
 
     componentDidMount() {
+        /* 
+            once the app is mounted 
+            we can remove the old css 
+            that was injected by the server
+        */
         document.getElementById('css').remove();
     }
 

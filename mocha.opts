@@ -1,5 +1,3 @@
---require @babel/register
---require @babel/register
---require mocha-clean
+--require babel.setup.js
 --require mocha.setup.js
 --reporter nyan

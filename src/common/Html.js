@@ -6,7 +6,7 @@ export default class Html extends PureComponent {
         app: PropTypes.string.isRequired,
         style: PropTypes.string.isRequired,
         title: PropTypes.string,
-        scripts: PropTypes.string
+        scripts: PropTypes.array
     };
 
     setupScripts = scripts => {

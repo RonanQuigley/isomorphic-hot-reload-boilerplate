@@ -11,7 +11,6 @@ module.exports = {
     sourceMaps: true,
     env: {
         test: {
-            presets: [['@babel/preset-env', { modules: false }]],
             plugins: [['istanbul']]
         }
     }
