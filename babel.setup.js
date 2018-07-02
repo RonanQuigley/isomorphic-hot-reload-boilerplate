@@ -8,6 +8,6 @@ require('@babel/register');
     when it comes across the unloadable extensions
 */
 
-const extensions = ['scss'];
+const extensions = ['scss', 'graphql'];
 
 extensions.forEach(ext => (require.extensions['.' + ext] = () => {}));
