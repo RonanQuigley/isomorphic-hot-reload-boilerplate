@@ -53,8 +53,9 @@ export default {
                 exclude: /node_modules/
             },
             {
-                test: /\.graphql?$/,
-                loader: 'webpack-graphql-loader'
+                exclude: /node_modules/,
+                test: /\.graphql$/,
+                use: [{ loader: 'graphql-import-loader' }]
             }
         ]
     }

@@ -3,7 +3,6 @@ import morgan from 'morgan';
 /*eslint no-unused-vars: [0]*/
 import { green } from 'colors';
 import bodyParser from 'body-parser';
-import router from './router';
 const app = express();
 
 app.use(bodyParser.json());
@@ -24,7 +23,11 @@ if (process.env.NODE_ENV === 'development') {
     app.use(
         // allow express to access our public assets in the dist
         express.static(__dirname),
-        router()
+        /* Router module can't be imported statically as babel register 
+        will run the file once without webpack. As such, this will cause 
+        errors on the first run of a program due to the absence of webpack 
+        loaders */
+        import('./router').then(router => router.default())
     );
 }
 

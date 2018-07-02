@@ -1,3 +1,7 @@
-import graphql from './test.graphql';
+import graphQLHTTP from 'express-graphql';
+import schema from './schema/index';
 
-console.log(graphql);
+export default graphQLHTTP({
+    schema: schema,
+    graphiql: true
+});
