@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/server';
 import Html from '../../../../common/Html';
-import { buildApp } from '../../../../common/api';
+import { buildApp } from '../../../../common/react/api';
 import { createServerContext } from '../../../api/react';
 
 export function render(req, res, next) {
