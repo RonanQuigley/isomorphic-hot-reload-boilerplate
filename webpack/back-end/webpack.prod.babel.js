@@ -6,7 +6,7 @@ const prod = {
     mode: 'production',
     // we need this babel polyfill in production
     // for Math library extensions.
-    entry: ['@babel/polyfill', './src/index'],
+    entry: ['@babel/polyfill', './src/server/prod'],
     optimization: {
         minimizer: [
             // maintain source maps but strip comments

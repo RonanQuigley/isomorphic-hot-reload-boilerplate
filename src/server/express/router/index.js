@@ -1,7 +1,7 @@
 import express from 'express';
 import index from './views/index';
 const router = express.Router();
-import graphql from '../graphql/index';
+import graphql from '../../graphql/index';
 
 router.use('/graphql', graphql);
 

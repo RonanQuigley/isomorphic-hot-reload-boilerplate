@@ -94,7 +94,7 @@
     "build:all:start": "npm-run-all -s build:all start:prod",
     "build:analyze": "cross-env ANALYZE=true NODE_ENV=production webpack --display-reasons -p --config webpack/full-stack/webpack.babel.js",
     "start:prod": "node ./dist/server.js",
-    "start:dev": "cross-env NODE_ENV=development node --max-old-space-size=8192 --inspect -r dotenv/config -r ./babel.setup.js ./src/index.js",
+    "start:dev": "cross-env NODE_ENV=development node --max-old-space-size=8192 --inspect -r dotenv/config -r ./babel.setup.js ./src/server/dev.js",
     "test:front": "mocha --watch --opts mocha.opts test/front-end/**/*.test.js",
     "test:back": "mocha --watch --opts mocha.opts test/back-end/**/*.test.js",
     "test:common": "mocha --watch --opts mocha.opts test/common/**/*.test.js",

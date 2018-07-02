@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/server';
-import Html from '../../../../common/react/components/html/index';
-import { buildApp } from '../../../../common/react/api/index';
-import { createServerContext } from '../../../api/react/index';
+import Html from '../../../../../common/react/components/html/index';
+import { buildApp } from '../../../../../common/react/api/index';
+import { createServerContext } from '../../../../api/react/index';
 
 export function render(req, res, next) {
     const css = new Set();
