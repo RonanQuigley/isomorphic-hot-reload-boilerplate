@@ -10,8 +10,8 @@ export default {
     module: {
         rules: [
             {
-                exclude: /node_modules|packages/,
-                test: /\.js$/,
+                exclude: /node_modules/,
+                test: /\.js|jsx$/,
                 loader: 'babel-loader?cacheDirectory=false',
                 sideEffects: false
             },

@@ -1,11 +1,11 @@
 import React from 'react';
-import ContextProvider from '../context-provider';
-import App from '../app';
+import ContextProvider from '../components/context-provider/index';
+import App from '../components/app';
 
-export function buildApp(context) {
+export function buildApp(context, props) {
     return (
         <ContextProvider context={context}>
-            <App />
+            <App {...props} />
         </ContextProvider>
     );
 }

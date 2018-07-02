@@ -1,5 +1,5 @@
 import merge from 'webpack-merge';
-import server from '../back-end/webpack.prod.babel';
+import server from '../back-end/webpack.prod.babel.js';
 import client from '../front-end/webpack.prod.babel';
 import CleanWebpackPlugin from 'clean-webpack-plugin';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';

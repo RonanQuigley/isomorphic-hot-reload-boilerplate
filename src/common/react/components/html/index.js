@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 export default class Html extends PureComponent {
     static propTypes = {
         app: PropTypes.string.isRequired,
-        style: PropTypes.string.isRequired,
+        styles: PropTypes.string.isRequired,
         title: PropTypes.string,
         scripts: PropTypes.array
     };
@@ -16,7 +16,7 @@ export default class Html extends PureComponent {
     };
 
     render() {
-        const { style, app, title, scripts } = this.props;
+        const { styles, app, title, scripts } = this.props;
         const isDev = process.env.NODE_ENV === 'development' ? true : false;
         return (
             <html lang="en">
@@ -30,7 +30,7 @@ export default class Html extends PureComponent {
                     <title>{title ? title : 'Document'}</title>
                     <style
                         id="css"
-                        dangerouslySetInnerHTML={{ __html: style }}
+                        dangerouslySetInnerHTML={{ __html: styles }}
                     />
                 </head>
                 <body>
