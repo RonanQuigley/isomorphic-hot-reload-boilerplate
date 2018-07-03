@@ -55,4 +55,4 @@ Using paths with spaces i.e. C:/users/foo/project/my project/ may result in a 40
 
 ## Support & Suggestions
 
-Please [open an issue](https://github.com/RonanQuigley/isomorphic-hot-reload-boilerplate/issues) for support.
+Please [open an issue](https://github.com/RonanQuigley/isomorphic-hot-reload-boilerplate/issues) for support
