@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 
 describe('foo', () => {
-    it('should say test', () => {
-        expect('test').to.equal('test');
+    it('should say foo', () => {
+        expect('foo').to.equal('foo');
     });
 });
