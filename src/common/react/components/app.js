@@ -1,4 +1,4 @@
-import hot from 'react-hot-loader';
+import { hot } from 'react-hot-loader';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import styles from './styles.scss';
 import React from 'react';
