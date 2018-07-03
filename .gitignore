@@ -7,3 +7,4 @@ yarn.lock
 coverage
 output.txt
 test.ts
+teamcity-extension.log
