@@ -3,6 +3,7 @@ import morgan from 'morgan';
 /*eslint no-unused-vars: [0]*/
 import { green } from 'colors';
 import bodyParser from 'body-parser';
+import emitter from '../../../dev/emitter';
 
 export default function setupApp(middleware) {
     const app = express();
@@ -17,20 +18,27 @@ export default function setupApp(middleware) {
         app.use(morgan('dev'));
     }
 
+    const listen = function() {
+        const port = process.env.PORT || 3000;
+        app.listen(port);
+        console.log('Server listening at port: '.green + port.green);
+    };
+
     if (process.env.NODE_ENV === 'development') {
         app.use(middleware);
+        emitter.on('dev-middleware-built', () => {
+            listen();
+        });
     } else {
         app.use(
             // allow express to access our public assets in the dist
             express.static(__dirname),
             middleware
         );
-    }
-
-    // let our unit tests handle listening
-    if (process.env.NODE_ENV !== 'test') {
-        const port = process.env.PORT || 3000;
-        app.listen(port);
-        console.log('Server listening at port: '.green + port.green);
+        // in tests we don't need to listen
+        // as we're using superagent
+        if (process.env.NODE_ENV !== 'test') {
+            listen();
+        }
     }
 }

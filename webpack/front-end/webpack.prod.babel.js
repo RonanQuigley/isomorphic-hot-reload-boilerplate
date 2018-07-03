@@ -29,7 +29,4 @@ const prod = {
         })
     ]
 };
-
-console.log(merge(common, prod));
-
 export default merge(common, prod);

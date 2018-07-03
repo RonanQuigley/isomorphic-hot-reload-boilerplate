@@ -8459,7 +8459,7 @@ webpack-hot-server-middleware@^0.5.0:
     source-map-support "^0.5.3"
     yarn "^1.5.1"
 
-webpack-log@^1.0.1:
+webpack-log@^1.0.1, webpack-log@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/webpack-log/-/webpack-log-1.2.0.tgz#a4b34cda6b22b518dbb0ab32e567962d5c72a43d"
   dependencies:

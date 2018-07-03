@@ -4,7 +4,7 @@ import Html from '../../../../../../common/react/components/html/index';
 import { buildApp } from '../../../../../../common/react/api/index';
 import { createServerContext } from '../../../../../api/react/index';
 
-export default function render(req, res, next) {
+export function render(req, res, next) {
     const css = new Set();
 
     const context = createServerContext(css);

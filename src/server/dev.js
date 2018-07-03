@@ -1,4 +1,6 @@
 import setupApp from './express/app';
-import devMiddleware from '../dev-middleware';
+import devRouter from '../dev/router';
 
-setupApp(devMiddleware);
+/* You can't import the express router at this point 
+in dev as babel will attempt to compile it. */
+setupApp(devRouter);
