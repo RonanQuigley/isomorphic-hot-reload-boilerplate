@@ -1,0 +1,5 @@
+endpoint: https://eu1.prisma.sh/ronan-quigley-011516/hot-reloading-boilerplate-redux/dev
+datamodel: datamodel.graphql
+hooks:
+  post-deploy:
+    - graphql get-schema -p prisma

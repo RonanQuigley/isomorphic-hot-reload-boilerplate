@@ -1,16 +1,7 @@
-import { importSchema } from 'graphql-import';
 import { makeExecutableSchema } from 'graphql-tools';
-import { Prisma } from 'prisma-binding';
-import path from 'path';
-const schema = require('./schema.graphql');
+import schema from './schema.graphql';
 
-const resolvers = {
-    Query: {
-        name: () => {
-            return 'test query';
-        }
-    }
-};
+import resolvers from '../resolvers';
 
 export default new makeExecutableSchema({
     typeDefs: schema,

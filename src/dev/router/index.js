@@ -72,7 +72,6 @@ builtDevServer.waitUntilValid(() => {
     // open('http://localhost:' + (process.env.PORT || 3000), {
     //     app: ['chrome', '--remote-debugging-port=9222']
     // });
-    console.log('valid');
     builtDevClient.waitUntilValid(() => {
         emitter.emit('dev-middleware-built');
     });
