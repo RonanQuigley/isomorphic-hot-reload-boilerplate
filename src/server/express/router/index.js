@@ -1,11 +1,8 @@
 import express from 'express';
 import index from './views/index';
-import ApolloServer from '../../graphql/apollo';
 import graphql from '../../graphql/index';
 
 const router = express.Router();
-
-// ApolloServer.applyMiddleware({ app: router });
 
 router.use('/graphql', graphql);
 
