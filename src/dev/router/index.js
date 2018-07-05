@@ -62,7 +62,7 @@ const builtHotClient = wphotClientMiddleware(clientCompiler, {
 this is used by webpack hot middleware on 
 the client to trigger page refreshes */
 watcher.on('ready', () => {
-    watcher.on('all', () => {
+    watcher.on('change', (event, path, details) => {
         // publish a reload flag
         builtHotClient.publish({ reload: true });
     });

@@ -1,9 +1,13 @@
-# import Post from 'src/server/graphql/prisma/generated/prisma.graphql'
-# import User from 'src/server/graphql/prisma/generated/prisma.graphql'
+#import Post from 'src/server/graphql/prisma/generated/prisma.graphql'
+#import User from 'src/server/graphql/prisma/generated/prisma.graphql'
+#import Author from 'src/server/graphql/prisma/generated/prisma.graphql'
+#import Address from 'src/server/graphql/prisma/generated/prisma.graphql'
 
 type Query {
   posts(searchString: String): [Post!]!
   user(id: ID!): User
+  author(id: ID!): Author
+  address(id: ID!): Address
 }
 
 type Mutation {

@@ -13,10 +13,13 @@
     "colors": "^1.2.1",
     "express": "^4.16.3",
     "express-graphql": "^0.6.12",
+    "find": "^0.2.9",
     "graphql-import-loader": "^0.2.1",
+    "graphql-tag": "^2.9.2",
     "graphql-tools": "^3.0.4",
     "ignore-styles": "^5.0.1",
     "jsdom": "^11.11.0",
+    "merge-graphql-schemas": "^1.5.2",
     "mocha-clean": "^1.0.0",
     "morgan": "^1.9.0",
     "node-fetch": "^2.1.2",
@@ -25,6 +28,7 @@
     "opn": "^5.3.0",
     "postcss-cssnext": "^3.1.0",
     "postcss-import": "^11.1.0",
+    "prisma": "^1.11.0",
     "prisma-binding": "^2.1.0",
     "react": "16.3.0",
     "react-dom": "16.3.0",
@@ -99,7 +103,8 @@
     "test:back": "mocha --opts mocha.opts test/back-end/**/*.test.js",
     "test:common": "mocha --watch --opts mocha.opts test/common/**/*.test.js",
     "test:all": "mocha --watch --opts mocha.opts test/**/*.test.js",
-    "coverage:back": "cross-env NODE_ENV=test nyc --report-dir ./coverage/back npm run test:back"
+    "coverage:back": "cross-env NODE_ENV=test nyc --report-dir ./coverage/back npm run test:back",
+    "prisma": "prisma deploy"
   },
   "bugs": {
     "url": "https://github.com/RonanQuigley/isomorphic-hot-reload-boilerplate/issues"

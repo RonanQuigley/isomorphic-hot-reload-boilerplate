@@ -54,7 +54,7 @@ export default {
             },
             {
                 exclude: /node_modules/,
-                test: /\.graphql$/,
+                test: /\.(graphql|gql)$/,
                 use: [{ loader: 'graphql-import-loader' }]
             }
         ]
