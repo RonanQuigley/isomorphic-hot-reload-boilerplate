@@ -4,14 +4,20 @@ import common from './webpack.common.babel';
 import { setDevTool } from './utilities';
 import util from 'util';
 
+// reload option reloads the browser in the event of a crash
+const hotMiddleware = 'webpack-hot-middleware/client?reload=true';
+
 const dev = {
     mode: 'development',
     entry: {
         dev: ['./src/client/dev/index'],
-        index: ['webpack-hot-middleware/client', './src/client/pages/index/']
+        index: ['./src/client/pages/index/']
     },
     devtool: setDevTool(),
     plugins: [new webpack.HotModuleReplacementPlugin()]
 };
+
+// prepend the hot middleware to each page/file
+Object.values(dev.entry).forEach(elem => elem.unshift(hotMiddleware));
 
 export default merge(common, dev);

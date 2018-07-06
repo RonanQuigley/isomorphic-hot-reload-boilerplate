@@ -1,6 +1,8 @@
+// do not import this file in your webpack entries in production
+
+import webpackHotMiddleware from 'webpack-hot-middleware/client';
+
 function checkForServerChanges() {
-    // do not try to import this as it'll show up in production builds
-    const webpackHotMiddleware = require('webpack-hot-middleware/client');
     webpackHotMiddleware.subscribe(message => {
         if (message.reload === true) {
             window.location.reload();
@@ -11,3 +13,11 @@ function checkForServerChanges() {
 if (process.env.NODE_ENV === 'development') {
     checkForServerChanges();
 }
+
+if (module.hot) {
+    module.hot.accept(error => {
+        console.log(error);
+    });
+}
+
+console.log('hey');

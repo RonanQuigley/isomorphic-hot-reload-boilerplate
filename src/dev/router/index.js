@@ -57,7 +57,6 @@ const builtHotServer = wphotServerMiddleware(mergedCompilers, {
 const builtHotClient = wphotClientMiddleware(clientCompiler, {
     log: false
 });
-
 /* watch our server side files for changes
 this is used by webpack hot middleware on 
 the client to trigger page refreshes */
