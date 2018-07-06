@@ -13,7 +13,25 @@ const backEndCommon = {
         __dirname: false
     },
     externals: nodeExternals(),
-    plugins: [new DotEnv()]
+    plugins: [new DotEnv()],
+    module: {
+        rules: [
+            {
+                exclude: /node_modules/,
+                test: /\.js|jsx$/,
+                // we cannot cache the directory otherwise graphql
+                // loader won't get new changes to our schema when
+                // prisma deploy is ran
+                loader: 'babel-loader?cacheDirectory=false',
+                sideEffects: false
+            },
+            {
+                exclude: /node_modules/,
+                test: /\.(graphql|gql)$/,
+                use: [{ loader: 'graphql-import-loader' }]
+            }
+        ]
+    }
 };
 
 export default merge(common, backEndCommon);

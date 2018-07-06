@@ -10,12 +10,6 @@ export default {
     module: {
         rules: [
             {
-                exclude: /node_modules/,
-                test: /\.js|jsx$/,
-                loader: 'babel-loader?cacheDirectory=false',
-                sideEffects: false
-            },
-            {
                 test: /\.scss$/,
                 use: [
                     {
@@ -51,11 +45,6 @@ export default {
                     'sass-loader'
                 ],
                 exclude: /node_modules/
-            },
-            {
-                exclude: /node_modules/,
-                test: /\.(graphql|gql)$/,
-                use: [{ loader: 'graphql-import-loader' }]
             }
         ]
     }

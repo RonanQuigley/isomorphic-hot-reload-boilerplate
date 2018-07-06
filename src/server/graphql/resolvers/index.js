@@ -22,6 +22,13 @@ export default {
                 },
                 info
             );
+        },
+        users: (_, args, context, info) => {
+            return context.prisma.query.users({
+                where: {
+                    name: args.name
+                }
+            });
         }
     },
     Mutation: {

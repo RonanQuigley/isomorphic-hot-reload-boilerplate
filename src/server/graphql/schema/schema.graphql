@@ -6,6 +6,7 @@
 type Query {
   posts(searchString: String): [Post!]!
   user(id: ID!): User
+  users(name: String!): [User!]!
   author(id: ID!): Author
   address(id: ID!): Address
 }

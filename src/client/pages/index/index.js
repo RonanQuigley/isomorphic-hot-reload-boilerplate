@@ -1,5 +1,8 @@
-import { createClientContext } from '../../api/react/index';
-import { buildApp } from '../../../common/react/api/index';
+import ReactDOM from 'react-dom';
+import { createClientContext } from '../../api/react';
+import { buildApp } from '../../../common/react/api';
+import '../../api/graphql';
+
 const root = document.getElementById('root');
 
 const context = createClientContext();

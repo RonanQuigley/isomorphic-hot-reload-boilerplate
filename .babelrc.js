@@ -1,6 +1,14 @@
 module.exports = {
     presets: [
-        ['@babel/preset-env'],
+        [
+            '@babel/preset-env',
+            {
+                // only import the polyfills we need
+                useBuiltIns: 'usage',
+                // https://github.com/browserslist/browserslist#best-practices
+                targets: { browsers: ['defaults', '>0.5%', 'IE 10'] }
+            }
+        ],
         ['@babel/stage-0', { decoratorsLegacy: true }],
         '@babel/preset-react'
     ],

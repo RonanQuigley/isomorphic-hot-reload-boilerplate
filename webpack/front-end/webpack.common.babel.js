@@ -8,7 +8,24 @@ const frontEndCommon = {
     target: 'web',
     devtool: setDevTool(),
     output: setOutput(),
-    plugins: [new webpack.NamedModulesPlugin()]
+    plugins: [new webpack.NamedModulesPlugin()],
+    module: {
+        rules: [
+            {
+                exclude: /node_modules/,
+                test: /\.js|jsx$/,
+                // for the front end, we can cache the directory
+                // as we aren't using prisma
+                loader: 'babel-loader?cacheDirectory=true',
+                sideEffects: false
+            },
+            {
+                exclude: /node_modules/,
+                test: /\.(graphql|gql)$/,
+                use: [{ loader: 'graphql-tag/loader' }]
+            }
+        ]
+    }
 };
 
 export default merge(common, frontEndCommon);

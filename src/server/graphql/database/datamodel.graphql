@@ -1,5 +1,5 @@
 # Our file watcher relies on this file being inside the database directory
-# if you change the directory be sure to update the dev/prisma directory
+# if you change the directory be sure to update the directory in src/dev/prisma 
 
 type User {
   id: ID! @unique
