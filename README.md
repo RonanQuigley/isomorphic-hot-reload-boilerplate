@@ -1,6 +1,6 @@
 # Isomoprhic Hot Reload Boilerplate
 
-Combines the holy trinity of webpack-hot-server, wepback-dev-middleware and webpack-hot-middleware for hot reloading both client and server.
+Combines webpack-hot-server, wepback-dev-middleware and webpack-hot-middleware for hot reloading both client and server.
 
 After scouring the web looking at all sorts of isomorphic boilerplates and articles for hot reloading, I wasn't able to find any that checked all the boxes for what I was looking for in a setup. Either the project's were abandoned, used out of date tech, were completely over-engineered, had patchy instructions, could only bundle client-side code or were unable to hot reload both client and server at the same time.
 
@@ -11,13 +11,16 @@ This boileplate solves those problems, and its primary aim is to maximise dev ef
 *   Morgan
 *   React
 *   React hot loader
+*   GraphQL
+*   Prisma
+*   Apollo Client
 *   ES6 support
 *   Babel 7 support
 *   Eslint
-*   Unit testing support for mocha/chai
+*   Unit testing support with mocha/chai
 *   Production ready full-stack builds
 *   DotEnv for loading your env files into webpack
-*   Automatically opens up the browser window in development
+*   Automatically opens browser window in development and closes in the event of a node process exit
 *   Watches for server side changes and reloads the browser
 *   Handles all files in memory for the fastest possible update times.
 
@@ -36,7 +39,7 @@ The src directory holds all of your source files:
 
 *   The client folder contains all client side code. It currently has a simple index file. update the following line to your colour of choice to see changes reflected in your browser : `document.body.style.background = 'white'`
 *   The common folder contains your shared client/server code. In this case, it has a tiny react app.js example.
-*   The dev folder contains all of the hot reloading code for development.
+*   The dev folder contains hot reloading and other dev related code.
 *   The server folder contains your routes and whatever else you'd need to add for server-side.
 *   The index file handles the express app generation and changes the middleware used based on whether your are in development or production
 
