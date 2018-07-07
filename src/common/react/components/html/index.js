@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 
 export default class Html extends PureComponent {
     static propTypes = {
-        app: PropTypes.string.isRequired,
+        // optional in case you don't want to
+        // render a react app and just need html
+        app: PropTypes.string,
         styles: PropTypes.string.isRequired,
         title: PropTypes.string,
         scripts: PropTypes.array
