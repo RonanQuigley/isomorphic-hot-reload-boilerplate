@@ -1,8 +1,6 @@
-mutation{
-
-	
-  signup(name: "Serena"){
+mutation {
+  signup(name: "Test") {
+    name 
     id
   }
-
 }
