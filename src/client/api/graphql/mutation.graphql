@@ -1,0 +1,8 @@
+mutation{
+
+	
+  signup(name: "Serena"){
+    id
+  }
+
+}

@@ -1,6 +1,5 @@
 query{
-    rates(currency: "USD") {
-        currency
-        rate
-    }
+  users(name: "Alice"){
+    id
+  }
 }

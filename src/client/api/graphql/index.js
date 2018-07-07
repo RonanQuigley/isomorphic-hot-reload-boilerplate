@@ -2,44 +2,43 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import ApolloClient from 'apollo-boost';
 import testQuery from './query.graphql';
-import { Query, ApolloProvider } from 'react-apollo';
+import testMutation from './mutation.graphql';
+import { Query, ApolloProvider, Mutation } from 'react-apollo';
+
+console.log(testMutation);
 
 const client = new ApolloClient({
-    uri: 'https://w5xlvm3vzz.lp.gql.zone/graphql'
+    uri: 'http://localhost:3000/graphql'
 });
 
-const test = client
-    .query({
-        query: testQuery
-    })
-    .then(result => console.log(result));
+const TestMutation = () => (
+    <Mutation mutation={testMutation}>
+        {(func, { data }) => {
+            return <div>Hello</div>;
+        }}
+    </Mutation>
+);
+
+const TestQuery = () => (
+    <Query query={testQuery}>
+        {({ loading, error, data }) => {
+            if (loading) return <p>Loading...</p>;
+            if (error) return <p>Error :(</p>;
+            return data.users.map(user => <div key={user.id}>{user.id}</div>);
+        }}
+    </Query>
+);
 
 const Apollo = () => (
     <ApolloProvider client={client}>
-        <div>
-            <ExchangeRates />
-        </div>
+        <TestQuery />
+        <TestMutation />
     </ApolloProvider>
 );
 
 const elem = document.createElement('div');
 elem.setAttribute('id', 'apollo');
 document.body.appendChild(elem);
-
-const ExchangeRates = () => (
-    <Query query={testQuery}>
-        {({ loading, error, data }) => {
-            if (loading) return <p>Loading...</p>;
-            if (error) return <p>Error :(</p>;
-
-            return data.rates.map(({ currency, rate }) => (
-                <div key={currency}>
-                    <p>{`${currency}: ${rate}`}</p>
-                </div>
-            ));
-        }}
-    </Query>
-);
 
 ReactDOM.render(<Apollo />, elem);
 

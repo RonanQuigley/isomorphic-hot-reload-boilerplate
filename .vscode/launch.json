@@ -40,7 +40,7 @@
             "request": "launch",
             "name": "Debug Dev Server Setup",
             "smartStep": true,
-            "program": "${workspaceFolder}/src/index.js",
+            "program": "${workspaceFolder}/src/server/dev.js",
             "skipFiles": [
                 "${workspaceRoot}/node_modules/**/*.js",
                 "<node_internals>/**/*.js"

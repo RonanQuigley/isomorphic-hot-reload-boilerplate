@@ -1,7 +1,6 @@
 import chokidar from 'chokidar';
 import express from 'express';
 import webpack from 'webpack';
-import open from 'opn';
 import path from 'path';
 import wpDevMiddleware from 'webpack-dev-middleware';
 import wphotClientMiddleware from 'webpack-hot-middleware';
@@ -10,6 +9,7 @@ import clientConfig from '../../../webpack/front-end/webpack.dev.babel';
 import serverConfig from '../../../webpack/back-end/webpack.dev.babel';
 import emitter from '../emitter';
 import weblog from 'webpack-log';
+import loadBrowser from '../browser';
 
 const router = express.Router();
 
@@ -68,9 +68,7 @@ watcher.on('ready', () => {
 });
 
 builtDevServer.waitUntilValid(() => {
-    // open('http://localhost:' + (process.env.PORT || 3000), {
-    //     app: ['chrome', '--remote-debugging-port=9222']
-    // });
+    loadBrowser();
     builtDevClient.waitUntilValid(() => {
         emitter.emit('dev-middleware-built');
     });
