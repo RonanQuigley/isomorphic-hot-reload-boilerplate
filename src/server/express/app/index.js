@@ -3,7 +3,7 @@ import morgan from 'morgan';
 /*eslint no-unused-vars: [0]*/
 import { green } from 'colors';
 import bodyParser from 'body-parser';
-import emitter from '../../../dev/emitter';
+import emitter from '../../dev/emitter';
 
 export default function setupApp(middleware) {
     const app = express();

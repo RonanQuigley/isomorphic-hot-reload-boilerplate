@@ -3,10 +3,7 @@ import chokidar from 'chokidar';
 import path from 'path';
 import { red } from 'colors';
 
-const dir = path.resolve(
-    __dirname,
-    '../../server/graphql/database/datamodel.graphql'
-);
+const dir = path.resolve(__dirname, '../../graphql/database/datamodel.graphql');
 
 const watcher = chokidar.watch(dir);
 

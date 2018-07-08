@@ -5,11 +5,11 @@ import path from 'path';
 import wpDevMiddleware from 'webpack-dev-middleware';
 import wphotClientMiddleware from 'webpack-hot-middleware';
 import wphotServerMiddleware from 'webpack-hot-server-middleware';
-import clientConfig from '../../../webpack/front-end/webpack.dev.babel';
-import serverConfig from '../../../webpack/back-end/webpack.dev.babel';
+import clientConfig from '../../../../webpack/front-end/webpack.dev.babel';
+import serverConfig from '../../../../webpack/back-end/webpack.dev.babel';
 import emitter from '../emitter';
 import weblog from 'webpack-log';
-import loadBrowser from '../browser';
+import loadChrome from '../chrome';
 
 const router = express.Router();
 
@@ -20,7 +20,7 @@ const mergedCompilers = webpack([clientConfig, serverConfig]);
 /* watch files on the server for changes; this is 
 used on the client side by webpack hot middleware 
 to automatically refresh the page */
-const serverDir = path.resolve(__dirname, '../../server');
+const serverDir = path.resolve(__dirname, '../../');
 const watcher = chokidar.watch(serverDir);
 
 /* build the server side development middleware */
@@ -61,14 +61,14 @@ const builtHotClient = wphotClientMiddleware(clientCompiler, {
 this is used by webpack hot middleware on 
 the client to trigger page refreshes */
 watcher.on('ready', () => {
-    watcher.on('change', (event, path, details) => {
+    watcher.on('change', () => {
         // publish a reload flag
         builtHotClient.publish({ reload: true });
     });
 });
 
 builtDevServer.waitUntilValid(() => {
-    loadBrowser();
+    loadChrome();
     builtDevClient.waitUntilValid(() => {
         emitter.emit('dev-middleware-built');
     });
