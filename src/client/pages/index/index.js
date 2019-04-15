@@ -1,20 +1,16 @@
 import ReactDOM from 'react-dom';
 import React from 'react';
-import { createClientContext } from '../../api/react';
-import { buildApp } from '../../../common/react/api';
-import '../../api/graphql';
-import '../../api/graphql';
-
-// const root = document.getElementById('root');
+import App from '../../../common/react/components/app';
+// import '../../api/graphql';
+const root = document.getElementById('root');
 
 // const context = createClientContext();
 
 // const app = buildApp(context);
 
-// ReactDOM.hydrate(app, root);
+ReactDOM.hydrate(<App />, root);
 
-// change me to a different colour and see the changes reflected in browser
-document.body.style.background = 'white';
+document.body.style.background = 'red';
 
 if (module.hot) {
     module.hot.accept();

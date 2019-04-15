@@ -8,44 +8,6 @@ const minimizeCssOptions = {
 
 export default {
     module: {
-        rules: [
-            {
-                test: /\.scss$/,
-                use: [
-                    {
-                        loader: 'isomorphic-style-loader',
-                        options: {
-                            debug: isDev
-                        }
-                    },
-                    {
-                        loader: 'css-loader',
-                        options: {
-                            // CSS Modules https://github.com/css-modules/css-modules
-                            modules: true,
-                            sourceMap: isDev,
-                            minimize: isDev ? false : minimizeCssOptions,
-                            localIdentName: isDev
-                                ? '[name]__[local]-[hash:base64:5]'
-                                : '[hash:base64:5]'
-                        }
-                    },
-                    {
-                        loader: 'postcss-loader',
-                        options: {
-                            parser: 'postcss-scss',
-                            plugins: () => [
-                                require('autoprefixer')({
-                                    browsers: ['last 2 versions']
-                                }),
-                                require('cssnano')({ zindex: false })
-                            ]
-                        }
-                    },
-                    'sass-loader'
-                ],
-                exclude: /node_modules/
-            }
-        ]
+        rules: []
     }
 };

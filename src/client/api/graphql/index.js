@@ -16,6 +16,7 @@ const Apollo = () => (
 
 const elem = document.createElement('div');
 elem.setAttribute('id', 'apollo');
+console.log(document.body);
 document.body.appendChild(elem);
 
 ReactDOM.render(<Apollo />, elem);

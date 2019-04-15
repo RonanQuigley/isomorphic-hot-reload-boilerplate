@@ -19,5 +19,3 @@ if (module.hot) {
         console.log(error);
     });
 }
-
-console.log('hey');

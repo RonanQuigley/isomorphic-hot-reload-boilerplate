@@ -1,32 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom/server';
-import Html from '../../../../../../common/react/components/html/index';
-import { buildApp } from '../../../../../../common/react/api/index';
-import { createServerContext } from '../../../../../api/react/index';
 
 export function render(req, res, next) {
-    const css = new Set();
+    const App = () => <div>Hello from Place</div>;
 
-    const context = createServerContext(css);
-
-    const builtApp = buildApp(context);
-
-    const app = ReactDOM.renderToString(builtApp);
-
-    const styles = [...css].join('');
-
-    const scripts = ['./index.js'];
-
-    const title = 'Index Page';
-
-    const content = {
-        app: app,
-        styles: styles,
-        title: title,
-        scripts: scripts
-    };
-
-    const html = ReactDOM.renderToString(<Html {...content} />);
-
-    res.send(html);
+    res.send(`
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <meta http-equiv="X-UA-Compatible" content="ie=edge">
+            <title>Document</title>
+            <script defer src="./index.js"></script>
+        </head>
+        <body>
+            <div id="root"></div>
+        </body>
+        </html>
+    `);
 }
