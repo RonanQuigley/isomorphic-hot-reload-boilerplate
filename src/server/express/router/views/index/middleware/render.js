@@ -1,9 +1,8 @@
 import React from 'react';
-import ReactDOM from 'react-dom/server';
-
+import { renderToString } from 'react-dom/server';
+import App from '../../../../../../common/react/app';
 export function render(req, res, next) {
-    const App = () => <div>Hello from Place</div>;
-
+    const html = renderToString(<App />);
     res.send(`
         <!DOCTYPE html>
         <html lang="en">
@@ -15,7 +14,7 @@ export function render(req, res, next) {
             <script defer src="./index.js"></script>
         </head>
         <body>
-            <div id="root"></div>
+            <div id="root">${html}</div>
         </body>
         </html>
     `);

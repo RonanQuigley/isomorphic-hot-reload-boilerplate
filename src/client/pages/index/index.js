@@ -1,12 +1,7 @@
 import ReactDOM from 'react-dom';
 import React from 'react';
-import App from '../../../common/react/components/app';
-// import '../../api/graphql';
+import App from '../../../common/react/app';
 const root = document.getElementById('root');
-
-// const context = createClientContext();
-
-// const app = buildApp(context);
 
 ReactDOM.hydrate(<App />, root);
 

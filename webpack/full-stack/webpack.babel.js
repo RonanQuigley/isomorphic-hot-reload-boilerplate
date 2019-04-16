@@ -10,18 +10,16 @@ const root = path.join(__dirname, '../../');
 
 const clientPlugin = {
     plugins: [
-        new CleanWebpackPlugin(dist, {
-            root: root,
-            exclude: ['server.js', 'server.js.map']
+        new CleanWebpackPlugin({
+            cleanAfterEveryBuildPatterns: ['index.js', 'index.js.map']
         })
     ]
 };
 
 const serverPlugin = {
     plugins: [
-        new CleanWebpackPlugin(dist, {
-            root: root,
-            exclude: ['client.js', 'client.js.map']
+        new CleanWebpackPlugin({
+            cleanAfterEveryBuildPatterns: ['server.js', 'server.js.map']
         })
     ]
 };
