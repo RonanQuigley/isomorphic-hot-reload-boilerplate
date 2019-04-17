@@ -1,7 +1,5 @@
 import DotEnv from 'dotenv-webpack';
 import nodeExternals from 'webpack-node-externals';
-import merge from 'webpack-merge';
-import common from '../webpack.common.babel';
 import { setDevTool, setOutput } from './utilities';
 
 const backEndCommon = {
@@ -34,4 +32,4 @@ const backEndCommon = {
     }
 };
 
-export default merge(common, backEndCommon);
+export default backEndCommon;

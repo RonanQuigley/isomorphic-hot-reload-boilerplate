@@ -15,7 +15,5 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 if (module.hot) {
-    module.hot.accept(error => {
-        console.log(error);
-    });
+    module.hot.accept(error => console.error(error));
 }

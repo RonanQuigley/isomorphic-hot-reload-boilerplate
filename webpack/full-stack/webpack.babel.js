@@ -3,10 +3,6 @@ import server from '../back-end/webpack.prod.babel.js';
 import client from '../front-end/webpack.prod.babel';
 import CleanWebpackPlugin from 'clean-webpack-plugin';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
-import path from 'path';
-
-const dist = path.join(__dirname, '../../dist');
-const root = path.join(__dirname, '../../');
 
 const clientPlugin = {
     plugins: [

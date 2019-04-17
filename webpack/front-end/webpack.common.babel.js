@@ -1,6 +1,4 @@
 import webpack from 'webpack';
-import merge from 'webpack-merge';
-import common from '../webpack.common.babel';
 import { setDevTool, setOutput } from '../front-end/utilities';
 
 const frontEndCommon = {
@@ -28,4 +26,4 @@ const frontEndCommon = {
     }
 };
 
-export default merge(common, frontEndCommon);
+export default frontEndCommon;
