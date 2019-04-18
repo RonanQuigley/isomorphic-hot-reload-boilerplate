@@ -1,6 +1,6 @@
 import ReactDOM from 'react-dom';
 import React from 'react';
-import App from '../../../common/react/app';
+import App from '../../react/app';
 const root = document.getElementById('root');
 
 ReactDOM.hydrate(<App />, root);
