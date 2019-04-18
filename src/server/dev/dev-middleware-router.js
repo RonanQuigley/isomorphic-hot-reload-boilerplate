@@ -9,7 +9,7 @@ import clientConfig from '../../../webpack/front-end/webpack.dev.babel';
 import serverConfig from '../../../webpack/back-end/webpack.dev.babel';
 import emitter from './emitter';
 import weblog from 'webpack-log';
-import loadChrome from '../dev';
+import loadChrome from './chrome';
 
 const devMiddlewareRouter = express.Router();
 

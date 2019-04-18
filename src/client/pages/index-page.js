@@ -5,7 +5,8 @@ const root = document.getElementById('root');
 
 ReactDOM.hydrate(<App />, root);
 
-document.body.style.background = 'orange';
+// change me to another colour
+document.body.style.background = 'red';
 
 if (module.hot) {
     module.hot.accept();

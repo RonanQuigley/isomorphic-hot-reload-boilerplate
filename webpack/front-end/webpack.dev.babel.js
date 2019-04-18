@@ -10,8 +10,8 @@ const hotMiddleware = 'webpack-hot-middleware/client?reload=true';
 const dev = {
     mode: 'development',
     entry: {
-        dev: ['./src/client/dev/index'],
-        index: ['./src/client/pages/index/']
+        dev: ['./src/client/dev'],
+        index: ['./src/client/pages/index-page']
     },
     devtool: setDevTool(),
     plugins: [new webpack.HotModuleReplacementPlugin()]
