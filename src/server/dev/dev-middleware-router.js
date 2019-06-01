@@ -8,6 +8,7 @@ import serverConfig from '../../../webpack/back-end/webpack.dev.babel';
 import emitter from './emitter';
 import weblog from 'webpack-log';
 import loadChrome from './chrome';
+import { find } from 'lodash';
 
 const devMiddlewareRouter = express.Router();
 
@@ -64,7 +65,10 @@ devMiddlewareRouter
     .use(builtHotClient)
     .use(builtHotServer);
 
-mergedCompilers.compilers[1].hooks.afterEmit.tap('AfterPluginCompletion', () =>
+// reload the browser each time the server has completed a rebuild
+find(mergedCompilers.compilers, {
+    name: 'server'
+}).hooks.afterEmit.tap('AfterServerHasRebuilt', () =>
     builtHotClient.publish({ reload: true })
 );
 
