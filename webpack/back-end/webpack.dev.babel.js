@@ -1,6 +1,5 @@
 import common from './webpack.common.babel';
 import merge from 'webpack-merge';
-
 const dev = {
     mode: 'development',
     /* in development we go straight to the express router 
