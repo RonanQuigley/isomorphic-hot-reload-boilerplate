@@ -20,7 +20,7 @@ const mergedCompilers = webpack([clientConfig, serverConfig]);
 /* watch files on the server for changes; this is 
 used on the client side by webpack hot middleware 
 to automatically refresh the page */
-const serverDir = path.resolve(__dirname, '../../');
+const serverDir = path.resolve(__dirname, '../express');
 const watcher = chokidar.watch(serverDir);
 
 /* build the server side development middleware */
@@ -47,6 +47,8 @@ const builtDevClient = wpDevMiddleware(clientCompiler, {
     })
 });
 
+console.log(builtDevServer.context.compiler.hooks);
+
 /* hot reloading for server side code */
 const builtHotServer = wphotServerMiddleware(mergedCompilers, {
     // disables logging of build times
@@ -57,6 +59,7 @@ const builtHotServer = wphotServerMiddleware(mergedCompilers, {
 const builtHotClient = wphotClientMiddleware(clientCompiler, {
     log: false
 });
+
 /* watch our server side files for changes
 this is used by webpack hot middleware on 
 the client to trigger page refreshes */

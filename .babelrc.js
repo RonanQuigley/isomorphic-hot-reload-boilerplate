@@ -19,13 +19,11 @@ module.exports = {
     sourceMaps: true,
     env: {
         development: {
-            plugins: ['react-hot-loader/babel', 'dynamic-import-node']
+            plugins: ['react-hot-loader/babel']
         },
         test: {
             plugins: [['istanbul']]
         },
-        production: {
-            plugins: ['dynamic-import-node']
-        }
+        production: {}
     }
 };

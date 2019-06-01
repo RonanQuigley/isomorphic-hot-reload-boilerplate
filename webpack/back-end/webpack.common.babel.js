@@ -17,16 +17,9 @@ const backEndCommon = {
             {
                 exclude: /node_modules/,
                 test: /\.js|jsx$/,
-                // we cannot cache the directory otherwise graphql
-                // loader won't get new changes to our schema when
-                // prisma deploy is ran
-                loader: 'babel-loader?cacheDirectory=false',
+                // cache the directory for faster rebuilds
+                loader: 'babel-loader?cacheDirectory=true',
                 sideEffects: false
-            },
-            {
-                exclude: /node_modules/,
-                test: /\.(graphql|gql)$/,
-                use: [{ loader: 'graphql-import-loader' }]
             }
         ]
     }

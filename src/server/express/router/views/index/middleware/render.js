@@ -14,7 +14,7 @@ export function render(req, res, next) {
             <title>Document</title>
             <script defer src="./index.js"></script>
         </head>
-        <body>
+        <body>            
             <div id="root">${html}</div>
         </body>
         </html>

@@ -12,15 +12,8 @@ const frontEndCommon = {
             {
                 exclude: /node_modules/,
                 test: /\.js|jsx$/,
-                // for the front end, we can cache the directory
-                // as we aren't using prisma
                 loader: 'babel-loader?cacheDirectory=true',
                 sideEffects: false
-            },
-            {
-                exclude: /node_modules/,
-                test: /\.(graphql|gql)$/,
-                use: [{ loader: 'graphql-tag/loader' }]
             }
         ]
     }
