@@ -1,13 +1,10 @@
+import bodyParser from 'body-parser';
+import { green } from 'colors';
 import express from 'express';
 import morgan from 'morgan';
-import { green } from 'colors';
-import bodyParser from 'body-parser';
 import loadChrome from '../../dev-tools/chrome';
-import router from './router/router';
-
-console.log('hello');
-
 import devTools from '../../dev-tools/server-dev-tools';
+import router from './router/router';
 
 const app = express();
 
