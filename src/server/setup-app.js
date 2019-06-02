@@ -2,9 +2,9 @@ import express from 'express';
 import morgan from 'morgan';
 import { green } from 'colors';
 import bodyParser from 'body-parser';
-import loadChrome from '../../../dev-tools/chrome';
+import loadChrome from '../../dev-tools/chrome';
 import router from './router/router';
-import devTools from '../../../dev-tools/dev-tools';
+import devTools from '../../dev-tools/server-dev-tools';
 
 const app = express();
 

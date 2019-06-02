@@ -4,7 +4,7 @@ import common from './webpack.common.babel';
 import UglifyJsPlugin from 'uglifyjs-webpack-plugin';
 const prod = {
     mode: 'production',
-    entry: ['./src/server/express/setup-app'],
+    entry: ['./src/server/setup-app'],
     optimization: {
         minimizer: [
             // maintain source maps but strip comments

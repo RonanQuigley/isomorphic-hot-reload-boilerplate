@@ -4,7 +4,7 @@ const dev = {
     mode: 'development',
     /* in development we go straight to the express router 
     as the initial hot reloading setup is done outside webpack */
-    entry: './src/server/express/router/router'
+    entry: './src/server/router/router'
 };
 
 export default merge(common, dev);

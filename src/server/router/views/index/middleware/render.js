@@ -1,6 +1,6 @@
 import React from 'react';
 import { renderToString } from 'react-dom/server';
-import App from '../../../../../../react/app';
+import App from '../../../../../react/app';
 
 export function render(req, res, next) {
     const html = renderToString(<App />);

@@ -6,7 +6,7 @@ import { setDevTool } from './utilities';
 // reload option reloads the browser in the event of a crash
 const hotMiddlewareUtils = [
     'webpack-hot-middleware/client?reload=true',
-    './src/client/dev' // reloads in the event of server changes
+    './dev-tools/client-dev-tools' // reloads in the event of server changes
 ];
 
 const dev = {
