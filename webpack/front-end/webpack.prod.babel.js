@@ -9,6 +9,7 @@ const prod = {
         index: ['./src/client/pages/index']
     },
     optimization: {
+        usedExports: true,
         minimizer: [
             // maintain source maps but strip comments
             new UglifyJsPlugin({

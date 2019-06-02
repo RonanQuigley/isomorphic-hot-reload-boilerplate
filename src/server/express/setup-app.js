@@ -3,9 +3,8 @@ import morgan from 'morgan';
 import { green } from 'colors';
 import bodyParser from 'body-parser';
 import loadChrome from '../../../dev-tools/chrome';
-import devTools from '../../../dev-tools/setup-dev-environment';
-
-const { builtDevClient, builtDevServer, devMiddlewareRouter } = devTools;
+import router from './router/router';
+import devTools from '../../../dev-tools/dev-tools';
 
 const app = express();
 
@@ -19,13 +18,14 @@ if (process.env.ENABLE_LOGGING === 'true') {
     app.use(morgan('dev'));
 }
 
-const listen = function() {
+const listen = () => {
     const port = process.env.PORT || 3000;
     app.listen(port);
     console.log('Server listening at port: '.green + port.green);
 };
 
 if (process.env.NODE_ENV === 'development') {
+    const { builtDevClient, builtDevServer, devMiddlewareRouter } = devTools;
     builtDevServer.waitUntilValid(() => {
         builtDevClient.waitUntilValid(() => {
             app.use(devMiddlewareRouter);
@@ -39,7 +39,7 @@ if (process.env.NODE_ENV === 'development') {
         express.static(__dirname),
         /* webpack hot server middleware requires the router to be exported 
         as a function so we need to call it in order to get the actual router */
-        require('./router/router').default
+        router()
     );
     // in tests we don't need to listen
     // as we're using superagent

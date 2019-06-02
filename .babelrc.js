@@ -7,7 +7,10 @@ module.exports = {
                 useBuiltIns: 'usage',
                 corejs: '3.0.0',
                 // https://github.com/browserslist/browserslist#best-practices
-                targets: { browsers: ['defaults', '>0.5%', 'IE 10'] }
+                targets: {
+                    esmodules: false,
+                    browsers: ['defaults', '>0.5%', 'IE 10']
+                }
             }
         ],
         '@babel/preset-react'
@@ -24,6 +27,23 @@ module.exports = {
         test: {
             plugins: [['istanbul']]
         },
-        production: {}
+        production: {
+            // presets: [
+            //     [
+            //         '@babel/preset-env',
+            //         {
+            //             // only import the polyfills we need
+            //             useBuiltIns: 'usage',
+            //             corejs: '3.0.0',
+            //             // https://github.com/browserslist/browserslist#best-practices
+            //             targets: {
+            //                 // let webpack deal with transpilation of modules
+            //                 esmodules: false,
+            //                 browsers: ['defaults', '>0.5%', 'IE 10']
+            //             }
+            //         }
+            //     ]
+            // ]
+        }
     }
 };
