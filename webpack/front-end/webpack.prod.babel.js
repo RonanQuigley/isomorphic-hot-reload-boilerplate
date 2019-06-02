@@ -5,9 +5,6 @@ import webpack from 'webpack';
 const prod = {
     // will set NODE_ENV to production
     mode: 'production',
-    entry: {
-        index: ['./src/client/pages/index']
-    },
     optimization: {
         usedExports: true,
         minimizer: [

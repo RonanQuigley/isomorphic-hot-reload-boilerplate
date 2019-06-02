@@ -11,14 +11,15 @@ const hotMiddlewareUtils = [
 
 const dev = {
     mode: 'development',
-    entry: {
-        index: ['./src/client/pages/index']
-    },
     devtool: setDevTool(),
     plugins: [new webpack.HotModuleReplacementPlugin()]
 };
 
-// prepend the hot middleware to each page/file
-Object.values(dev.entry).forEach(elem => elem.unshift(...hotMiddlewareUtils));
+const mergedConfigs = merge(common, dev);
 
-export default merge(common, dev);
+// prepend the hot middleware to each page/file
+Object.values(mergedConfigs.entry).forEach(elem =>
+    elem.unshift(...hotMiddlewareUtils)
+);
+
+export default mergedConfigs;

@@ -4,6 +4,9 @@ import { setDevTool, setOutput } from '../front-end/utilities';
 const frontEndCommon = {
     name: 'client',
     target: 'web',
+    entry: {
+        index: ['./src/client/pages/index']
+    },
     devtool: setDevTool(),
     output: setOutput(),
     plugins: [new webpack.NamedModulesPlugin()],

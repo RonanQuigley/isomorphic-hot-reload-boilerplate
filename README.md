@@ -2,7 +2,7 @@
 
 Hot reloading of both client and server :fire:
 
-Project aim is to maximise dev efficiency and your iteration loop out of the box. It provides the following tech & features
+Project aim is to maximise dev efficiency and your iteration loop out of the box. It provides the following tech & features:
 
 -   Webpack 4
 -   Express
