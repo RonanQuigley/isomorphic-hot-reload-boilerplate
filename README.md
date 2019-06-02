@@ -1,6 +1,6 @@
 # Isomoprhic Hot Reload Boilerplate
 
-Hot reloading of both client and server `:fire:`
+Hot reloading of both client and server :fire:
 
 Project aim is to maximise dev efficiency and your iteration loop out of the box. It provides the following tech & features
 
