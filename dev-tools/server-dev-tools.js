@@ -7,7 +7,10 @@ import clientConfig from '../webpack/front-end/webpack.dev.babel';
 import serverConfig from '../webpack/back-end/webpack.dev.babel';
 import weblog from 'webpack-log';
 
-import { find } from 'lodash';
+import { find, keys } from 'lodash';
+
+const windowsReactPath = '\\src\\react';
+const unixReactPath = 'src/react';
 
 const devMiddlewareRouter = express.Router();
 
@@ -57,12 +60,21 @@ devMiddlewareRouter
     .use(builtHotClient)
     .use(builtHotServer);
 
+const compiledServer = find(mergedCompilers.compilers, { name: 'server' });
+
 // reload the browser each time the server has completed a rebuild
-find(mergedCompilers.compilers, {
-    name: 'server'
-}).hooks.afterEmit.tap('AfterServerHasRebuilt', () =>
-    builtHotClient.publish({ reload: true })
-);
+// of any file except react files
+compiledServer.hooks.afterEmit.tap('AfterServerHasRebuilt', comp => {
+    const hasReactFileChanged = keys(
+        comp.compiler.watchFileSystem.watcher.mtimes
+    ).some(
+        file => file.includes(windowsReactPath) || file.includes(unixReactPath)
+    );
+    if (!hasReactFileChanged) {
+        console.log('reloading due to server change');
+        builtHotClient.publish({ reload: true });
+    }
+});
 
 const devTools = {
     devMiddlewareRouter,

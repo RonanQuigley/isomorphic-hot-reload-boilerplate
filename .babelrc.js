@@ -15,7 +15,10 @@ module.exports = {
         ],
         '@babel/preset-react'
     ],
-    plugins: ['@babel/plugin-proposal-class-properties'],
+    plugins: [
+        '@babel/plugin-proposal-class-properties',
+        'babel-plugin-styled-components'
+    ],
     // set retainLines and sourceMaps to true for proper debugging
     // otherwise you will get debugger errors for chrome
     retainLines: true,

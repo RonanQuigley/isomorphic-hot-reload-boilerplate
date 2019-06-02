@@ -4,6 +4,9 @@ import { green } from 'colors';
 import bodyParser from 'body-parser';
 import loadChrome from '../../dev-tools/chrome';
 import router from './router/router';
+
+console.log('hello');
+
 import devTools from '../../dev-tools/server-dev-tools';
 
 const app = express();
@@ -37,7 +40,7 @@ if (process.env.NODE_ENV === 'development') {
     app.use(
         // allow express to access our public assets in the dist
         express.static(__dirname),
-        /* webpack hot server middleware requires the router to be exported 
+        /* webpack hot server middleware requires the router to be exported
         as a function so we need to call it in order to get the actual router */
         router()
     );
