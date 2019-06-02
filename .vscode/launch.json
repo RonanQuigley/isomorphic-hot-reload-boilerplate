@@ -40,7 +40,7 @@
             "request": "launch",
             "name": "Debug Dev Server Setup",
             "smartStep": true,
-            "program": "${workspaceFolder}/src/server/dev.js",
+            "program": "${workspaceFolder}/src/server/express/setup-app.js",
             "skipFiles": [
                 "${workspaceRoot}/node_modules/**/*.js",
                 "<node_internals>/**/*.js"
@@ -53,7 +53,8 @@
             "runtimeArgs": [
                 "--lazy",
                 "--require",
-                "@babel/register"
+                "@babel/register",
+                
             ],
             "outFiles": [
                 "${workspaceRoot}/dist/*.{js,.js.map}"

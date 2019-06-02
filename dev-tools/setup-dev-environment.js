@@ -3,11 +3,10 @@ import webpack from 'webpack';
 import wpDevMiddleware from 'webpack-dev-middleware';
 import wphotClientMiddleware from 'webpack-hot-middleware';
 import wphotServerMiddleware from 'webpack-hot-server-middleware';
-import clientConfig from '../../../webpack/front-end/webpack.dev.babel';
-import serverConfig from '../../../webpack/back-end/webpack.dev.babel';
-import emitter from './emitter';
+import clientConfig from '../webpack/front-end/webpack.dev.babel';
+import serverConfig from '../webpack/back-end/webpack.dev.babel';
 import weblog from 'webpack-log';
-import loadChrome from './chrome';
+
 import { find } from 'lodash';
 
 const devMiddlewareRouter = express.Router();
@@ -51,13 +50,6 @@ const builtHotClient = wphotClientMiddleware(clientCompiler, {
     log: false
 });
 
-builtDevServer.waitUntilValid(() => {
-    loadChrome();
-    builtDevClient.waitUntilValid(() => {
-        emitter.emit('dev-middleware-built');
-    });
-});
-
 // built client middleware must come before the hot server
 devMiddlewareRouter
     .use(builtDevServer)
@@ -72,4 +64,10 @@ find(mergedCompilers.compilers, {
     builtHotClient.publish({ reload: true })
 );
 
-export default devMiddlewareRouter;
+const devTools = {
+    devMiddlewareRouter,
+    builtDevClient,
+    builtDevServer
+};
+
+export default devTools;

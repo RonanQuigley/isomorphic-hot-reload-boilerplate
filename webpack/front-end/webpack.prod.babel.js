@@ -6,7 +6,7 @@ const prod = {
     // will set NODE_ENV to production
     mode: 'production',
     entry: {
-        index: ['./src/client/pages/index/']
+        index: ['./src/client/pages/index']
     },
     optimization: {
         minimizer: [
