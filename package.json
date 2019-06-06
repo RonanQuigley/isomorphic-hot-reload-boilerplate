@@ -9,6 +9,7 @@
   "dependencies": {
     "@babel/plugin-transform-regenerator": "^7.4.5",
     "@babel/runtime": "^7.4.5",
+    "@storybook/react": "^5.1.1",
     "babel-eslint": "^10.0.1",
     "babel-loader": "^8.0.6",
     "babel-plugin-styled-components": "^1.10.0",
@@ -66,7 +67,8 @@
     "test:front": "jest /client",
     "test:back": "jest /server",
     "test:common": "jest /common",
-    "test": "jest"
+    "test": "jest",
+    "storybook": "start-storybook"
   },
   "bugs": {
     "url": "https://github.com/RonanQuigley/isomorphic-hot-reload-boilerplate/issues"
