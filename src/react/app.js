@@ -1,13 +1,42 @@
-import { hot } from 'react-hot-loader/root';
-import styled from 'styled-components';
 import React from 'react';
+import { Route, Link } from 'react-router-dom';
 
-const App = () => {
-    return <Element>Hello Bar</Element>;
-};
+function Index() {
+    return <h2>Home</h2>;
+}
 
-const Element = styled.div`
-    color: cyan;
-`;
+function About() {
+    return <h2>About</h2>;
+}
 
-export default hot(App);
+function Users() {
+    return <h2>Users</h2>;
+}
+
+function AppRouter() {
+    return (
+        <div>
+            <div>
+                <nav>
+                    <ul>
+                        <li>
+                            <Link to="/">Home</Link>
+                        </li>
+                        <li>
+                            <Link to="/about/">About</Link>
+                        </li>
+                        <li>
+                            <Link to="/users/">Users</Link>
+                        </li>
+                    </ul>
+                </nav>
+
+                <Route path="/" exact component={Index} />
+                <Route path="/about/" component={About} />
+                <Route path="/users/" component={Users} />
+            </div>
+        </div>
+    );
+}
+
+export default AppRouter;

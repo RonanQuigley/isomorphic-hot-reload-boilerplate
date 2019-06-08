@@ -28,6 +28,7 @@
     "react": "16.8.6",
     "react-dom": "npm:@hot-loader/react-dom",
     "react-hot-loader": "^4.8.4",
+    "react-router-dom": "^5.0.1",
     "source-map-support": "^0.5.4",
     "styled-components": "^4.2.1",
     "webpack": "^4.14.0",
