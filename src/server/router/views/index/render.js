@@ -1,7 +1,8 @@
+import App from '@react-app/app';
 import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { ServerStyleSheet } from 'styled-components';
-import App from '@react-app/app';
+
 export function render(req, res, next) {
     const sheet = new ServerStyleSheet();
 
@@ -20,7 +21,7 @@ export function render(req, res, next) {
             ${styleTags}
             <script defer src="./index.js"></script>
         </head>
-        <body>            
+        <body>                    
             <div id="root">${html}</div>
         </body>
         </html>

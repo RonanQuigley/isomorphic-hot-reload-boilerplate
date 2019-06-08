@@ -5,7 +5,7 @@ app.use(
     // allow express to access our public assets in the dist
     express.static(__dirname),
     /* webpack hot server middleware requires the router to be exported
-        as a function so we need to call it in order to get the actual router */
+    as a function so we need to call it in order to get the actual router */
     router()
 );
 

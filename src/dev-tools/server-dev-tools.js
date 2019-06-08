@@ -1,3 +1,4 @@
+import { promisify } from 'util';
 import express from 'express';
 import { find, keys } from 'lodash';
 import webpack from 'webpack';
@@ -11,72 +12,83 @@ import clientConfig from '../../webpack/front-end/webpack.dev.babel';
 const windowsReactPath = '\\src\\react';
 const unixReactPath = 'src/react';
 
-const devMiddlewareRouter = express.Router();
+const setupDevApp = async baseApp => {
+    const devMiddlewareRouter = express.Router();
 
-/* compile our webpack bundles */
-const clientCompiler = webpack(clientConfig);
-const mergedCompilers = webpack([clientConfig, serverConfig]);
+    /* compile our webpack bundles */
+    const clientCompiler = webpack(clientConfig);
+    const mergedCompilers = webpack([clientConfig, serverConfig]);
 
-/* build the server side development middleware */
-const builtDevServer = wpDevMiddleware(mergedCompilers, {
-    noInfo: true,
-    serverSideRender: true,
-    stats: 'errors-only',
-    logger: weblog({
-        level: 'info',
-        name: 'wp-server',
-        timestamp: false
-    })
-});
+    /* build the server side development middleware */
+    const builtDevServer = wpDevMiddleware(mergedCompilers, {
+        noInfo: true,
+        serverSideRender: true,
+        stats: 'errors-only',
+        logger: weblog({
+            level: 'info',
+            name: 'wp-server',
+            timestamp: false
+        })
+    });
 
-/* build the client side development middleware */
-const builtDevClient = wpDevMiddleware(clientCompiler, {
-    noInfo: true,
-    publicPath: clientConfig.output.publicPath,
-    stats: 'errors-only',
-    logger: weblog({
-        level: 'info',
-        name: 'wp-client',
-        timestamp: false
-    })
-});
+    /* build the client side development middleware */
+    const builtDevClient = wpDevMiddleware(clientCompiler, {
+        noInfo: true,
+        publicPath: clientConfig.output.publicPath,
+        stats: 'errors-only',
+        logger: weblog({
+            level: 'info',
+            name: 'wp-client',
+            timestamp: false
+        })
+    });
 
-/* hot reloading for server side code */
-const builtHotServer = wphotServerMiddleware(mergedCompilers, {
-    // disables logging of build times
-    log: false
-});
+    // wrap dev middlewares in promises
+    const waitUntilServerIsValid = () =>
+        new Promise(resolve => builtDevServer.waitUntilValid(resolve));
 
-/* hot reloading for client side code */
-const builtHotClient = wphotClientMiddleware(clientCompiler, {
-    log: false
-});
+    const waitUntilClientIsValid = () =>
+        new Promise(resolve => builtDevClient.waitUntilValid(resolve));
 
-// built client middleware must come before the hot server
-devMiddlewareRouter
-    .use(builtDevServer)
-    .use(builtDevClient)
-    .use(builtHotClient)
-    .use(builtHotServer);
+    /* hot reloading for server side code */
+    const builtHotServer = wphotServerMiddleware(mergedCompilers, {
+        // disables logging of build times
+        log: false
+    });
 
-const compiledServer = find(mergedCompilers.compilers, { name: 'server' });
+    /* hot reloading for client side code */
+    const builtHotClient = wphotClientMiddleware(clientCompiler, {
+        log: false
+    });
 
-// reload the browser each time the server has completed a rebuild
-// of any file except react files
-compiledServer.hooks.afterEmit.tap('AfterServerHasRebuilt', comp => {
-    const hasReactFileChanged = keys(
-        comp.compiler.watchFileSystem.watcher.mtimes
-    ).some(
-        file => file.includes(windowsReactPath) || file.includes(unixReactPath)
-    );
-    if (!hasReactFileChanged) {
-        console.log('reloading due to server change');
-        builtHotClient.publish({ reload: true });
-    }
-});
+    // built client middleware must come before the hot server
+    devMiddlewareRouter
+        .use(builtDevServer)
+        .use(builtDevClient)
+        .use(builtHotClient)
+        .use(builtHotServer);
 
-module.exports = {
-    devMiddlewareRouter,
-    builtDevClient,
-    builtDevServer
+    const compiledServer = find(mergedCompilers.compilers, { name: 'server' });
+
+    // reload the browser each time the server has completed a rebuild
+    // of any file except react files
+    compiledServer.hooks.afterEmit.tap('AfterServerHasRebuilt', comp => {
+        const hasReactFileChanged = keys(
+            comp.compiler.watchFileSystem.watcher.mtimes
+        ).some(
+            file =>
+                file.includes(windowsReactPath) || file.includes(unixReactPath)
+        );
+        if (!hasReactFileChanged) {
+            console.log('reloading due to server change');
+            builtHotClient.publish({ reload: true });
+        }
+    });
+
+    await waitUntilServerIsValid();
+    await waitUntilClientIsValid();
+
+    return baseApp.use(devMiddlewareRouter);
 };
+
+module.exports = setupDevApp;
