@@ -1,6 +1,6 @@
 // do not import this file in your webpack entries in production
 
-import webpackHotMiddleware from 'webpack-hot-middleware/client';
+const webpackHotMiddleware = require('webpack-hot-middleware/client');
 
 function checkForServerChanges() {
     webpackHotMiddleware.subscribe(message => {

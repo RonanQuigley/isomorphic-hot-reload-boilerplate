@@ -2,8 +2,8 @@ import bodyParser from 'body-parser';
 import { green } from 'colors';
 import express from 'express';
 import morgan from 'morgan';
-import loadChrome from '../../dev-tools/chrome';
-import devTools from '../../dev-tools/server-dev-tools';
+import loadChrome from '../dev-tools/chrome';
+import devTools from '../dev-tools/server-dev-tools';
 import router from './router/router';
 
 const app = express();

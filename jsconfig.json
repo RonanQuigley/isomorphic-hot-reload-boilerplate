@@ -1,0 +1,13 @@
+{
+    "compilerOptions": {
+      "baseUrl": ".",
+      "checkJs": false, // using eslint and prettier instead
+      "target": "ES2018",
+      "jsx": "react",
+      "moduleResolution": "node",
+      "resolveJsonModule": true,
+      "module": "esnext"
+    },
+    "exclude": ["dist", "node_modules"]
+}
+    
