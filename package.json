@@ -63,7 +63,7 @@
     "build:all:start": "npm-run-all -s build:all start:prod",
     "build:analyze": "cross-env ANALYZE=true NODE_ENV=production webpack --display-reasons -p --config webpack/full-stack/webpack.babel.js",
     "start:prod": "node ./dist/server.js",
-    "start": "cross-env-shell NODE_ENV=development node --max-old-space-size=8192 --inspect -r dotenv/config -r @babel/register ./src/server/setup-app.js",
+    "start": "cross-env-shell NODE_ENV=development node --max-old-space-size=8192 --inspect -r dotenv/config -r @babel/register ./src/server/dev-app.js",
     "test:front": "jest /client",
     "test:back": "jest /server",
     "test:common": "jest /common",
