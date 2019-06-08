@@ -4,8 +4,6 @@ import express from 'express';
 import morgan from 'morgan';
 import loadChrome from '../dev-tools/chrome';
 import devTools from '../dev-tools/server-dev-tools';
-import router from './router/router';
-
 const app = express();
 
 app.use(bodyParser.json());
@@ -39,7 +37,7 @@ if (process.env.NODE_ENV === 'development') {
         express.static(__dirname),
         /* webpack hot server middleware requires the router to be exported
         as a function so we need to call it in order to get the actual router */
-        router()
+        require('./router/router').default()
     );
     // in tests we don't need to listen
     // as we're using superagent

@@ -1,5 +1,6 @@
 import DotEnv from 'dotenv-webpack';
 import nodeExternals from 'webpack-node-externals';
+import { modules, aliases } from '../common/common';
 import { setDevTool, setOutput } from './utilities';
 
 const backEndCommon = {
@@ -10,19 +11,12 @@ const backEndCommon = {
     node: {
         __dirname: false
     },
+    resolve: {
+        alias: aliases
+    },
     externals: nodeExternals(),
     plugins: [new DotEnv()],
-    module: {
-        rules: [
-            {
-                exclude: /node_modules/,
-                test: /\.js|jsx$/,
-                // cache the directory for faster rebuilds
-                loader: 'babel-loader?cacheDirectory=true',
-                sideEffects: false
-            }
-        ]
-    }
+    module: modules
 };
 
 export default backEndCommon;

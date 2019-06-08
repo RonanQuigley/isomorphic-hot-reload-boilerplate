@@ -8,7 +8,6 @@ module.exports = {
                 corejs: '3.0.0',
                 // https://github.com/browserslist/browserslist#best-practices
                 targets: {
-                    esmodules: false,
                     browsers: ['defaults', '>0.5%', 'IE 10']
                 }
             }
@@ -27,26 +26,7 @@ module.exports = {
         development: {
             plugins: ['react-hot-loader/babel']
         },
-        test: {
-            plugins: [['istanbul']]
-        },
-        production: {
-            // presets: [
-            //     [
-            //         '@babel/preset-env',
-            //         {
-            //             // only import the polyfills we need
-            //             useBuiltIns: 'usage',
-            //             corejs: '3.0.0',
-            //             // https://github.com/browserslist/browserslist#best-practices
-            //             targets: {
-            //                 // let webpack deal with transpilation of modules
-            //                 esmodules: false,
-            //                 browsers: ['defaults', '>0.5%', 'IE 10']
-            //             }
-            //         }
-            //     ]
-            // ]
-        }
+        test: {},
+        production: {}
     }
 };

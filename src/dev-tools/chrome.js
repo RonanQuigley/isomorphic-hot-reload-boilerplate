@@ -8,7 +8,7 @@ module.exports = async function loadChrome() {
     try {
         await launch({
             startingUrl: 'http://localhost:' + (process.env.PORT || 3000),
-            chromeFlags: ['--remote-debugging-port=9222']
+            port: 9222
             // killing the browser when node exits is already enabled by default
         });
     } catch (_) {

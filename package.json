@@ -45,7 +45,6 @@
     "@babel/preset-env": "^7.4.5",
     "@babel/preset-react": "7.0.0",
     "@babel/register": "7.4.0",
-    "@webpack/tools": "./webpack",
     "cross-env": "^5.1.4",
     "dotenv": "^7.0.0",
     "dotenv-webpack": "^1.5.5",
@@ -55,8 +54,7 @@
     "eslint-plugin-react": "^7.10.0",
     "uglifyjs-webpack-plugin": "^2.1.2",
     "webpack-bundle-analyzer": "^3.2.0",
-    "webpack-hot-server-middleware": "^0.6.0",
-    "webpack-tools": "./webpack"
+    "webpack-hot-server-middleware": "^0.6.0"
   },
   "scripts": {
     "build:back": "webpack -p --config webpack/back-end/webpack.prod.babel.js",

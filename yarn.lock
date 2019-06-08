@@ -1958,9 +1958,6 @@
     "@webassemblyjs/wast-parser" "1.8.5"
     "@xtuc/long" "4.2.2"
 
-"@webpack/tools@./webpack":
-  version "0.0.0"
-
 "@xtuc/ieee754@^1.2.0":
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/@xtuc/ieee754/-/ieee754-1.2.0.tgz#eef014a3145ae477a1cbc00cd1e552336dceb790"
@@ -9752,6 +9749,11 @@ typedarray@^0.0.6:
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
   integrity sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
 
+typescript@^3.6.0-dev.20190608:
+  version "3.6.0-dev.20190608"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.6.0-dev.20190608.tgz#df0865c43c156e95c8122f55a6ac4896de07731a"
+  integrity sha512-x0hgPeq7Tpwx0IJ5/PfxF/I5GCVgbh/k73X39Ki45M8EBorv/OPLXmxNsu+DiVvALiKrYUAGM24ULNf/FTM0GQ==
+
 ua-parser-js@^0.7.18:
   version "0.7.19"
   resolved "https://registry.yarnpkg.com/ua-parser-js/-/ua-parser-js-0.7.19.tgz#94151be4c0a7fb1d001af7022fdaca4642659e4b"
@@ -10192,9 +10194,6 @@ webpack-sources@^1.1.0, webpack-sources@^1.3.0:
   dependencies:
     source-list-map "^2.0.0"
     source-map "~0.6.1"
-
-webpack-tools@./webpack:
-  version "0.0.0"
 
 webpack@^4.14.0, webpack@^4.28.0, webpack@^4.32.0:
   version "4.33.0"
