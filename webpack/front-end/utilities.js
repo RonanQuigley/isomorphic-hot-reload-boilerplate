@@ -1,9 +1,12 @@
 import path from 'path';
 const dist = path.join(__dirname, '../../dist');
 
+const filename = 'client.js';
+
 export function setOutput() {
     if (process.env.NODE_ENV === 'development') {
         return {
+            filename: filename,
             path: dist,
             // fixes vscode chrome debugger stepping into unrelated webpack code
             // therefore: do not remove this!!!
@@ -17,6 +20,7 @@ export function setOutput() {
     } else {
         // testing and production
         return {
+            filename: filename,
             path: dist
         };
     }

@@ -5,9 +5,7 @@ import { modules, aliases } from '../common/common';
 const frontEndCommon = {
     name: 'client',
     target: 'web',
-    entry: {
-        index: ['./src/client/pages/index']
-    },
+    entry: './src/client/client',
     resolve: {
         alias: aliases
     },

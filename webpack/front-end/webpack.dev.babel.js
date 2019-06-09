@@ -18,8 +18,10 @@ const dev = {
 const mergedConfigs = merge(common, dev);
 
 // prepend the hot middleware to each page/file
-Object.values(mergedConfigs.entry).forEach(elem =>
-    elem.unshift(...hotMiddlewareUtils)
-);
+// Object.values(mergedConfigs.entry).forEach(elem =>
+//     elem.unshift(...hotMiddlewareUtils)
+// );
+
+mergedConfigs.entry.concat(...hotMiddlewareUtils);
 
 export default mergedConfigs;

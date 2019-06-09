@@ -30,7 +30,6 @@ function AppRouter() {
                         </li>
                     </ul>
                 </nav>
-
                 <Route path="/" exact component={Index} />
                 <Route path="/about/" component={About} />
                 <Route path="/users/" component={Users} />

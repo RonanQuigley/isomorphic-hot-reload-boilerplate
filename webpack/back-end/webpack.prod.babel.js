@@ -5,7 +5,7 @@ import UglifyJsPlugin from 'uglifyjs-webpack-plugin';
 
 const prod = {
     mode: 'production',
-    entry: ['./src/server/prod-app-app'],
+    entry: ['./src/server/prod-app'],
     optimization: {
         minimizer: [
             // maintain source maps but strip comments

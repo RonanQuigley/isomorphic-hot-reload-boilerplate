@@ -1,4 +1,4 @@
-import app, { listen } from './setup-base-app';
+import app, { listen } from './base-app';
 import router from './router/router';
 
 app.use(
