@@ -3,6 +3,7 @@ import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { ServerStyleSheet } from 'styled-components';
 import { StaticRouter } from 'react-router';
+import logger from '@dev-tools/logger';
 
 export function render(req, res, next) {
     const sheet = new ServerStyleSheet();
@@ -15,8 +16,8 @@ export function render(req, res, next) {
                 </StaticRouter>
             )
         );
+        logger.info('rendering page to client');
         const styleTags = sheet.getStyleTags(); // or sheet.getStyleElement();
-        console.log('render page');
         res.send(`
         <!DOCTYPE html>
         <html lang="en">
@@ -35,7 +36,7 @@ export function render(req, res, next) {
     `);
     } catch (error) {
         // handle error
-        console.error(error);
+        logger.error(error);
     } finally {
         sheet.seal();
     }
