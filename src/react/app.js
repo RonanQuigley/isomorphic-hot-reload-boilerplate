@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Route, Link } from 'react-router-dom';
 
 function Index() {
@@ -13,11 +13,20 @@ function Users() {
     return <h2>Users</h2>;
 }
 
-const Foo = () => {};
+function ReactHooksExample() {
+    const [count, setCount] = useState(0);
 
+    return (
+        <>
+            <p>You clicked {count} times</p>
+            <button onClick={() => setCount(count + 1)}>Click me</button>
+        </>
+    );
+}
 function AppRouter() {
     return (
         <div>
+            <ReactHooksExample />
             <div>
                 <nav>
                     <ul>
