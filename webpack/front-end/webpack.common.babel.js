@@ -5,7 +5,7 @@ import { modules } from '../common/common';
 const frontEndCommon = {
     name: 'client',
     target: 'web',
-    entry: './src/client/client',
+    entry: ['./src/client/client'],
     devtool: setDevTool(),
     output: setOutput(),
     plugins: [new webpack.NamedModulesPlugin()],

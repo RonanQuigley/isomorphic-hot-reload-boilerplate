@@ -1,21 +1,22 @@
 # Isomoprhic Hot Reload Boilerplate
 
-Hot reloading of both client and server :fire:
+:fire: Hot reloading of both client and server :fire:
 
 Project aim is to maximise dev efficiency and your iteration loop out of the box. It provides the following tech & features:
 
--   Webpack 4
--   Express
--   Morgan
--   React
--   React hot loader
--   Babel
--   Jest
--   Production ready full-stack builds
--   DotEnv for loading your env files into webpack
--   Automatically opens browser window in development and closes in the event of a node process exit
--   Watches for server side changes and reloads the browser
--   Handles all files in memory for the fastest possible update times.
+- Webpack 4
+- Express
+- Morgan
+- React
+- React router
+- React hot loader
+- Babel
+- Jest
+- Production ready full-stack builds
+- DotEnv for loading your env files into webpack
+- Automatically opens browser window in development and closes in the event of a node process exit
+- Watches for server side changes and reloads the browser
+- Handles all files in memory for the fastest possible update times.
 
 If you're looking for a speedier set up than using browser-sync or nodemon, then this might be for you.
 
@@ -30,9 +31,9 @@ yarn
 
 The src directory holds all of your source files:
 
--   The client folder contains all client side code. It currently has a simple index file. update the following line to your colour of choice to see changes reflected in your browser : `document.body.style.background = 'whatever-colour'`
--   The server folder contains your routes and whatever else you'd need to add for server-side.
--   The react folder is for your react app
+- The client folder contains all client side code. It currently has a simple index file. update the following line to your colour of choice to see changes reflected in your browser : `document.body.style.background = 'whatever-colour'`
+- The server folder contains your routes and whatever else you'd need to add for server-side.
+- The react folder is for your react app
 
 The dev tools folder contains hot reloading and other dev related code.
 

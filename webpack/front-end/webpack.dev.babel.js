@@ -22,6 +22,6 @@ const mergedConfigs = merge(common, dev);
 //     elem.unshift(...hotMiddlewareUtils)
 // );
 
-mergedConfigs.entry.concat(...hotMiddlewareUtils);
+mergedConfigs.entry = mergedConfigs.entry.concat(hotMiddlewareUtils);
 
 export default mergedConfigs;

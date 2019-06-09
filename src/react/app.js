@@ -13,6 +13,8 @@ function Users() {
     return <h2>Users</h2>;
 }
 
+const Foo = () => {};
+
 function AppRouter() {
     return (
         <div>

@@ -12,7 +12,7 @@ ReactDOM.hydrate(
 );
 
 // change me to another colour
-document.body.style.background = 'blue';
+document.body.style.background = 'white';
 
 if (module.hot) {
     module.hot.accept();

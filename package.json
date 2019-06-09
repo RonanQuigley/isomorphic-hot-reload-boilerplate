@@ -29,7 +29,7 @@
     "prettier": "^1.17.1",
     "react": "16.8.6",
     "react-dom": "npm:@hot-loader/react-dom",
-    "react-hot-loader": "^4.8.4",
+    "react-hot-loader": "^4.9.0",
     "react-router-dom": "^5.0.1",
     "source-map-support": "^0.5.4",
     "styled-components": "^4.2.1",
@@ -71,8 +71,7 @@
     "test:front": "jest /client",
     "test:back": "jest /server",
     "test:common": "jest /common",
-    "test": "jest",
-    "storybook": "start-storybook"
+    "test": "jest"
   },
   "bugs": {
     "url": "https://github.com/RonanQuigley/isomorphic-hot-reload-boilerplate/issues"
