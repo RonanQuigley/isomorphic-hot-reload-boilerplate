@@ -7,6 +7,7 @@ import wphotServerMiddleware from 'webpack-hot-server-middleware';
 import weblog from 'webpack-log';
 import serverConfig from '@webpack/back-end/webpack.dev.babel';
 import clientConfig from '@webpack/front-end/webpack.dev.babel';
+import logger from '@dev-tools/logger';
 
 const windowsReactPath = '\\src\\react';
 const unixReactPath = 'src/react';
@@ -79,7 +80,7 @@ const setupDevApp = async baseApp => {
                 file.includes(windowsReactPath) || file.includes(unixReactPath)
         );
         if (!hasReactFileChanged) {
-            console.log('reloading due to server change');
+            logger.info('reloading due to server change');
             builtHotClient.publish({ reload: true });
         }
     });
