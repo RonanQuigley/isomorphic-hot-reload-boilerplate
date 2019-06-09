@@ -6,8 +6,8 @@ import wpDevMiddleware from 'webpack-dev-middleware';
 import wphotClientMiddleware from 'webpack-hot-middleware';
 import wphotServerMiddleware from 'webpack-hot-server-middleware';
 import weblog from 'webpack-log';
-import serverConfig from '../../webpack/back-end/webpack.dev.babel';
-import clientConfig from '../../webpack/front-end/webpack.dev.babel';
+import serverConfig from '@webpack/back-end/webpack.dev.babel';
+import clientConfig from '@webpack/front-end/webpack.dev.babel';
 
 const windowsReactPath = '\\src\\react';
 const unixReactPath = 'src/react';

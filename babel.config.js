@@ -16,7 +16,18 @@ module.exports = {
     ],
     plugins: [
         '@babel/plugin-proposal-class-properties',
-        'babel-plugin-styled-components'
+        'babel-plugin-styled-components',
+        [
+            require.resolve('babel-plugin-module-resolver'),
+            {
+                root: ['./'],
+                alias: {
+                    '@dev-tools': './src/dev-tools',
+                    '@react-app': './src/react',
+                    '@webpack': './webpack'
+                }
+            }
+        ]
     ],
     // set retainLines and sourceMaps to true for proper debugging
     // otherwise you will get debugger errors for chrome

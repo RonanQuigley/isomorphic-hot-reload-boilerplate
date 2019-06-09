@@ -7,7 +7,9 @@
     "resolveJsonModule": true,
     "module": "commonjs",    
     "paths": {
-      "@react-app/*": ["./src/react/*"]
+      "@react-app/*": ["./src/react/*"],
+      "@dev-tools/*": ["./src/dev-tools/*"],
+      "@webpack/*": ["./webpack"]
     },
   },
 }
