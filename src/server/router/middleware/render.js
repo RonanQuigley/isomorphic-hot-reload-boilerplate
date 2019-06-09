@@ -1,5 +1,6 @@
 import App from '@react-app/app';
 import React from 'react';
+import { map } from 'lodash';
 import { renderToString } from 'react-dom/server';
 import { ServerStyleSheet } from 'styled-components';
 import { StaticRouter } from 'react-router';
@@ -7,7 +8,7 @@ import logger from '@dev-tools/logger';
 
 export function render(req, res, next) {
     const sheet = new ServerStyleSheet();
-
+    map([1, 2, 3], x => x * 2);
     try {
         const html = renderToString(
             sheet.collectStyles(

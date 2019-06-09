@@ -1,6 +1,6 @@
 import DotEnv from 'dotenv-webpack';
 import nodeExternals from 'webpack-node-externals';
-import { modules } from '../common/common';
+import { modules, plugins } from '../common/common';
 import { setDevTool, setOutput } from './utilities';
 
 const backEndCommon = {
@@ -12,7 +12,7 @@ const backEndCommon = {
         __dirname: false
     },
     externals: nodeExternals(),
-    plugins: [new DotEnv()],
+    plugins: [new DotEnv(), ...plugins],
     module: modules
 };
 

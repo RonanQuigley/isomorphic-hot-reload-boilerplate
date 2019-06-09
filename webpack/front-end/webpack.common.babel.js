@@ -1,6 +1,6 @@
 import webpack from 'webpack';
 import { setDevTool, setOutput } from '../front-end/utilities';
-import { modules } from '../common/common';
+import { modules, plugins } from '../common/common';
 
 const frontEndCommon = {
     name: 'client',
@@ -8,7 +8,7 @@ const frontEndCommon = {
     entry: ['./src/client/client'],
     devtool: setDevTool(),
     output: setOutput(),
-    plugins: [new webpack.NamedModulesPlugin()],
+    plugins: [new webpack.NamedModulesPlugin(), ...plugins],
     module: modules
 };
 

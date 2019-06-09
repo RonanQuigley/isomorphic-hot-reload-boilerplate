@@ -1,3 +1,5 @@
+import LodashModuleReplacementPlugin from 'lodash-webpack-plugin';
+
 export const modules = {
     rules: [
         {
@@ -9,3 +11,5 @@ export const modules = {
         }
     ]
 };
+
+export const plugins = [new LodashModuleReplacementPlugin()];
