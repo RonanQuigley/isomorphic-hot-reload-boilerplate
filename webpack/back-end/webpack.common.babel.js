@@ -6,12 +6,15 @@ import { setDevTool, setOutput } from './utilities';
 const backEndCommon = {
     name: 'server',
     target: 'node',
+    stats: 'verbose',
     devtool: setDevTool(),
     output: setOutput(),
     node: {
         __dirname: false
     },
-    externals: nodeExternals(),
+    externals: nodeExternals({
+        whitelist: ['react-universal-component', 'webpack-flush-chunks']
+    }),
     plugins: [new DotEnv(), ...plugins],
     module: modules
 };

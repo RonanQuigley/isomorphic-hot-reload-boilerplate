@@ -1,4 +1,5 @@
 import LodashModuleReplacementPlugin from 'lodash-webpack-plugin';
+import LoadablePlugin from '@loadable/webpack-plugin';
 
 export const modules = {
     rules: [
@@ -12,4 +13,9 @@ export const modules = {
     ]
 };
 
-export const plugins = [new LodashModuleReplacementPlugin()];
+export const plugins = [
+    new LodashModuleReplacementPlugin(),
+    new LoadablePlugin({
+        writeToDisk: true
+    })
+];

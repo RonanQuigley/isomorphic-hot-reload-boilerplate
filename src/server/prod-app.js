@@ -1,5 +1,6 @@
 import app, { listen } from './base-app';
-import router from './router/router';
+import express from 'express';
+import router from './router';
 
 app.use(
     // allow express to access our public assets in the dist

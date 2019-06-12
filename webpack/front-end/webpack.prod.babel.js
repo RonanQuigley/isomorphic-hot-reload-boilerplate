@@ -1,4 +1,5 @@
 import merge from 'webpack-merge';
+import { setOutput } from './utilities';
 import common from './webpack.common.babel';
 import UglifyJsPlugin from 'uglifyjs-webpack-plugin';
 import webpack from 'webpack';
@@ -19,6 +20,7 @@ const prod = {
             })
         ]
     },
+    output: setOutput(),
     plugins: [
         new webpack.DefinePlugin({
             'process.env': {

@@ -45,7 +45,7 @@
             "type": "node",
             "request": "launch",
             "name": "Debug Dev Server Setup",
-            "smartStep": true,
+            "smartStep": false,
             "program": "${workspaceFolder}/src/server/dev-app.js",
             "skipFiles": [
                 "${workspaceRoot}/node_modules/**/*.js",
@@ -57,7 +57,10 @@
                 "ENABLE_LOGGING" : "false"        
             },
             "runtimeArgs": [
-
+                "--max-old-space-size=8192",
+                "--inspect",
+                "--require", 
+                "dotenv/config",
                 "--require",
                 "@babel/register"            
             ],

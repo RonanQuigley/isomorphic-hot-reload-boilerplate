@@ -1,13 +1,17 @@
 import path from 'path';
-const dist = path.join(__dirname, '../../dist');
 
-const filename = 'client.js';
+const commonFields = {
+    path: path.join(__dirname, '../../dist/client'),
+    chunkFilename: '[name].chunk.js',
+    filename: '[hash:8].client.js',
+    publicPath: '/'
+};
 
 export function setOutput() {
     if (process.env.NODE_ENV === 'development') {
         return {
-            filename: filename,
-            path: dist,
+            ...commonFields,
+            filename: 'client.js',
             // fixes vscode chrome debugger stepping into unrelated webpack code
             // therefore: do not remove this!!!
             devtoolModuleFilenameTemplate(info) {
@@ -19,10 +23,7 @@ export function setOutput() {
         };
     } else {
         // testing and production
-        return {
-            filename: filename,
-            path: dist
-        };
+        return commonFields;
     }
 }
 

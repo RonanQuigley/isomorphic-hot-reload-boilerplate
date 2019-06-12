@@ -15,6 +15,9 @@ module.exports = {
         '@babel/preset-react'
     ],
     plugins: [
+        '@babel/plugin-syntax-dynamic-import',
+        'universal-import',
+        '@loadable/babel-plugin',
         '@babel/plugin-proposal-class-properties',
         'babel-plugin-styled-components',
         'babel-plugin-lodash',

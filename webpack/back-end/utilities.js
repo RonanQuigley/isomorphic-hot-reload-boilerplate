@@ -1,15 +1,19 @@
 import path from 'path';
-const dist = path.join(__dirname, '../../dist');
+
+const commonFields = {
+    path: path.join(__dirname, '../../dist/server'),
+    publicPath: '/',
+    filename: '[hash:8].server.js',
+    // this is necessary for webpack hot server middleware
+    libraryTarget: 'commonjs2',
+    chunkFilename: '[chunkhash:8].server.js'
+};
 
 export function setOutput() {
-    const filename = 'server.js';
-    const libraryTarget = 'commonjs2';
     if (process.env.NODE_ENV === 'development') {
         return {
-            path: dist,
-            filename: filename,
-            // this is necessary for webpack hot server middleware
-            libraryTarget: libraryTarget,
+            ...commonFields,
+            filename: 'server.js',
             /* fixes server side debugging issues for source maps */
             devtoolModuleFilenameTemplate(info) {
                 return `file:///${info.absoluteResourcePath.replace(
@@ -19,11 +23,7 @@ export function setOutput() {
             }
         };
     } else {
-        return {
-            path: dist,
-            filename: filename,
-            libraryTarget: libraryTarget
-        };
+        return commonFields;
     }
 }
 
