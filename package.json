@@ -70,13 +70,8 @@
     "webpack-hot-server-middleware": "^0.6.0"
   },
   "scripts": {
-    "build:back": "webpack -p --config webpack/back-end/webpack.prod.babel.js",
-    "build:front": "webpack --config webpack/front-end/webpack.prod.babel.js",
-    "build:all": "cross-env NODE_ENV=production webpack --config webpack/full-stack/webpack.babel.js",
+    "build:all": "cross-env NODE_ENV=production webpack --config webpack/webpack.config.babel.js",
     "build:all:start": "npm-run-all -s build:all start:prod",
-    "---NEW---": "", 
-    "build:all2": "cross-env NODE_ENV=production webpack --config webpack/webpack.config.babel.js",
-    "build:all2:start": "npm-run-all -s build:all start:prod",
     "build:analyze": "cross-env ANALYZE=true NODE_ENV=production webpack --display-reasons -p --config webpack/full-stack/webpack.babel.js",
     "start:prod": "node ./dist/server/server.js",
     "start": "cross-env-shell NODE_ENV=development node --max-old-space-size=8192 --inspect -r dotenv/config -r @babel/register ./src/server/dev-app.js",

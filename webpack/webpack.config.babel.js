@@ -11,6 +11,7 @@ import {
 import nodeExternals from 'webpack-node-externals';
 import CleanWebpackPlugin from 'clean-webpack-plugin';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
+import UglifyJsPlugin from 'uglifyjs-webpack-plugin';
 
 const development = process.env.NODE_ENV === 'development';
 
@@ -32,6 +33,8 @@ const entryPoints = {
 const commonNodePlugins = [
     new DotEnv(),
     new webpack.optimize.LimitChunkCountPlugin({
+        // used due to react universal component chunking
+        // in reality we only need one chunk on the server
         maxChunks: 1
     })
 ];
@@ -42,7 +45,7 @@ const plugins = {
         production: [
             ...commonNodePlugins,
             new CleanWebpackPlugin({
-                cleanAfterEveryBuildPatterns: ['server.js', 'server.js.map']
+                cleanAfterEveryBuildPatterns: ['**/*']
             })
         ]
     },
@@ -53,7 +56,25 @@ const plugins = {
         ],
         production: [
             new CleanWebpackPlugin({
-                cleanAfterEveryBuildPatterns: ['index.js', 'index.js.map']
+                cleanAfterEveryBuildPatterns: ['**/*']
+            })
+        ]
+    }
+};
+
+const optimization = {
+    development: {},
+    production: {
+        usedExports: true,
+        minimizer: [
+            // maintain source maps but strip comments
+            new UglifyJsPlugin({
+                sourceMap: true,
+                uglifyOptions: {
+                    output: {
+                        comments: false
+                    }
+                }
             })
         ]
     }
@@ -68,6 +89,7 @@ const getConfig = target => ({
     },
     entry: entryPoints[target][process.env.NODE_ENV],
     devtool: target === 'node' ? setNodeDevTool() : setWebDevTool(),
+    optimization: optimization[process.env.NODE_ENV],
     externals:
         target === 'node'
             ? nodeExternals({
