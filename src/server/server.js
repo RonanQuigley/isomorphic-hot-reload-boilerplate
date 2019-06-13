@@ -10,7 +10,7 @@ import logger from '@dev-tools/logger';
 /**
  * exports a curried function for hot server middleware purposes
  */
-const serverSideRender = ({ clientStats }) => (req, res) => {
+const serverSideRender = options => (req, res) => {
     if (process.env.NODE_ENV === 'development') {
         const sheet = new ServerStyleSheet();
         try {
@@ -24,7 +24,7 @@ const serverSideRender = ({ clientStats }) => (req, res) => {
 
             const styleTags = sheet.getStyleTags();
 
-            const { js } = flushChunks(clientStats, {
+            const { js } = flushChunks(options.clientStats, {
                 chunkNames: flushChunkNames()
             });
 
@@ -47,7 +47,16 @@ const serverSideRender = ({ clientStats }) => (req, res) => {
             sheet.seal();
         }
     } else {
-        return res.send(`haven't setup production yet`);
+        return res.send(`
+        <!doctype html>
+            <html>
+                <head>
+
+                </head>
+                <body>
+                    <div id="root">Haven't tested production yet</div>    
+                </body>
+        </html>`);
     }
 };
 

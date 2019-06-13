@@ -22,8 +22,6 @@ const entryPoints = {
     }
 };
 
-const commonWebPlugins = [new webpack.NamedModulesPlugin()];
-
 const commonNodePlugins = [
     new DotEnv(),
     new webpack.optimize.LimitChunkCountPlugin({
@@ -34,27 +32,14 @@ const commonNodePlugins = [
 const plugins = {
     node: {
         development: [...commonNodePlugins],
-        production: [
-            // need to specify NODE_ENV otherwise it will show undefined in code
-            new webpack.EnvironmentPlugin({
-                NODE_ENV: 'production'
-            }),
-            ...commonNodePlugins
-        ]
+        production: [...commonNodePlugins]
     },
     web: {
         development: [
             new webpack.HotModuleReplacementPlugin(),
-            ...commonWebPlugins
+            new webpack.NamedModulesPlugin()
         ],
-        production: [
-            new webpack.DefinePlugin({
-                'process.env': {
-                    NODE_ENV: JSON.stringify('production')
-                }
-            }),
-            ...commonWebPlugins
-        ]
+        production: []
     }
 };
 
@@ -174,7 +159,7 @@ function setWebOutput() {
     }
 }
 
-export const clientConfig = merge(getConfig('web'), commonConfig);
-console.log('TCL: clientConfig', clientConfig);
-export const serverConfig = merge(getConfig('node'), commonConfig);
-console.log('TCL: serverConfig', serverConfig);
+export default [
+    merge(getConfig('web'), commonConfig),
+    merge(getConfig('node'), commonConfig)
+];

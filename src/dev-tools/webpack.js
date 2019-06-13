@@ -1,19 +1,21 @@
-import { clientConfig, serverConfig } from '@webpack/webpack.config.babel.js';
+import multiConfig from '@webpack/webpack.config.babel.js';
 import { find, keys } from 'lodash';
 import webpack from 'webpack';
 import wpDevMiddleware from 'webpack-dev-middleware';
 import wphotClientMiddleware from 'webpack-hot-middleware';
 import wphotServerMiddleware from 'webpack-hot-server-middleware';
 import weblog from 'webpack-log';
-import path from 'path';
 import logger from './logger';
 
 const windowsReactPath = '\\src\\react';
 const unixReactPath = 'src/react';
 
+const clientConfig = find(multiConfig, { target: 'web' });
+const serverConfig = find(multiConfig, { target: 'node' });
+
 export const clientCompiler = webpack(clientConfig);
 
-export const mergedCompilers = webpack([clientConfig, serverConfig]);
+export const mergedCompilers = webpack(multiConfig);
 
 /* build the server side development middleware */
 export const builtDevServer = wpDevMiddleware(mergedCompilers, {
