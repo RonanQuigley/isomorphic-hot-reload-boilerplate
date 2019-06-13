@@ -1,13 +1,7 @@
 import LodashModuleReplacementPlugin from 'lodash-webpack-plugin';
-import LoadablePlugin from '@loadable/webpack-plugin';
 
 export default {
-    plugins: [
-        new LodashModuleReplacementPlugin(),
-        new LoadablePlugin({
-            writeToDisk: true
-        })
-    ],
+    plugins: [new LodashModuleReplacementPlugin()],
     module: {
         rules: [
             {
