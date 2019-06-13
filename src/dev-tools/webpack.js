@@ -23,11 +23,6 @@ export const builtDevServer = wpDevMiddleware(mergedCompilers, {
     publicPath: serverConfig.output.publicPath,
     serverSideRender: true,
     stats: 'errors-only',
-    writeToDisk(filePath) {
-        return (
-            /dist\/server\//.test(filePath) || /loadable-stats/.test(filePath)
-        );
-    },
     logger: weblog({
         level: 'info',
         name: 'wp-server',
@@ -40,11 +35,6 @@ export const builtDevClient = wpDevMiddleware(clientCompiler, {
     noInfo: true,
     publicPath: clientConfig.output.publicPath,
     stats: 'errors-only',
-    writeToDisk(filePath) {
-        return (
-            /dist\/client\//.test(filePath) || /loadable-stats/.test(filePath)
-        );
-    },
     logger: weblog({
         level: 'info',
         name: 'wp-client',
