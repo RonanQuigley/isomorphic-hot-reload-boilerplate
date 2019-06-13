@@ -9,34 +9,35 @@ import weblog from 'webpack-log';
 const clientConfig = find(multiConfig, { target: 'web' });
 const serverConfig = find(multiConfig, { target: 'node' });
 
+const clientPath = clientConfig.output.publicPath;
+const serverPath = serverConfig.output.publicPath;
+
+const setDevMiddlewareConfig = target => ({
+    publicPath: target === 'web' ? clientPath : serverPath,
+    serverSideRender: true,
+    stats: 'errors-only',
+    logger: weblog({
+        level: 'info',
+        name: target === 'web' ? 'client' : 'server',
+        timestamp: false
+    })
+});
+
 export const clientCompiler = webpack(clientConfig);
 
 export const mergedCompilers = webpack(multiConfig);
 
 /* build the server side development middleware */
-export const builtDevServer = wpDevMiddleware(mergedCompilers, {
-    noInfo: true,
-    publicPath: serverConfig.output.publicPath,
-    serverSideRender: true,
-    stats: 'errors-only',
-    logger: weblog({
-        level: 'info',
-        name: 'wp-server',
-        timestamp: false
-    })
-});
+export const builtDevServer = wpDevMiddleware(
+    mergedCompilers,
+    setDevMiddlewareConfig('node')
+);
 
 /* build the client side development middleware */
-export const builtDevClient = wpDevMiddleware(clientCompiler, {
-    noInfo: true,
-    publicPath: clientConfig.output.publicPath,
-    stats: 'errors-only',
-    logger: weblog({
-        level: 'info',
-        name: 'wp-client',
-        timestamp: false
-    })
-});
+export const builtDevClient = wpDevMiddleware(
+    clientCompiler,
+    setDevMiddlewareConfig('web')
+);
 
 /* hot reloading for server side code */
 export const builtHotServer = wphotServerMiddleware(mergedCompilers, {
