@@ -2,7 +2,7 @@
 
 :fire: Hot reloading of both client and server :fire:
 
-Project aim is to maximise dev efficiency and your iteration loop out of the box. It provides the following tech & features:
+Project aim is to maximise dev efficiency and your iteration loop out of the box. It provides/uses the following tech & features:
 
 -   Webpack 4
 -   Express
@@ -20,7 +20,9 @@ Project aim is to maximise dev efficiency and your iteration loop out of the box
 -   Watches for server side changes and reloads the browser
 -   Handles all files in memory for the fastest possible update times.
 
-If you're looking for a speedier set up than using browser-sync or nodemon, then this might be for you.
+If you're looking for a speedier set up than using browser-sync, webpack dev server or nodemon, then this might be for you.
+
+Developed using Windows; if there's a linux/mac issue, [let me know](https://github.com/RonanQuigley/isomorphic-hot-reload-boilerplate/issues).
 
 ## Installation
 
@@ -33,8 +35,8 @@ yarn
 
 The src directory holds all of your source files:
 
--   The client folder contains all client side code. It currently has a simple index file. update the following line to your colour of choice to see changes reflected in your browser : `document.body.style.background = 'whatever-colour'`
--   The server folder contains your routes and whatever else you'd need to add for server-side.
+-   The client folder contains all client side code. It currently has a simple `client.js` file. update the following line to your colour of choice to see changes reflected in your browser : `document.body.style.background = 'whatever-colour'`
+-   The server folder contains the express app and a server side renderer middleware i.e. function. You can extend off of this by adding an express router.
 -   The react folder is for your react app
 
 The dev tools folder contains hot reloading and other dev related code.

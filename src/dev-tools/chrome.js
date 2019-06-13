@@ -1,10 +1,10 @@
-const { launch } = require('chrome-launcher');
+import { launch } from 'chrome-launcher';
 
 /**
  * Automatically opens chrome for development. Also closes chrome
  * when the nodejs process has been exited
  */
-module.exports = async function loadChrome() {
+export default async function loadChrome() {
     try {
         await launch({
             startingUrl: 'http://localhost:' + (process.env.PORT || 3000),
@@ -16,4 +16,4 @@ module.exports = async function loadChrome() {
         showing up. doesn't seem to cause an issue for dev 
         so don't let the errors bubble up */
     }
-};
+}

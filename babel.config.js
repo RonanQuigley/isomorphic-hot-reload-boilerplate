@@ -8,7 +8,7 @@ module.exports = {
                 corejs: '3.0.0',
                 // https://github.com/browserslist/browserslist#best-practices
                 targets: {
-                    browsers: ['defaults', '>0.5%', 'IE 10']
+                    browsers: ['defaults', '>0.5%', 'IE 11']
                 }
             }
         ],
