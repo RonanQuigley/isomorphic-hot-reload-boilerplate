@@ -46,7 +46,7 @@
             "request": "launch",
             "name": "Debug Dev Server Setup",
             "smartStep": false,
-            "program": "${workspaceFolder}/src/server/dev-app.js",
+            "program": "${workspaceFolder}/src/server/app.js",
             "skipFiles": [
                 "${workspaceRoot}/node_modules/**/*.js",
                 "<node_internals>/**/*.js"
@@ -54,6 +54,31 @@
             "envFile": "${workspaceFolder}/.env",
             "env": {
                 "NODE_ENV" : "development",
+                "ENABLE_LOGGING" : "false"        
+            },
+            "runtimeArgs": [
+                "--max-old-space-size=8192",
+                "--inspect",
+                "--require", 
+                "dotenv/config",
+                "--require",
+                "@babel/register"            
+            ],
+
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Debug Prod Server Setup",
+            "smartStep": false,
+            "program": "${workspaceFolder}/src/server/app.js",
+            "skipFiles": [
+                "${workspaceRoot}/node_modules/**/*.js",
+                "<node_internals>/**/*.js"
+            ],
+            "envFile": "${workspaceFolder}/.env",
+            "env": {
+                "NODE_ENV" : "production",
                 "ENABLE_LOGGING" : "false"        
             },
             "runtimeArgs": [

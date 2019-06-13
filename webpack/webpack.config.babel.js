@@ -12,13 +12,14 @@ import nodeExternals from 'webpack-node-externals';
 import CleanWebpackPlugin from 'clean-webpack-plugin';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import UglifyJsPlugin from 'uglifyjs-webpack-plugin';
+import { StatsWriterPlugin } from 'webpack-stats-plugin';
 
 const development = process.env.NODE_ENV === 'development';
 
 const entryPoints = {
     node: {
         development: ['./src/server/server'],
-        production: ['./src/server/prod-app']
+        production: ['./src/server/server']
     },
     web: {
         development: [
@@ -42,14 +43,22 @@ const commonNodePlugins = [
 const plugins = {
     node: {
         development: commonNodePlugins,
-        production: [...commonNodePlugins, new CleanWebpackPlugin()]
+        production: [
+            ...commonNodePlugins,
+            new CleanWebpackPlugin() // Write out stats file to build directory.
+        ]
     },
     web: {
         development: [
             new webpack.HotModuleReplacementPlugin(),
             new webpack.NamedModulesPlugin()
         ],
-        production: [new CleanWebpackPlugin()]
+        production: [
+            new CleanWebpackPlugin(),
+            new StatsWriterPlugin({
+                filename: 'client-stats.json' // Default
+            })
+        ]
     }
 };
 
@@ -75,6 +84,7 @@ const getConfig = target => ({
     name: target === 'web' ? 'client' : 'server',
     mode: development ? 'development' : 'production',
     target,
+    stats: 'verbose',
     node: {
         __dirname: false
     },
@@ -86,7 +96,8 @@ const getConfig = target => ({
             ? nodeExternals({
                   whitelist: [
                       'react-universal-component',
-                      'webpack-flush-chunks'
+                      'webpack-flush-chunks',
+                      'client-stats.json'
                   ]
               })
             : [],

@@ -6,7 +6,7 @@ const LoadMe = () => {
 };
 
 const Element = styled.div`
-    background: grey;
+    background: khaki;
 `;
 
 export default LoadMe;

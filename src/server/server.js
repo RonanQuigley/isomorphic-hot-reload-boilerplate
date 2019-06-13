@@ -1,5 +1,6 @@
 import React from 'react';
 import App from '@react-app/app';
+import path from 'path';
 import { ServerStyleSheet } from 'styled-components';
 import ReactDOMServer from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom';
@@ -10,25 +11,24 @@ import logger from '@dev-tools/logger';
 /**
  * exports a curried function for hot server middleware purposes
  */
-const serverSideRender = options => (req, res) => {
-    if (process.env.NODE_ENV === 'development') {
-        const sheet = new ServerStyleSheet();
-        try {
-            const app = sheet.collectStyles(
-                <StaticRouter location={req.url} context={{}}>
-                    <App />
-                </StaticRouter>
-            );
+const serverSideRender = ({ clientStats }) => (req, res) => {
+    const sheet = new ServerStyleSheet();
+    try {
+        const app = sheet.collectStyles(
+            <StaticRouter location={req.url} context={{}}>
+                <App />
+            </StaticRouter>
+        );
 
-            const html = ReactDOMServer.renderToString(app);
+        const html = ReactDOMServer.renderToString(app);
 
-            const styleTags = sheet.getStyleTags();
+        const styleTags = sheet.getStyleTags();
 
-            const { js } = flushChunks(options.clientStats, {
-                chunkNames: flushChunkNames()
-            });
+        const { js } = flushChunks(clientStats, {
+            chunkNames: flushChunkNames()
+        });
 
-            return res.send(`
+        res.send(`
                 <!doctype html>
                     <html>
                         <head>
@@ -40,23 +40,11 @@ const serverSideRender = options => (req, res) => {
                         </body>
                 </html>
           `);
-        } catch (error) {
-            // handle error
-            logger.error(error);
-        } finally {
-            sheet.seal();
-        }
-    } else {
-        return res.send(`
-        <!doctype html>
-            <html>
-                <head>
-
-                </head>
-                <body>
-                    <div id="root">Haven't tested production yet</div>    
-                </body>
-        </html>`);
+    } catch (error) {
+        // handle error
+        logger.error(error);
+    } finally {
+        sheet.seal();
     }
 };
 
