@@ -6,8 +6,8 @@ import wphotClientMiddleware from 'webpack-hot-middleware';
 import wphotServerMiddleware from 'webpack-hot-server-middleware';
 import weblog from 'webpack-log';
 
-const clientConfig = find(multiConfig, { target: 'web' });
-const serverConfig = find(multiConfig, { target: 'node' });
+const clientConfig = find(multiConfig, { name: 'client' });
+const serverConfig = find(multiConfig, { name: 'server' });
 
 const clientPath = clientConfig.output.publicPath;
 const serverPath = serverConfig.output.publicPath;
@@ -15,7 +15,7 @@ const serverPath = serverConfig.output.publicPath;
 const setDevMiddlewareConfig = target => ({
     publicPath: target === 'web' ? clientPath : serverPath,
     serverSideRender: true,
-    stats: 'errors-only',
+    stats: 'none',
     logger: weblog({
         level: 'info',
         name: target === 'web' ? 'client' : 'server',
@@ -25,7 +25,7 @@ const setDevMiddlewareConfig = target => ({
 
 export const clientCompiler = webpack(clientConfig);
 
-export const mergedCompilers = webpack(multiConfig);
+export const mergedCompilers = webpack([clientConfig, serverConfig]);
 
 /* build the server side development middleware */
 export const builtDevServer = wpDevMiddleware(

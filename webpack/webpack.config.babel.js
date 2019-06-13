@@ -43,10 +43,7 @@ const commonNodePlugins = [
 const plugins = {
     node: {
         development: commonNodePlugins,
-        production: [
-            ...commonNodePlugins,
-            new CleanWebpackPlugin() // Write out stats file to build directory.
-        ]
+        production: [...commonNodePlugins, new CleanWebpackPlugin()]
     },
     web: {
         development: [
@@ -84,7 +81,7 @@ const getConfig = target => ({
     name: target === 'web' ? 'client' : 'server',
     mode: development ? 'development' : 'production',
     target,
-    stats: 'verbose',
+    stats: 'normal',
     node: {
         __dirname: false
     },
@@ -96,11 +93,10 @@ const getConfig = target => ({
             ? nodeExternals({
                   whitelist: [
                       'react-universal-component',
-                      'webpack-flush-chunks',
-                      'client-stats.json'
+                      'webpack-flush-chunks'
                   ]
               })
-            : [],
+            : ['client-stats.json'],
     output: target == 'node' ? setNodeOutput() : setWebOutput(),
     plugins: plugins[target][process.env.NODE_ENV]
 });
