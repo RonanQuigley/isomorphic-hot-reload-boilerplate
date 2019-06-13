@@ -3,7 +3,7 @@ import path from 'path';
 const commonFields = {
     path: path.join(__dirname, '../../dist/server'),
     publicPath: '/',
-    filename: '[hash:8].server.js',
+    filename: 'server.js',
     // this is necessary for webpack hot server middleware
     libraryTarget: 'commonjs2',
     chunkFilename: '[chunkhash:8].server.js'
@@ -13,7 +13,6 @@ export function setOutput() {
     if (process.env.NODE_ENV === 'development') {
         return {
             ...commonFields,
-            filename: 'server.js',
             /* fixes server side debugging issues for source maps */
             devtoolModuleFilenameTemplate(info) {
                 return `file:///${info.absoluteResourcePath.replace(

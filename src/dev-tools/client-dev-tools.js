@@ -10,9 +10,7 @@ function checkForServerChanges() {
     });
 }
 
-if (process.env.NODE_ENV === 'development') {
-    checkForServerChanges();
-}
+checkForServerChanges();
 
 if (module.hot) {
     module.hot.accept(error => console.error(error));

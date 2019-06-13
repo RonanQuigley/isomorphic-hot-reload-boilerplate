@@ -12,7 +12,7 @@ const frontEndCommon = {
     entry: ['./src/client/client'],
     devtool: setDevTool(),
     output: setOutput(),
-    plugins: [new webpack.NamedModulesPlugin(), ...plugins],
+    plugins: [...plugins],
     externals: [],
     module: modules
 };

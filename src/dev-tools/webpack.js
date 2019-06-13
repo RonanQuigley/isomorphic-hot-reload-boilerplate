@@ -1,5 +1,4 @@
-import serverConfig from '@webpack/back-end/webpack.dev.babel';
-import clientConfig from '@webpack/front-end/webpack.dev.babel';
+import { clientConfig, serverConfig } from '@webpack/webpack.config.babel.js';
 import { find, keys } from 'lodash';
 import webpack from 'webpack';
 import wpDevMiddleware from 'webpack-dev-middleware';

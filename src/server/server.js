@@ -46,8 +46,9 @@ const serverSideRender = ({ clientStats }) => (req, res) => {
         } finally {
             sheet.seal();
         }
+    } else {
+        return res.send(`haven't setup production yet`);
     }
-    return res.send(`haven't setup production yet`);
 };
 
 export default serverSideRender;
