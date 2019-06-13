@@ -42,23 +42,14 @@ const commonNodePlugins = [
 const plugins = {
     node: {
         development: commonNodePlugins,
-        production: [
-            ...commonNodePlugins,
-            new CleanWebpackPlugin({
-                cleanAfterEveryBuildPatterns: ['**/*']
-            })
-        ]
+        production: [...commonNodePlugins, new CleanWebpackPlugin()]
     },
     web: {
         development: [
             new webpack.HotModuleReplacementPlugin(),
             new webpack.NamedModulesPlugin()
         ],
-        production: [
-            new CleanWebpackPlugin({
-                cleanAfterEveryBuildPatterns: ['**/*']
-            })
-        ]
+        production: [new CleanWebpackPlugin()]
     }
 };
 

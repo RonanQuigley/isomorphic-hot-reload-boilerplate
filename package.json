@@ -2,7 +2,6 @@
   "name": "isomorphic-hot-reloading-boilerplate",
   "sideEffects": false,
   "version": "1.0.0",
-  "main": "index.js",
   "repository": "https://github.com/RonanQuigley/isomorphic-hot-reload-boilerplate.git",
   "author": "ronanquigley <info@ronanquigley.com>",
   "license": "MIT",
