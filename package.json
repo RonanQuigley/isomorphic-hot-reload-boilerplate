@@ -70,7 +70,7 @@
   "scripts": {
     "build:all": "cross-env NODE_ENV=production node -r @babel/register ./webpack/webpack.config.babel.js",
     "build:all:start": "npm-run-all -s build:all start:prod",
-    "build:analyze": "cross-env ANALYZE=true NODE_ENV=production webpack --display-reasons -p --config webpack/full-stack/webpack.babel.js",
+    "build:analyze": "cross-env ANALYZE=true NODE_ENV=production npm-run-all build:all",
     "start:prod": "cross-env NODE_ENV=production node ./dist/server/server.js",
     "start": "cross-env NODE_ENV=development node --max-old-space-size=8192 --inspect -r @babel/register ./src/server/app.js",
     "test": "jest"
