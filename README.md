@@ -2,6 +2,8 @@
 
 :fire: Hot reloading of both client and server :fire:
 
+![example-gif](example.gif)
+
 Project aim is to maximise dev efficiency and your iteration loop out of the box. It provides/uses the following tech & features:
 
 -   Webpack 4
