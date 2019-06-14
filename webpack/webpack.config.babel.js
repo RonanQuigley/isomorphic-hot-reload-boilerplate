@@ -14,6 +14,8 @@ import nodeExternals from 'webpack-node-externals';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import UglifyJsPlugin from 'uglifyjs-webpack-plugin';
+import CompressionPlugin from 'compression-webpack-plugin';
+import BrotliPlugin from 'brotli-webpack-plugin';
 
 const development = process.env.NODE_ENV === 'development';
 
@@ -61,7 +63,9 @@ const plugins = {
              */
             new webpack.HashedModuleIdsPlugin(),
             ...commonWebPlugins,
-            new ManifestPlugin()
+            new ManifestPlugin(),
+            new CompressionPlugin(),
+            new BrotliPlugin()
         ]
     }
 };

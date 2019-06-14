@@ -5,6 +5,7 @@ import morgan from 'morgan';
 import logger from '@dev-tools/logger';
 import loadChrome from '@dev-tools/chrome';
 import { setupDevApp } from '@dev-tools/server-dev-tools';
+import expressStaticGzip from 'express-static-gzip';
 import path from 'path';
 const app = express();
 
@@ -30,9 +31,14 @@ if (process.env.NODE_ENV === 'development') {
         loadChrome();
     });
 } else {
+    const clientPath = path.join(__dirname, '../client');
     app.use(
         // allow express to access our public assets in the dist
-        express.static(path.join(__dirname, '../client')),
+        // express.static(clientPath),
+        expressStaticGzip(clientPath, {
+            enableBrotli: true,
+            orderPreference: ['br'] // prefer brotli to gzip assets
+        }),
         /* webpack hot server middleware requires the router to be exported
         as a function so we need to call it in order to get the actual router */
         server({
