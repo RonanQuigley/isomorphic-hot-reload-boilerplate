@@ -2,7 +2,9 @@ import React from 'react';
 import universal from 'react-universal-component';
 import { Route, Link } from 'react-router-dom';
 
-const UniversalComponent = universal(import(`./load-me`));
+const UniversalComponent = universal(
+    import(/* webpackChunkName: "give-me-a-chunk-name" */ `./load-me`)
+);
 
 function Index() {
     return <h2>Home</h2>;
