@@ -2,12 +2,6 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "type": "node",
-            "request": "attach",
-            "name": "Attach by Process ID",
-            "processId": "${command:PickProcess}"
-        },
-        {
             "type": "chrome",
             "request": "attach",
             "name": "Attach to Client",
@@ -34,7 +28,6 @@
             "skipFiles": [
                 "${workspaceRoot}/node_modules/**/*.js",
                 "<node_internals>/**/*.js",
-                "*.hbs",
                 "webpack:///webpack/bootstrap",
                 "webpack:\\webpack\\bootstrap",
                 "webpack://webpack/bootstrap",
@@ -69,52 +62,20 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "Debug Prod Server Setup",
-            "smartStep": false,
-            "program": "${workspaceFolder}/src/server/app.js",
-            "skipFiles": [
-                "${workspaceRoot}/node_modules/**/*.js",
-                "<node_internals>/**/*.js"
-            ],
-            "envFile": "${workspaceFolder}/.env",
-            "env": {
-                "NODE_ENV" : "production",
-                "ENABLE_LOGGING" : "false"        
-            },
-            "runtimeArgs": [
-                "--max-old-space-size=8192",
-                "--inspect",
-                "--require", 
-                "dotenv/config",
-                "--require",
-                "@babel/register"            
-            ],
-
-        },
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "Debug Build",
-            "smartStep": false,
+            "name": "Debug Webpack Build",
+            "smartStep": true,
             "program": "${workspaceFolder}/webpack/webpack.config.babel.js",
             "skipFiles": [
                 "${workspaceRoot}/node_modules/**/*.js",
                 "<node_internals>/**/*.js"
             ],
-            "envFile": "${workspaceFolder}/.env",
             "env": {
                 "NODE_ENV" : "production",
-                "ENABLE_LOGGING" : "false"        
             },
             "runtimeArgs": [
-                "--max-old-space-size=8192",
-                "--inspect",
-                "--require", 
-                "dotenv/config",
                 "--require",
                 "@babel/register"            
             ],
-
         },
         {
             "type": "node",
@@ -126,12 +87,6 @@
                 "${workspaceRoot}/node_modules/**/*.js",
                 "<node_internals>/**/*.js"
             ],
-            "envFile": "${workspaceFolder}/.env",
-            "env": {                
-                "NODE_ENV" : "production",
-                "ENABLE_LOGGING" : "false"
-            },
-
         }
     ]
 }
