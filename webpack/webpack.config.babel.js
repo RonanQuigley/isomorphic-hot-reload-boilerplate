@@ -11,7 +11,7 @@ import {
     setWebDevTool
 } from './utilities';
 import nodeExternals from 'webpack-node-externals';
-import CleanWebpackPlugin from 'clean-webpack-plugin';
+import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import UglifyJsPlugin from 'uglifyjs-webpack-plugin';
 
