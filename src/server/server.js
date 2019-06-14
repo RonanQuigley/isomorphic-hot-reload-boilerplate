@@ -9,7 +9,7 @@ import flushChunks from 'webpack-flush-chunks';
 import logger from '@dev-tools/logger';
 
 /**
- * exports a curried function for hot server middleware purposes
+ * exports a function that returns a function for hot server middleware purposes
  */
 const serverSideRender = ({ clientStats }) => (req, res) => {
     const sheet = new ServerStyleSheet();
