@@ -1,4 +1,4 @@
-import multiConfig from '@webpack/webpack.config.babel.js';
+import { configs as multiConfig } from '@webpack/webpack.config.babel.js';
 import { find } from 'lodash';
 import webpack from 'webpack';
 import wpDevMiddleware from 'webpack-dev-middleware';
@@ -15,7 +15,7 @@ const serverPath = serverConfig.output.publicPath;
 const setDevMiddlewareConfig = target => ({
     publicPath: target === 'web' ? clientPath : serverPath,
     serverSideRender: true,
-    stats: 'none',
+    stats: 'errors-only',
     logger: weblog({
         level: 'info',
         name: target === 'web' ? 'client' : 'server',

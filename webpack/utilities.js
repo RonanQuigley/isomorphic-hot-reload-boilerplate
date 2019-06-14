@@ -69,15 +69,28 @@ export function setNodeOutput() {
 }
 
 export function setWebOutput() {
+    /**
+     * Hash: is corresponding to build. Each chunk will get same the hash across the build.
+     * If anything changes in the build, the corresponding hash will also change.
+     * Chunkhash: is based on the webpack entry point. Each entry defined will have it’s own hash.
+     * If anything changes for that particular entry point than only that corresponding hash will change.
+     * [hash:8]: slice the first 8 digits of the hash for use
+     */
+
     const commonFields = {
         path: path.join(__dirname, '../dist/client'),
         chunkFilename: '[name].chunk.js',
-        filename: '[hash:8].client.js',
+        filename: '[name].[contenthash].client.js',
         publicPath: '/'
     };
     if (process.env.NODE_ENV === 'development') {
         return {
             ...commonFields,
+            /*
+                webpack hot middleware cannot make use of
+                contenthashes; instead keep it as hash:8 
+            */
+            filename: '[hash:8].client.js',
             // fixes vscode chrome debugger stepping into unrelated webpack code
             // therefore: do not remove this!!!
             devtoolModuleFilenameTemplate(info) {

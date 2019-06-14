@@ -11,14 +11,7 @@ import logger from '@dev-tools/logger';
 /**
  * exports a curried function for hot server middleware purposes
  */
-const serverSideRender = options => (req, res) => {
-    const clientStats = options
-        ? options.clientStats
-        : require(path.join(__dirname, '../client/client-stats.json')).default;
-    try {
-    } catch (error) {
-        logger.error(error);
-    }
+const serverSideRender = ({ clientStats }) => (req, res) => {
     const sheet = new ServerStyleSheet();
     try {
         const app = sheet.collectStyles(

@@ -1,14 +1,11 @@
-import webpack from 'webpack';
-import multiConfig from '../../webpack/webpack.config.babel';
 import express from 'express';
 import server from './server';
 import bodyParser from 'body-parser';
 import morgan from 'morgan';
 import logger from '@dev-tools/logger';
 import loadChrome from '@dev-tools/chrome';
-import { find } from 'lodash';
 import { setupDevApp } from '@dev-tools/server-dev-tools';
-
+import path from 'path';
 const app = express();
 
 app.use(bodyParser.json());
@@ -33,23 +30,18 @@ if (process.env.NODE_ENV === 'development') {
         loadChrome();
     });
 } else {
-    webpack(multiConfig).run((err, stats) => {
-        const clientStats = stats.toJson().children[0];
-
-        app.use(
-            // allow express to access our public assets in the dist
-            express.static(find(multiConfig, { name: 'client' }).output.path),
-            /* webpack hot server middleware requires the router to be exported
-            as a function so we need to call it in order to get the actual router */
-            server({
-                clientStats
-            })
-        );
-
-        // in tests we don't need to listen
-        // as we're using superagent
-        if (process.env.NODE_ENV !== 'test') {
-            listen(app);
-        }
-    });
+    app.use(
+        // allow express to access our public assets in the dist
+        express.static(path.join(__dirname, '../client')),
+        /* webpack hot server middleware requires the router to be exported
+        as a function so we need to call it in order to get the actual router */
+        server({
+            clientStats: process.env.CLIENT_STATS
+        })
+    );
+    // // in tests we don't need to listen
+    // as we're using superagent
+    if (process.env.NODE_ENV !== 'test') {
+        listen(app);
+    }
 }

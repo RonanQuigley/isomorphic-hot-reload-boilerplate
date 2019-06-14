@@ -94,9 +94,34 @@
         {
             "type": "node",
             "request": "launch",
+            "name": "Debug Build",
+            "smartStep": false,
+            "program": "${workspaceFolder}/webpack/webpack.config.babel.js",
+            "skipFiles": [
+                "${workspaceRoot}/node_modules/**/*.js",
+                "<node_internals>/**/*.js"
+            ],
+            "envFile": "${workspaceFolder}/.env",
+            "env": {
+                "NODE_ENV" : "production",
+                "ENABLE_LOGGING" : "false"        
+            },
+            "runtimeArgs": [
+                "--max-old-space-size=8192",
+                "--inspect",
+                "--require", 
+                "dotenv/config",
+                "--require",
+                "@babel/register"            
+            ],
+
+        },
+        {
+            "type": "node",
+            "request": "launch",
             "name": "Debug Prod Build - Server",
             "smartStep": true,
-            "program": "${workspaceFolder}/dist/server.js",
+            "program": "${workspaceFolder}/dist/server/server.js",
             "skipFiles": [
                 "${workspaceRoot}/node_modules/**/*.js",
                 "<node_internals>/**/*.js"

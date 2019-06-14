@@ -1,6 +1,7 @@
 import webpack from 'webpack';
 import merge from 'webpack-merge';
 import commonConfig from './webpack.common.babel.js';
+import { promisify } from 'util';
 import DotEnv from 'dotenv-webpack';
 import {
     setNodeOutput,
@@ -12,14 +13,13 @@ import nodeExternals from 'webpack-node-externals';
 import CleanWebpackPlugin from 'clean-webpack-plugin';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import UglifyJsPlugin from 'uglifyjs-webpack-plugin';
-import { StatsWriterPlugin } from 'webpack-stats-plugin';
 
 const development = process.env.NODE_ENV === 'development';
 
 const entryPoints = {
     node: {
         development: ['./src/server/server'],
-        production: ['./src/server/server']
+        production: ['./src/server/app']
     },
     web: {
         development: [
@@ -52,28 +52,59 @@ const plugins = {
         ],
         production: [
             new CleanWebpackPlugin(),
-            new StatsWriterPlugin({
-                filename: 'client-stats.json' // Default
-            })
+            /**
+             * allows our vendor hashes to stay consistent
+             * between builds => better long term browser caching
+             */
+            new webpack.HashedModuleIdsPlugin()
         ]
     }
 };
 
 const optimization = {
-    development: {},
-    production: {
-        usedExports: true,
-        minimizer: [
-            // maintain source maps but strip comments
-            new UglifyJsPlugin({
-                sourceMap: true,
-                uglifyOptions: {
-                    output: {
-                        comments: false
+    web: {
+        development: {},
+        production: {
+            usedExports: false,
+            runtimeChunk: 'single',
+            splitChunks: {
+                cacheGroups: {
+                    vendor: {
+                        test: /[\\/]node_modules[\\/]/,
+                        name: 'vendors',
+                        chunks: 'all'
                     }
                 }
-            })
-        ]
+            },
+            minimizer: [
+                // maintain source maps but strip comments
+                new UglifyJsPlugin({
+                    sourceMap: true,
+                    uglifyOptions: {
+                        output: {
+                            comments: false
+                        }
+                    }
+                })
+            ]
+        }
+    },
+    node: {
+        development: {},
+        production: {
+            usedExports: true,
+            minimizer: [
+                // maintain source maps but strip comments
+                new UglifyJsPlugin({
+                    sourceMap: true,
+                    uglifyOptions: {
+                        output: {
+                            comments: false
+                        }
+                    }
+                })
+            ]
+        }
     }
 };
 
@@ -81,13 +112,12 @@ const getConfig = target => ({
     name: target === 'web' ? 'client' : 'server',
     mode: development ? 'development' : 'production',
     target,
-    stats: 'normal',
     node: {
         __dirname: false
     },
     entry: entryPoints[target][process.env.NODE_ENV],
     devtool: target === 'node' ? setNodeDevTool() : setWebDevTool(),
-    optimization: optimization[process.env.NODE_ENV],
+    optimization: optimization[target][process.env.NODE_ENV],
     externals:
         target === 'node'
             ? nodeExternals({
@@ -96,7 +126,7 @@ const getConfig = target => ({
                       'webpack-flush-chunks'
                   ]
               })
-            : ['client-stats.json'],
+            : [],
     output: target == 'node' ? setNodeOutput() : setWebOutput(),
     plugins: plugins[target][process.env.NODE_ENV]
 });
@@ -117,7 +147,49 @@ if (process.env.ANALYZE === 'true') {
     );
 }
 
-export default [
-    merge(webConfig, commonConfig),
-    merge(nodeConfig, commonConfig)
-];
+const clientConfig = merge(webConfig, commonConfig);
+const serverConfig = merge(nodeConfig, commonConfig);
+const promisedWebpack = promisify(webpack);
+
+const compile = async config => {
+    try {
+        const stats = await promisedWebpack(config);
+        if (stats.hasErrors() || stats.hasWarnings()) {
+            throw new Error(
+                stats.toString({
+                    errorDetails: true,
+                    warnings: true,
+                    colors: true
+                })
+            );
+        }
+        console.log(
+            stats.toString({
+                colors: true
+            })
+        );
+        return stats;
+    } catch (error) {
+        throw error;
+    }
+};
+
+const build = async () => {
+    const clientStats = await compile(clientConfig);
+
+    /**
+     * Add the clientStats as an environment variable
+     * so that our server code can read it
+     */
+    serverConfig.plugins.push(
+        new webpack.DefinePlugin({
+            'process.env.CLIENT_STATS': JSON.stringify(clientStats.toJson())
+        })
+    );
+
+    await compile(serverConfig);
+};
+
+if (require.main === module) build();
+
+export const configs = [clientConfig, serverConfig];
