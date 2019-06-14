@@ -1,6 +1,5 @@
 import React from 'react';
 import App from '@react-app/app';
-import path from 'path';
 import { ServerStyleSheet } from 'styled-components';
 import ReactDOMServer from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom';
