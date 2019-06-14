@@ -37,7 +37,10 @@ if (process.env.NODE_ENV === 'development') {
         // express.static(clientPath),
         expressStaticGzip(clientPath, {
             enableBrotli: true,
-            orderPreference: ['br'] // prefer brotli to gzip assets
+            orderPreference: ['br'], // prefer brotli to gzip assets
+            setHeaders: (
+                res // cache until ages in the future
+            ) => res.setHeader('Cache-Control', 'public, max-age=31536000')
         }),
         /* webpack hot server middleware requires the router to be exported
         as a function so we need to call it in order to get the actual router */
