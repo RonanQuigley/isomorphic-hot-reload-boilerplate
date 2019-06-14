@@ -33,6 +33,7 @@ function AppRouter() {
         <div>
             <UniversalComponent />
             <Hooks />
+            <div>Just another div</div>
             <nav>
                 <ul>
                     <li>

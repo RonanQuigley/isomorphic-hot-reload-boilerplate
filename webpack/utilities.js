@@ -79,7 +79,6 @@ export function setWebOutput() {
 
     const commonFields = {
         path: path.join(__dirname, '../dist/client'),
-        chunkFilename: '[name].chunk.js',
         filename: '[name].[contenthash].client.js',
         publicPath: '/'
     };

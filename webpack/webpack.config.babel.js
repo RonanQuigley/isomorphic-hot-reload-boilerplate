@@ -1,6 +1,7 @@
 import webpack from 'webpack';
 import merge from 'webpack-merge';
 import commonConfig from './webpack.common.babel.js';
+import ManifestPlugin from 'webpack-manifest-plugin';
 import { promisify } from 'util';
 import DotEnv from 'dotenv-webpack';
 import {
@@ -40,15 +41,17 @@ const commonNodePlugins = [
     })
 ];
 
+const commonWebPlugins = [new webpack.NamedModulesPlugin()];
+
 const plugins = {
     node: {
         development: commonNodePlugins,
-        production: [...commonNodePlugins, new CleanWebpackPlugin()]
+        production: [new CleanWebpackPlugin(), ...commonNodePlugins]
     },
     web: {
         development: [
             new webpack.HotModuleReplacementPlugin(),
-            new webpack.NamedModulesPlugin()
+            ...commonWebPlugins
         ],
         production: [
             new CleanWebpackPlugin(),
@@ -56,18 +59,34 @@ const plugins = {
              * allows our vendor hashes to stay consistent
              * between builds => better long term browser caching
              */
-            new webpack.HashedModuleIdsPlugin()
+            new webpack.HashedModuleIdsPlugin(),
+            ...commonWebPlugins,
+            new ManifestPlugin()
         ]
     }
 };
+
+// maintain source maps but strip comments
+const uglifyConfig = new UglifyJsPlugin({
+    sourceMap: true,
+    uglifyOptions: {
+        output: {
+            comments: false
+        }
+    }
+});
 
 const optimization = {
     web: {
         development: {},
         production: {
-            usedExports: false,
+            usedExports: true,
             runtimeChunk: 'single',
             splitChunks: {
+                /**
+                 * Extract all third party libraries to a single file;
+                 * this is because they are less likely to change
+                 */
                 cacheGroups: {
                     vendor: {
                         test: /[\\/]node_modules[\\/]/,
@@ -76,34 +95,14 @@ const optimization = {
                     }
                 }
             },
-            minimizer: [
-                // maintain source maps but strip comments
-                new UglifyJsPlugin({
-                    sourceMap: true,
-                    uglifyOptions: {
-                        output: {
-                            comments: false
-                        }
-                    }
-                })
-            ]
+            minimizer: [uglifyConfig]
         }
     },
     node: {
         development: {},
         production: {
             usedExports: true,
-            minimizer: [
-                // maintain source maps but strip comments
-                new UglifyJsPlugin({
-                    sourceMap: true,
-                    uglifyOptions: {
-                        output: {
-                            comments: false
-                        }
-                    }
-                })
-            ]
+            minimizer: [uglifyConfig]
         }
     }
 };
