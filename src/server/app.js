@@ -6,7 +6,9 @@ import logger from '@dev-tools/logger';
 import loadChrome from '@dev-tools/chrome';
 import { setupDevApp } from '@dev-tools/server-dev-tools';
 import expressStaticGzip from 'express-static-gzip';
+import apolloServer from '../graphql/apollo-server';
 import path from 'path';
+
 const app = express();
 
 app.use(bodyParser.json());
@@ -32,6 +34,7 @@ if (process.env.NODE_ENV === 'development') {
     });
 } else {
     const clientPath = path.join(__dirname, '../client');
+    apolloServer.applyMiddleware({ app });
     app.use(
         // allow exess to access our public assets in the dist
         // express.static(clientPath),
@@ -48,9 +51,10 @@ if (process.env.NODE_ENV === 'development') {
             clientStats: process.env.CLIENT_STATS
         })
     );
+    apolloServer.applyMiddleware({ app });
     // // in tests we don't need to listen
     // as we're using superagent
     if (process.env.NODE_ENV !== 'test') {
-        listen(app);
+        listen(app, apolloServer);
     }
 }
