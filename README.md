@@ -14,6 +14,7 @@ Project aim is to maximise dev efficiency and your iteration loop out of the box
 -   React hot loader
 -   Babel
 -   Jest
+-   Postgres
 -   Code splitting
 -   Server side rendering
 -   Production ready full-stack builds

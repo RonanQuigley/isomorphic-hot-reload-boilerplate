@@ -27,6 +27,7 @@ module.exports = {
                 alias: {
                     '@dev-tools': './src/dev-tools',
                     '@react-app': './src/react',
+                    '@database': './src/database',
                     '@webpack': './webpack'
                 }
             }

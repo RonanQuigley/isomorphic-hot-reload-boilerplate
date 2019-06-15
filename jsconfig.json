@@ -9,6 +9,7 @@
     "paths": {
       "@react-app/*": ["./src/react/*"],
       "@dev-tools/*": ["./src/dev-tools/*"],
+      "@database/*": ["./src/database"],
       "@webpack/*": ["./webpack"]
     },
   },

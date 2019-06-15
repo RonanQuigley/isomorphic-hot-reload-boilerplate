@@ -6,7 +6,7 @@ export default {
         rules: [
             {
                 exclude: /node_modules/,
-                test: /\.js|jsx$/,
+                test: /\.js$|jsx$/,
                 // cache the directory for faster rebuilds
                 loader: 'babel-loader?cacheDirectory=true',
                 sideEffects: false

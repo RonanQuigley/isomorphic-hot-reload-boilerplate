@@ -10,7 +10,7 @@ import logger from '@dev-tools/logger';
 /**
  * exports a function that returns a function for hot server middleware purposes
  */
-const serverSideRender = ({ clientStats }) => (req, res) => {
+const serverSideRender = ({ clientStats }) => async (req, res) => {
     const sheet = new ServerStyleSheet();
     try {
         const app = sheet.collectStyles(

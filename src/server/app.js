@@ -33,7 +33,7 @@ if (process.env.NODE_ENV === 'development') {
 } else {
     const clientPath = path.join(__dirname, '../client');
     app.use(
-        // allow express to access our public assets in the dist
+        // allow exess to access our public assets in the dist
         // express.static(clientPath),
         expressStaticGzip(clientPath, {
             enableBrotli: true,
