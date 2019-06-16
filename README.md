@@ -16,8 +16,9 @@ Project aim is to maximise dev efficiency and your iteration loop out of the box
 -   Jest
 -   Postgres
 -   Graphql
+-   Apollo Client & Server
 -   Code splitting
--   Server side rendering
+-   Server side rendering - React & Apollo
 -   Production ready full-stack builds
 -   DotEnv for loading your env files into webpack
 -   Automatically opens browser window in development and closes in the event of a node process exit
