@@ -23,7 +23,7 @@
             "smartStep": true,
             "sourceMaps": true,
             "outFiles": [
-                "${workspaceRoot}/dist/*.{.js.map}"
+                "${workspaceRoot}/dist/server/*.{.js.map}"
             ],
             "skipFiles": [
                 "${workspaceRoot}/node_modules/**/*.js",
@@ -80,9 +80,14 @@
         {
             "type": "node",
             "request": "launch",
+            "protocol": "inspector",
             "name": "Debug Prod Build - Server",
+            "sourceMaps": true,
             "smartStep": true,
             "program": "${workspaceFolder}/dist/server/server.js",
+            "outFiles": [
+                "${workspaceRoot}/dist/server/*.{.js.map}"
+            ],
             "skipFiles": [
                 "${workspaceRoot}/node_modules/**/*.js",
                 "<node_internals>/**/*.js"
