@@ -1,6 +1,8 @@
 import React from 'react';
 import universal from 'react-universal-component';
 import { Route, Link } from 'react-router-dom';
+import { Query } from 'react-apollo';
+import gql from 'graphql-tag';
 
 const UniversalComponent = universal(
     import(/* webpackChunkName: "give-me-a-chunk-name" */ `./load-me`)
@@ -17,6 +19,21 @@ function About() {
 function Users() {
     return <h2>Users</h2>;
 }
+
+const query = gql`
+    {
+        hello
+    }
+`;
+
+const ApolloQueryExample = () => (
+    <Query query={query}>
+        {({ loading, data }) => {
+            if (loading) return null;
+            return <div>{data.hello}</div>;
+        }}
+    </Query>
+);
 
 function Hooks() {
     // Declare a new state variable, which we'll call "count"
@@ -35,6 +52,7 @@ function AppRouter() {
         <div>
             <UniversalComponent />
             <Hooks />
+            <ApolloQueryExample />
             <div>Just another div</div>
             <nav>
                 <ul>

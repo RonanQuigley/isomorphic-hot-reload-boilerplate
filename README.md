@@ -15,6 +15,7 @@ Project aim is to maximise dev efficiency and your iteration loop out of the box
 -   Babel
 -   Jest
 -   Postgres
+-   Graphql
 -   Code splitting
 -   Server side rendering
 -   Production ready full-stack builds

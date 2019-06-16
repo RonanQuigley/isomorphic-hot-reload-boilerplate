@@ -8,6 +8,8 @@ import { flushChunkNames } from 'react-universal-component/server';
 import flushChunks from 'webpack-flush-chunks';
 import logger from '@dev-tools/logger';
 import apolloServer from '../graphql/apollo-server';
+import createClient from '../graphql/apollo-ssr';
+import { ApolloProvider, getDataFromTree } from 'react-apollo';
 
 const router = express.Router();
 
@@ -17,19 +19,33 @@ const router = express.Router();
 const serverSideRender = clientStats => async (req, res) => {
     const sheet = new ServerStyleSheet();
     try {
+        const client = createClient(req);
         const app = sheet.collectStyles(
-            <StaticRouter location={req.url} context={{}}>
-                <App />
-            </StaticRouter>
+            <ApolloProvider client={client}>
+                <StaticRouter location={req.url} context={{}}>
+                    <App />
+                </StaticRouter>
+            </ApolloProvider>
         );
+        /**
+         * get the apollo client data setup before
+         * rendering the app to a string
+         */
+        await getDataFromTree(app);
 
         const html = ReactDOMServer.renderToString(app);
+
+        const initialState = client.extract();
 
         const styleTags = sheet.getStyleTags();
 
         const { js } = flushChunks(clientStats, {
             chunkNames: flushChunkNames()
         });
+
+        if (process.env.NODE_ENV === 'development') {
+            logger.info('rendering page to client');
+        }
 
         res.send(`
                 <!doctype html>
@@ -39,7 +55,10 @@ const serverSideRender = clientStats => async (req, res) => {
                         </head>
                         <body>
                             <div id="root">${html}</div>
-                            ${js}
+                            ${js}            
+                            <script>window.__APOLLO_STATE__=${JSON.stringify(
+                                initialState
+                            ).replace(/</g, '\\u003c')};</script>
                         </body>
                 </html>
           `);
@@ -57,6 +76,10 @@ export default ({ clientStats }) => {
      * for every other route use the server side renderer
      */
     apolloServer.applyMiddleware({ app: router });
-    router.get('*', serverSideRender(clientStats));
+    /**
+     * TO DO: Create a 404 page for anything that doesn't exist yet
+     * e.g. favicon
+     */
+    router.get(/^\/(?!favicon|\/graphql).*/, serverSideRender(clientStats));
     return router;
 };

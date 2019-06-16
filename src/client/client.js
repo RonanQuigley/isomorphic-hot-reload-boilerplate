@@ -2,12 +2,16 @@ import ReactDOM from 'react-dom';
 import React from 'react';
 import App from '@react-app/app';
 import { BrowserRouter } from 'react-router-dom';
+import { ApolloProvider } from 'react-apollo';
+import client from './apollo-client';
 const root = document.getElementById('root');
 
 ReactDOM.hydrate(
-    <BrowserRouter>
-        <App />
-    </BrowserRouter>,
+    <ApolloProvider client={client}>
+        <BrowserRouter>
+            <App />
+        </BrowserRouter>
+    </ApolloProvider>,
     root
 );
 

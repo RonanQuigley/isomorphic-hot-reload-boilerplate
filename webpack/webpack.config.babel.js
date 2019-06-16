@@ -48,7 +48,10 @@ const commonWebPlugins = [new webpack.NamedModulesPlugin()];
 const plugins = {
     node: {
         development: commonNodePlugins,
-        production: [new CleanWebpackPlugin(), ...commonNodePlugins]
+        production: [
+            // new CleanWebpackPlugin(),
+            ...commonNodePlugins
+        ]
     },
     web: {
         development: [
@@ -56,13 +59,12 @@ const plugins = {
             ...commonWebPlugins
         ],
         production: [
-            new CleanWebpackPlugin(),
+            // new CleanWebpackPlugin(),
             /**
              * allows our vendor hashes to stay consistent
              * between builds => better long term browser caching
              */
             new webpack.HashedModuleIdsPlugin(),
-            ...commonWebPlugins,
             new ManifestPlugin(),
             new CompressionPlugin(),
             new BrotliPlugin()
@@ -155,31 +157,40 @@ const serverConfig = merge(nodeConfig, commonConfig);
 const promisedWebpack = promisify(webpack);
 
 const compile = async config => {
-    try {
-        const stats = await promisedWebpack(config);
-        if (stats.hasErrors() || stats.hasWarnings()) {
-            throw new Error(
-                stats.toString({
-                    errorDetails: true,
-                    warnings: true,
-                    colors: true
-                })
-            );
-        }
-        console.log(
+    const stats = await promisedWebpack(config);
+    if (stats.hasErrors()) {
+        throw new Error(
             stats.toString({
+                errorDetails: true,
+                colors: true
+            })
+        );
+    }
+    if (stats.hasWarnings()) {
+        console.warn(
+            stats.toString({
+                warnings: true,
                 colors: true
             })
         );
         return stats;
-    } catch (error) {
-        throw error;
     }
+    console.log(
+        stats.toString({
+            colors: true
+        })
+    );
+    return stats;
 };
 
 const build = async () => {
+    console.log('building client...');
     const clientStats = await compile(clientConfig);
-
+    console.log('client build complete');
+    if (!clientStats.toJson)
+        throw new Error(
+            'Unable to convert client stats to json! We need this for Server Side Rendering.'
+        );
     /**
      * Add the clientStats as an environment variable
      * so that our server code can read it
@@ -189,10 +200,11 @@ const build = async () => {
             'process.env.CLIENT_STATS': JSON.stringify(clientStats.toJson())
         })
     );
-
+    console.log('building server...');
     await compile(serverConfig);
+    console.log('server build complete');
 };
 
-if (require.main === module) build();
+if (require.main === module) build().catch(err => console.error(err));
 
 export const configs = [clientConfig, serverConfig];

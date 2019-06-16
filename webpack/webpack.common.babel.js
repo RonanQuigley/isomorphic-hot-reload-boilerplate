@@ -8,7 +8,7 @@ export default {
                 exclude: /node_modules/,
                 test: /\.js$|jsx$/,
                 // cache the directory for faster rebuilds
-                loader: 'babel-loader?cacheDirectory=true',
+                loader: 'babel-loader?cacheDirectory=false',
                 sideEffects: false
             }
         ]
