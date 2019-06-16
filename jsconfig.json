@@ -10,6 +10,7 @@
       "@react-app/*": ["./src/react/*"],
       "@dev-tools/*": ["./src/dev-tools/*"],
       "@database/*": ["./src/database"],
+      "@graphql/*": ["./src/graphql"],
       "@webpack/*": ["./webpack"]
     },
   },

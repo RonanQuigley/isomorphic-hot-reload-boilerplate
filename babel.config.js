@@ -28,6 +28,7 @@ module.exports = {
                     '@dev-tools': './src/dev-tools',
                     '@react-app': './src/react',
                     '@database': './src/database',
+                    '@graphql': './src/graphql',
                     '@webpack': './webpack'
                 }
             }

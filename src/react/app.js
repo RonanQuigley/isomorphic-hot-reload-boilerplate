@@ -20,17 +20,32 @@ function Users() {
     return <h2>Users</h2>;
 }
 
-const query = gql`
+const ssrQuery = gql`
     {
-        hello
+        ssrQuery
     }
 `;
 
-const ApolloQueryExample = () => (
-    <Query query={query}>
+const nonSSRQuery = gql`
+    {
+        nonSSRQuery
+    }
+`;
+
+const ApolloQuerySSRExample = () => (
+    <Query query={ssrQuery}>
         {({ loading, data }) => {
-            if (loading) return null;
-            return <div>{data.hello}</div>;
+            if (loading) return <div>loading ssr query</div>;
+            return <div>{data.ssrQuery}</div>;
+        }}
+    </Query>
+);
+
+const ApolloQueryNonSSRExample = () => (
+    <Query query={nonSSRQuery} ssr={false}>
+        {({ loading, data }) => {
+            if (loading) return <div>loading non ssr query</div>;
+            return <div>{data.nonSSRQuery}</div>;
         }}
     </Query>
 );
@@ -52,7 +67,8 @@ function AppRouter() {
         <div>
             <UniversalComponent />
             <Hooks />
-            <ApolloQueryExample />
+            <ApolloQueryNonSSRExample />
+            <ApolloQuerySSRExample />
             <div>Just another div</div>
             <nav>
                 <ul>

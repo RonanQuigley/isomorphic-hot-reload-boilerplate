@@ -6,6 +6,7 @@ const client = new ApolloClient({
     link: createHttpLink({
         uri: 'http://localhost:3000/graphql'
     }),
+    ssrMode: true,
     cache: new InMemoryCache().restore(window.__APOLLO_STATE__)
 });
 

@@ -7,8 +7,8 @@ import { StaticRouter } from 'react-router-dom';
 import { flushChunkNames } from 'react-universal-component/server';
 import flushChunks from 'webpack-flush-chunks';
 import logger from '@dev-tools/logger';
-import apolloServer from '../graphql/apollo-server';
-import createClient from '../graphql/apollo-ssr';
+import apolloServer from '@graphql/apollo-server';
+import apolloClientSSR from '@graphql/apollo-client-ssr';
 import { ApolloProvider, getDataFromTree } from 'react-apollo';
 
 const router = express.Router();
@@ -19,7 +19,7 @@ const router = express.Router();
 const serverSideRender = clientStats => async (req, res) => {
     const sheet = new ServerStyleSheet();
     try {
-        const client = createClient(req);
+        const client = apolloClientSSR(req);
         const app = sheet.collectStyles(
             <ApolloProvider client={client}>
                 <StaticRouter location={req.url} context={{}}>

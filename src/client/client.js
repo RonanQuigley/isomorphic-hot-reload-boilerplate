@@ -3,7 +3,7 @@ import React from 'react';
 import App from '@react-app/app';
 import { BrowserRouter } from 'react-router-dom';
 import { ApolloProvider } from 'react-apollo';
-import client from './apollo-client';
+import client from '@graphql/apollo-client';
 const root = document.getElementById('root');
 
 ReactDOM.hydrate(

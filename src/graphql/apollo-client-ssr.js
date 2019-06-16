@@ -3,7 +3,7 @@ import { ApolloClient } from 'apollo-client';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { createHttpLink } from 'apollo-link-http';
 
-const createClient = req =>
+const apolloClientSSR = req =>
     new ApolloClient({
         ssrMode: true,
         // Remember that this is the interface the SSR server will use to connect to the
@@ -19,4 +19,4 @@ const createClient = req =>
         cache: new InMemoryCache()
     });
 
-export default createClient;
+export default apolloClientSSR;
