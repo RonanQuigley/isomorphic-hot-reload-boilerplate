@@ -48,10 +48,7 @@ const commonWebPlugins = [new webpack.NamedModulesPlugin()];
 const plugins = {
     node: {
         development: commonNodePlugins,
-        production: [
-            // new CleanWebpackPlugin(),
-            ...commonNodePlugins
-        ]
+        production: [new CleanWebpackPlugin(), ...commonNodePlugins]
     },
     web: {
         development: [
@@ -59,7 +56,7 @@ const plugins = {
             ...commonWebPlugins
         ],
         production: [
-            // new CleanWebpackPlugin(),
+            new CleanWebpackPlugin(),
             /**
              * allows our vendor hashes to stay consistent
              * between builds => better long term browser caching
