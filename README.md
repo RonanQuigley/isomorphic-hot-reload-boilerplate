@@ -43,8 +43,9 @@ The src directory holds all of your source files:
 -   The client folder contains all client side code. It currently has a simple `client.js` file. update the following line to your colour of choice to see changes reflected in your browser : `document.body.style.background = 'whatever-colour'`
 -   The server folder contains the express app and a server side renderer middleware i.e. function. You can extend off of this by adding an express router.
 -   The react folder is for your react app
-
-The dev tools folder contains hot reloading and other dev related code.
+-   The database folder is for any database operations and your migrations
+-   The graphql folder is for all things apollo
+-   The dev tools folder contains hot reloading and other dev related code.
 
 I've added the .env file to the git repo, but for your own setup, it's best to add it to your .gitignore. It includes the following options:
 
