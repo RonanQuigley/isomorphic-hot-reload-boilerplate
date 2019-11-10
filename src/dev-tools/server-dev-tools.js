@@ -1,13 +1,20 @@
 import express from 'express';
 import logger from './logger';
 import { find, keys } from 'lodash';
-import {
-    builtDevClient,
-    builtDevServer,
-    builtHotClient,
-    builtHotServer,
-    mergedCompilers
-} from './webpack';
+import weblog from 'webpack-log';
+import webpack from 'webpack';
+import webpackDevMiddleware from 'webpack-dev-middleware';
+import webpackHotMiddleware from 'webpack-hot-middleware';
+import webpackHotServerMiddleware from 'webpack-hot-server-middleware';
+import { configs as multiConfig } from '@webpack/webpack.config.babel.js';
+
+const clientConfig = find(multiConfig, { name: 'client' });
+const serverConfig = find(multiConfig, { name: 'server' });
+
+const { publicPath: clientPublicPath } = clientConfig.output;
+
+const windowsReactPath = '\\src\\react';
+const unixReactPath = 'src/react';
 
 const devMiddlewareRouter = express.Router();
 
@@ -15,9 +22,7 @@ const devMiddlewareRouter = express.Router();
  *  reload the browser each time the server has completed a rebuild
     of any server file except react files
  */
-const handleClientReloading = () => {
-    const windowsReactPath = '\\src\\react';
-    const unixReactPath = 'src/react';
+const handleClientReloading = (mergedCompilers, clientMiddleware) => {
     const serverCompiler = find(mergedCompilers.compilers, {
         name: 'server'
     });
@@ -30,33 +35,56 @@ const handleClientReloading = () => {
                 file.includes(windowsReactPath) || file.includes(unixReactPath)
         );
         if (!hasReactFileChanged) {
-            logger.info('reloading due to server change');
-            builtHotClient.publish({ reload: true });
+            logger.info('reloading the browser due to server side change');
+            clientMiddleware.publish({ reload: true });
         }
     });
 };
 
 export const setupDevApp = async baseApp => {
-    // wrap dev middlewares in promises
-    const waitUntilServerIsValid = () =>
-        new Promise(resolve => builtDevServer.waitUntilValid(resolve));
+    const compilerInstance = webpack([clientConfig, serverConfig]);
 
-    const waitUntilClientIsValid = () =>
-        new Promise(resolve =>
-            builtDevClient.waitUntilValid(() => {
-                handleClientReloading();
-                resolve();
-            })
-        );
-    // built client middleware must come before the hot server
-    devMiddlewareRouter
-        .use(builtDevServer)
-        .use(builtDevClient)
-        .use(builtHotClient)
-        .use(builtHotServer);
+    const devMiddleware = webpackDevMiddleware(compilerInstance, {
+        publicPath: clientPublicPath,
+        serverSideRender: true,
+        stats: 'errors-only'
+    });
+
+    const clientCompiler = compilerInstance.compilers[0];
+
+    /**
+     * Hot reloading for the client bundle
+     */
+    const hotMiddleware = webpackHotMiddleware(clientCompiler, {
+        stats: 'errors-only',
+        log: weblog
+    });
+
+    /**
+     * Hot reloading for the server bundle.
+     *
+     * We also pass in both the client and server side config.
+     * This makes the server aware of changes to the client side bundle
+     * as it is a single compiler instance that runs in one process.
+     * The result is that the server side render will serve the latest state of the bundle
+     * and not the "stale" bundle generated when the application was initialised
+     */
+    const hotServerMiddleware = webpackHotServerMiddleware(compilerInstance);
+
+    devMiddlewareRouter.use(devMiddleware);
+    /**
+     * Mounted before webpack-hot-server-middleware
+     * to ensure client hot module replacement requests
+     * are handled correctly
+     */
+    devMiddlewareRouter.use(hotMiddleware);
+    devMiddlewareRouter.use(hotServerMiddleware);
+
+    const waitUntilServerIsValid = () =>
+        new Promise(resolve => devMiddleware.waitUntilValid(resolve));
 
     await waitUntilServerIsValid();
-    await waitUntilClientIsValid();
+    handleClientReloading(compilerInstance, hotMiddleware);
 
     return baseApp.use(devMiddlewareRouter);
 };
