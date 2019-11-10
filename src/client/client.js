@@ -4,16 +4,19 @@ import App from '@react-app/app';
 import { BrowserRouter } from 'react-router-dom';
 import { ApolloProvider } from 'react-apollo';
 import client from '@graphql/apollo-client';
-const root = document.getElementById('root');
+import { loadableReady } from '@loadable/component';
 
-ReactDOM.hydrate(
-    <ApolloProvider client={client}>
-        <BrowserRouter>
-            <App />
-        </BrowserRouter>
-    </ApolloProvider>,
-    root
-);
+loadableReady(() => {
+    const root = document.getElementById('root');
+    ReactDOM.hydrate(
+        <ApolloProvider client={client}>
+            <BrowserRouter>
+                <App />
+            </BrowserRouter>
+        </ApolloProvider>,
+        root
+    );
+});
 
 // change me to another colour
 document.body.style.background = 'red';

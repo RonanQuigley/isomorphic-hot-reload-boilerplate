@@ -16,7 +16,8 @@ module.exports = {
     ],
     plugins: [
         '@babel/plugin-syntax-dynamic-import',
-        'universal-import',
+        '@loadable/babel-plugin',
+        ['dynamic-import-node', { noInterop: true }],
         '@babel/plugin-proposal-class-properties',
         'babel-plugin-styled-components',
         'babel-plugin-lodash',

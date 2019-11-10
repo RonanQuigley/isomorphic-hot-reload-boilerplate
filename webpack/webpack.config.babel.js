@@ -16,7 +16,8 @@ import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import UglifyJsPlugin from 'uglifyjs-webpack-plugin';
 import CompressionPlugin from 'compression-webpack-plugin';
 import BrotliPlugin from 'brotli-webpack-plugin';
-
+import LoadablePlugin from '@loadable/webpack-plugin';
+import path from 'path';
 const development = process.env.NODE_ENV === 'development';
 
 const entryPoints = {
@@ -43,11 +44,17 @@ const commonNodePlugins = [
     })
 ];
 
-const commonWebPlugins = [new webpack.NamedModulesPlugin()];
+const commonWebPlugins = [
+    new webpack.NamedModulesPlugin(),
+    new LoadablePlugin({
+        path: path.join(__dirname, '../'),
+        writeToDisk: true
+    })
+];
 
 const plugins = {
     node: {
-        development: commonNodePlugins,
+        development: [commonNodePlugins],
         production: [new CleanWebpackPlugin(), ...commonNodePlugins]
     },
     web: {

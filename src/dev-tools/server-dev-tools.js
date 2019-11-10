@@ -28,11 +28,19 @@ const handleClientReloading = (mergedCompilers, clientMiddleware) => {
     });
 
     serverCompiler.hooks.afterEmit.tap('AfterServerHasRebuilt', comp => {
+        console.log(
+            'TCL: handleClientReloading -> comp.compiler.watchFileSystem.watcher.mtimes',
+            comp.compiler.watchFileSystem.watcher.mtimes
+        );
         const hasReactFileChanged = keys(
             comp.compiler.watchFileSystem.watcher.mtimes
         ).some(
             file =>
                 file.includes(windowsReactPath) || file.includes(unixReactPath)
+        );
+        console.log(
+            'TCL: handleClientReloading -> hasReactFileChanged',
+            hasReactFileChanged
         );
         if (!hasReactFileChanged) {
             logger.info('reloading the browser due to server side change');
