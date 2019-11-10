@@ -26,7 +26,7 @@ const entryPoints = {
     },
     web: {
         development: [
-            'webpack-hot-middleware/client?reload=true',
+            'webpack-hot-middleware/client',
             './src/dev-tools/client-dev-tools', // reloads in the event of server changes
             './src/client/client'
         ],
