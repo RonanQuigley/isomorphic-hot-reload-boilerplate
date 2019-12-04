@@ -14,66 +14,34 @@ import { ChunkExtractorManager, ChunkExtractor } from '@loadable/server';
 import path from 'path';
 const router = express.Router();
 
-const extractor = new ChunkExtractor({
-    statsFile: path.join(__dirname, '../client/loadable-stats.json')
-});
-
 /**
  * exports a function that returns a function for hot server middleware purposes
  */
 const serverSideRender = clientStats => async (req, res) => {
     const sheet = new ServerStyleSheet();
     try {
-        const client = apolloClientSSR(req);
+        const webExtractor = new ChunkExtractor({
+            statsFile: path.join(__dirname, '../client/loadable-stats.json')
+        });
+        console.log('TCL: webExtractor', webExtractor);
+        const jsx = webExtractor.collectChunks(<App />);
 
-        const app = sheet.collectStyles(
-            <ChunkExtractorManager extractor={extractor}>
-                <ApolloProvider client={client}>
-                    <StaticRouter location={req.url} context={{}}>
-                        <App />
-                    </StaticRouter>
-                </ApolloProvider>
-            </ChunkExtractorManager>
-        );
-        /**
-         * get the apollo client data setup before
-         * rendering the app to a string
-         */
-        await getDataFromTree(app);
+        const html = ReactDOMServer.renderToString(jsx);
 
-        const html = ReactDOMServer.renderToString(app);
-
-        const initialState = client.extract();
-
-        const styleTags = sheet.getStyleTags();
-
-        // const { js } = flushChunks(clientStats, {
-        //     chunkNames: flushChunkNames()
-        // });
-
-        if (process.env.NODE_ENV === 'development') {
-            logger.info('rendering page to client');
-        }
-        console.log(
-            'TCL: extractor.getScriptTags()',
-            extractor.getScriptTags()
-        );
-
+        res.set('content-type', 'text/html');
         res.send(`
-                <!doctype html>
-                    <html>
-                        <head>
-                            ${styleTags}
-                        </head>
-                        <body>
-                            <div id="root">${html}</div>          
-                            ${extractor.getScriptTags()}                   
-                            <script>window.__APOLLO_STATE__=${JSON.stringify(
-                                initialState
-                            ).replace(/</g, '\\u003c')};</script>
-                        </body>
-                </html>
-          `);
+      <!DOCTYPE html>
+      <html>
+        <head>
+        ${webExtractor.getLinkTags()}
+        ${webExtractor.getStyleTags()}
+        </head>
+        <body>
+          <div id="main">${html}</div>
+          ${webExtractor.getScriptTags()}
+        </body>
+      </html>
+    `);
     } catch (error) {
         // handle error
         logger.error(error);

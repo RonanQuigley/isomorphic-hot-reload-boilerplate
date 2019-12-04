@@ -35,26 +35,18 @@ const entryPoints = {
     }
 };
 
-const commonNodePlugins = [
-    new DotEnv(),
-    new webpack.optimize.LimitChunkCountPlugin({
-        // used due to react universal component chunking
-        // in reality we only need one chunk on the server
-        maxChunks: 1
-    })
-];
+const commonNodePlugins = [new DotEnv()];
 
 const commonWebPlugins = [
-    new webpack.NamedModulesPlugin(),
     new LoadablePlugin({
-        path: path.join(__dirname, '../'),
+        filename: path.join(__dirname, '../src/client/loadable-stats.json'),
         writeToDisk: true
     })
 ];
 
 const plugins = {
     node: {
-        development: [commonNodePlugins],
+        development: [...commonNodePlugins],
         production: [new CleanWebpackPlugin(), ...commonNodePlugins]
     },
     web: {

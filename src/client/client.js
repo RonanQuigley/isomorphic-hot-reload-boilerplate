@@ -1,25 +1,14 @@
-import ReactDOM from 'react-dom';
+import 'core-js';
 import React from 'react';
-import App from '@react-app/app';
-import { BrowserRouter } from 'react-router-dom';
-import { ApolloProvider } from 'react-apollo';
-import client from '@graphql/apollo-client';
+import { hydrate } from 'react-dom';
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { loadableReady } from '@loadable/component';
+import App from '../react/app';
 
 loadableReady(() => {
-    const root = document.getElementById('root');
-    ReactDOM.hydrate(
-        <ApolloProvider client={client}>
-            <BrowserRouter>
-                <App />
-            </BrowserRouter>
-        </ApolloProvider>,
-        root
-    );
+    const root = document.getElementById('main');
+    hydrate(<App />, root);
 });
-
-// change me to another colour
-document.body.style.background = 'red';
 
 if (module.hot) {
     module.hot.accept();

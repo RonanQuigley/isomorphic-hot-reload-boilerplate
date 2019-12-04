@@ -1,0 +1,415 @@
+{
+  "errors": [],
+  "warnings": [],
+  "version": "4.41.2",
+  "hash": "eecbfbabad8f1559e065",
+  "publicPath": "/",
+  "outputPath": "/home/ronan/work/isomorphic-hot-reload-boilerplate/dist/client",
+  "assetsByChunkName": {
+    "Y-file": "Y-file.eecbfbab.client.js",
+    "letters-A": "letters-A.eecbfbab.client.js",
+    "letters-A-css": "letters-A-css.eecbfbab.client.js",
+    "letters-B": "letters-B.eecbfbab.client.js",
+    "letters-C": "letters-C.eecbfbab.client.js",
+    "letters-D": "letters-D.eecbfbab.client.js",
+    "letters-E": "letters-E.eecbfbab.client.js",
+    "letters-F": "letters-F.eecbfbab.client.js",
+    "letters-Z-file": "letters-Z-file.eecbfbab.client.js",
+    "main": "eecbfbab.client.js"
+  },
+  "assets": [
+    {
+      "name": "Y-file.eecbfbab.client.js",
+      "size": 1980,
+      "chunks": [
+        "Y-file"
+      ],
+      "chunkNames": [
+        "Y-file"
+      ],
+      "info": {
+        "immutable": true
+      },
+      "emitted": false
+    },
+    {
+      "name": "eecbfbab.client.js",
+      "size": 3464781,
+      "chunks": [
+        "main"
+      ],
+      "chunkNames": [
+        "main"
+      ],
+      "info": {
+        "immutable": true
+      },
+      "emitted": false
+    },
+    {
+      "name": "letters-A-css.eecbfbab.client.js",
+      "size": 810,
+      "chunks": [
+        "letters-A-css"
+      ],
+      "chunkNames": [
+        "letters-A-css"
+      ],
+      "info": {
+        "immutable": true
+      },
+      "emitted": false
+    },
+    {
+      "name": "letters-A.eecbfbab.client.js",
+      "size": 3319,
+      "chunks": [
+        "letters-A"
+      ],
+      "chunkNames": [
+        "letters-A"
+      ],
+      "info": {
+        "immutable": true
+      },
+      "emitted": false
+    },
+    {
+      "name": "letters-B.eecbfbab.client.js",
+      "size": 2451,
+      "chunks": [
+        "letters-B"
+      ],
+      "chunkNames": [
+        "letters-B"
+      ],
+      "info": {
+        "immutable": true
+      },
+      "emitted": false
+    },
+    {
+      "name": "letters-C.eecbfbab.client.js",
+      "size": 2009,
+      "chunks": [
+        "letters-C"
+      ],
+      "chunkNames": [
+        "letters-C"
+      ],
+      "info": {
+        "immutable": true
+      },
+      "emitted": false
+    },
+    {
+      "name": "letters-D.eecbfbab.client.js",
+      "size": 2009,
+      "chunks": [
+        "letters-D"
+      ],
+      "chunkNames": [
+        "letters-D"
+      ],
+      "info": {
+        "immutable": true
+      },
+      "emitted": false
+    },
+    {
+      "name": "letters-E.eecbfbab.client.js",
+      "size": 2009,
+      "chunks": [
+        "letters-E"
+      ],
+      "chunkNames": [
+        "letters-E"
+      ],
+      "info": {
+        "immutable": true
+      },
+      "emitted": false
+    },
+    {
+      "name": "letters-F.eecbfbab.client.js",
+      "size": 2009,
+      "chunks": [
+        "letters-F"
+      ],
+      "chunkNames": [
+        "letters-F"
+      ],
+      "info": {
+        "immutable": true
+      },
+      "emitted": false
+    },
+    {
+      "name": "letters-Z-file.eecbfbab.client.js",
+      "size": 2059,
+      "chunks": [
+        "letters-Z-file"
+      ],
+      "chunkNames": [
+        "letters-Z-file"
+      ],
+      "info": {
+        "immutable": true
+      },
+      "emitted": false
+    }
+  ],
+  "filteredAssets": 0,
+  "entrypoints": {
+    "main": {
+      "chunks": [
+        "main"
+      ],
+      "assets": [
+        "eecbfbab.client.js"
+      ],
+      "children": {
+        "preload": [
+          {
+            "name": "letters-C",
+            "chunks": [
+              "letters-C"
+            ],
+            "assets": [
+              "letters-C.eecbfbab.client.js"
+            ]
+          }
+        ],
+        "prefetch": [
+          {
+            "name": "letters-D",
+            "chunks": [
+              "letters-D"
+            ],
+            "assets": [
+              "letters-D.eecbfbab.client.js"
+            ]
+          }
+        ]
+      },
+      "childAssets": {
+        "preload": [
+          "letters-C.eecbfbab.client.js"
+        ],
+        "prefetch": [
+          "letters-D.eecbfbab.client.js"
+        ]
+      }
+    }
+  },
+  "namedChunkGroups": {
+    "main": {
+      "chunks": [
+        "main"
+      ],
+      "assets": [
+        "eecbfbab.client.js"
+      ],
+      "children": {
+        "preload": [
+          {
+            "name": "letters-C",
+            "chunks": [
+              "letters-C"
+            ],
+            "assets": [
+              "letters-C.eecbfbab.client.js"
+            ]
+          }
+        ],
+        "prefetch": [
+          {
+            "name": "letters-D",
+            "chunks": [
+              "letters-D"
+            ],
+            "assets": [
+              "letters-D.eecbfbab.client.js"
+            ]
+          }
+        ]
+      },
+      "childAssets": {
+        "preload": [
+          "letters-C.eecbfbab.client.js"
+        ],
+        "prefetch": [
+          "letters-D.eecbfbab.client.js"
+        ]
+      }
+    },
+    "letters-A": {
+      "chunks": [
+        "letters-A"
+      ],
+      "assets": [
+        "letters-A.eecbfbab.client.js"
+      ],
+      "children": {},
+      "childAssets": {}
+    },
+    "letters-B": {
+      "chunks": [
+        "letters-B"
+      ],
+      "assets": [
+        "letters-B.eecbfbab.client.js"
+      ],
+      "children": {},
+      "childAssets": {}
+    },
+    "letters-C": {
+      "chunks": [
+        "letters-C"
+      ],
+      "assets": [
+        "letters-C.eecbfbab.client.js"
+      ],
+      "children": {},
+      "childAssets": {}
+    },
+    "letters-D": {
+      "chunks": [
+        "letters-D"
+      ],
+      "assets": [
+        "letters-D.eecbfbab.client.js"
+      ],
+      "children": {},
+      "childAssets": {}
+    },
+    "letters-E": {
+      "chunks": [
+        "letters-E"
+      ],
+      "assets": [
+        "letters-E.eecbfbab.client.js"
+      ],
+      "children": {},
+      "childAssets": {}
+    },
+    "letters-A-css": {
+      "chunks": [
+        "letters-A-css"
+      ],
+      "assets": [
+        "letters-A-css.eecbfbab.client.js"
+      ],
+      "children": {},
+      "childAssets": {}
+    },
+    "letters-A-js": {
+      "chunks": [
+        "letters-A"
+      ],
+      "assets": [
+        "letters-A.eecbfbab.client.js"
+      ],
+      "children": {},
+      "childAssets": {}
+    },
+    "letters-B-js": {
+      "chunks": [
+        "letters-B"
+      ],
+      "assets": [
+        "letters-B.eecbfbab.client.js"
+      ],
+      "children": {},
+      "childAssets": {}
+    },
+    "letters-C-js": {
+      "chunks": [
+        "letters-C"
+      ],
+      "assets": [
+        "letters-C.eecbfbab.client.js"
+      ],
+      "children": {},
+      "childAssets": {}
+    },
+    "letters-D-js": {
+      "chunks": [
+        "letters-D"
+      ],
+      "assets": [
+        "letters-D.eecbfbab.client.js"
+      ],
+      "children": {},
+      "childAssets": {}
+    },
+    "letters-E-js": {
+      "chunks": [
+        "letters-E"
+      ],
+      "assets": [
+        "letters-E.eecbfbab.client.js"
+      ],
+      "children": {},
+      "childAssets": {}
+    },
+    "letters-F": {
+      "chunks": [
+        "letters-F"
+      ],
+      "assets": [
+        "letters-F.eecbfbab.client.js"
+      ],
+      "children": {},
+      "childAssets": {}
+    },
+    "letters-F-js": {
+      "chunks": [
+        "letters-F"
+      ],
+      "assets": [
+        "letters-F.eecbfbab.client.js"
+      ],
+      "children": {},
+      "childAssets": {}
+    },
+    "letters-Z-file": {
+      "chunks": [
+        "letters-Z-file"
+      ],
+      "assets": [
+        "letters-Z-file.eecbfbab.client.js"
+      ],
+      "children": {},
+      "childAssets": {}
+    },
+    "letters-Z-file-js": {
+      "chunks": [
+        "letters-Z-file"
+      ],
+      "assets": [
+        "letters-Z-file.eecbfbab.client.js"
+      ],
+      "children": {},
+      "childAssets": {}
+    },
+    "Y-file": {
+      "chunks": [
+        "Y-file"
+      ],
+      "assets": [
+        "Y-file.eecbfbab.client.js"
+      ],
+      "children": {},
+      "childAssets": {}
+    }
+  },
+  "logging": {
+    "webpack.buildChunkGraph.visitModules": {
+      "entries": [],
+      "filteredEntries": 5,
+      "debug": false
+    }
+  },
+  "children": []
+}
