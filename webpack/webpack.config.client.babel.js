@@ -19,11 +19,9 @@ const clientConfig = {
     module: {
         rules: [
             {
-                exclude: /node_modules/,
                 test: /\.js$/,
-                // cache the directory for faster rebuilds
-                loader: 'babel-loader?cacheDirectory=true',
-                sideEffects: false
+                exclude: /node_modules/,
+                use: 'babel-loader'
             }
         ]
     },
@@ -65,12 +63,12 @@ const clientConfig = {
               ]
           },
     output: {
-        path: path.join(__dirname, '../dist/client'),
-        filename: development
-            ? '[hash:8].client.js'
-            : '[name].[contenthash].client.js',
-        publicPath: '/'
+        path: path.resolve(__dirname, '../dist/client'),
+        filename: '[name].js',
+        chunkFilename: '[name].chunk.js',
+        publicPath: '/dist/client'
     },
+    cache: development ? false : true,
     plugins: development
         ? [
               new webpack.HotModuleReplacementPlugin(),

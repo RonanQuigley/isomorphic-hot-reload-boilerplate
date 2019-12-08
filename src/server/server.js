@@ -39,9 +39,15 @@ const serverSideRender = clientStats => async (req, res) => {
 
         const styleTags = sheet.getStyleTags();
 
-        const { js } = flushChunks(clientStats, {
-            chunkNames: flushChunkNames()
+        const chunkNames = flushChunkNames();
+
+        const { js, styles, scripts, stylesheets } = flushChunks(clientStats, {
+            chunkNames
         });
+        console.log('TCL: styles', styles);
+        console.log('TCL: scripts', scripts);
+        console.log('TCL: stylesheets', stylesheets);
+        console.log('TCL: js', js.toString());
 
         if (process.env.NODE_ENV === 'development') {
             logger.info('rendering page to client');

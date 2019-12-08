@@ -33,10 +33,10 @@ function AppRouter() {
             <Route path="/" exact>
                 <A />
             </Route>
-            <Route path="/about/">
+            <Route path="/component-b">
                 <B />
             </Route>
-            <Route path="/users/">
+            <Route path="/component-c">
                 <C />
             </Route>
         </div>
