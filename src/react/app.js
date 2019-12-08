@@ -1,16 +1,16 @@
 import React from 'react';
-import universal from 'react-universal-component';
+import loadable from '@loadable/component';
 import { Route, Link } from 'react-router-dom';
 
-const A = universal(
+const A = loadable(() =>
     import(/* webpackChunkName: "component-a" */ `./component-a`)
 );
 
-const B = universal(
+const B = loadable(() =>
     import(/* webpackChunkName: "component-b" */ `./component-b`)
 );
 
-const C = universal(
+const C = loadable(() =>
     import(/* webpackChunkName: "component-c" */ `./component-c`)
 );
 

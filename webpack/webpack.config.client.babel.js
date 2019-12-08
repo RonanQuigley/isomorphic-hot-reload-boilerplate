@@ -6,6 +6,7 @@ import CompressionPlugin from 'compression-webpack-plugin';
 import BrotliPlugin from 'brotli-webpack-plugin';
 import LodashModuleReplacementPlugin from 'lodash-webpack-plugin';
 import path from 'path';
+import LoadablePlugin from '@loadable/webpack-plugin';
 
 const development = process.env.NODE_ENV === 'development';
 
@@ -73,7 +74,9 @@ const clientConfig = {
         ? [
               new webpack.HotModuleReplacementPlugin(),
               new webpack.NamedModulesPlugin(),
-              new LodashModuleReplacementPlugin()
+              new LoadablePlugin({
+                  writeToDisk: true
+              })
           ]
         : [
               new CleanWebpackPlugin(),
@@ -85,7 +88,9 @@ const clientConfig = {
               new ManifestPlugin(),
               new CompressionPlugin(),
               new BrotliPlugin(),
-              new LodashModuleReplacementPlugin()
+              new LoadablePlugin({
+                  writeToDisk: true
+              })
           ]
 };
 
