@@ -2,11 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 
 const LoadMe = () => {
-    return <Element>Load Me</Element>;
+    return <Element>Component A</Element>;
 };
 
 const Element = styled.div`
-    background: khaki;
+    background: yellow;
 `;
 
 export default LoadMe;

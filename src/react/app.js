@@ -1,91 +1,44 @@
 import React from 'react';
 import universal from 'react-universal-component';
 import { Route, Link } from 'react-router-dom';
-import { Query } from 'react-apollo';
-import gql from 'graphql-tag';
 
-const UniversalComponent = universal(
-    import(/* webpackChunkName: "give-me-a-chunk-name" */ `./load-me`)
+const A = universal(
+    import(/* webpackChunkName: "component-a" */ `./component-a`)
 );
 
-function Index() {
-    return <h2>Home</h2>;
-}
-
-function About() {
-    return <h2>About</h2>;
-}
-
-function Users() {
-    return <h2>Users</h2>;
-}
-
-const ssrQuery = gql`
-    {
-        ssrQuery
-    }
-`;
-
-const nonSSRQuery = gql`
-    {
-        nonSSRQuery
-    }
-`;
-
-const ApolloQuerySSRExample = () => (
-    <Query query={ssrQuery}>
-        {({ loading, data }) => {
-            if (loading) return <div>loading ssr query</div>;
-            return <div>{data.ssrQuery}</div>;
-        }}
-    </Query>
+const B = universal(
+    import(/* webpackChunkName: "component-b" */ `./component-b`)
 );
 
-const ApolloQueryNonSSRExample = () => (
-    <Query query={nonSSRQuery} ssr={false}>
-        {({ loading, data }) => {
-            if (loading) return <div>loading non ssr query</div>;
-            return <div>{data.nonSSRQuery}</div>;
-        }}
-    </Query>
+const C = universal(
+    import(/* webpackChunkName: "component-c" */ `./component-c`)
 );
-
-function Hooks() {
-    // Declare a new state variable, which we'll call "count"
-    const [count, setCount] = React.useState(0);
-
-    return (
-        <div>
-            <p>You clicked {count} times</p>
-            <button onClick={() => setCount(count + 1)}>Click me</button>
-        </div>
-    );
-}
 
 function AppRouter() {
     return (
         <div>
-            <UniversalComponent />
-            <Hooks />
-            <ApolloQueryNonSSRExample />
-            <ApolloQuerySSRExample />
-            <div>Just another div</div>
             <nav>
                 <ul>
                     <li>
-                        <Link to="/">Home</Link>
+                        <Link to="/">Component A</Link>
                     </li>
                     <li>
-                        <Link to="/about/">About</Link>
+                        <Link to="/component-b/">Component B</Link>
                     </li>
                     <li>
-                        <Link to="/users/">Users</Link>
+                        <Link to="/component-c/">Component C</Link>
                     </li>
                 </ul>
             </nav>
-            <Route path="/" exact component={Index} />
-            <Route path="/about/" component={About} />
-            <Route path="/users/" component={Users} />
+            <Route path="/" exact>
+                <A />
+            </Route>
+            <Route path="/about/">
+                <B />
+            </Route>
+            <Route path="/users/">
+                <C />
+            </Route>
         </div>
     );
 }
