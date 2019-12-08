@@ -80,7 +80,7 @@
     "create-migration": "db-migrate create --sql-file --config ./src/database/config.json --migrations-dir ./src/database/migrations",
     "db-down": "db-migrate down --config ./src/database/config.json --migrations-dir ./src/database/migrations -e dev",
     "db-up": "db-migrate up --config ./src/database/config.json --migrations-dir ./src/database/migrations -e dev",
-    "build:all": "cross-env NODE_ENV=production node -r @babel/register ./webpack/webpack.config.babel.js",
+    "build:all": "cross-env NODE_ENV=production node -r @babel/register ./webpack/webpack",
     "build:all:start": "npm-run-all -s build:all start:prod",
     "build:analyze": "cross-env ANALYZE=true NODE_ENV=production npm-run-all build:all",
     "start:prod": "cross-env NODE_ENV=production node ./dist/server/server.js",

@@ -6,10 +6,8 @@ import webpack from 'webpack';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 import webpackHotServerMiddleware from 'webpack-hot-server-middleware';
-import { configs as multiConfig } from '@webpack/webpack.config.babel.js';
-
-const clientConfig = find(multiConfig, { name: 'client' });
-const serverConfig = find(multiConfig, { name: 'server' });
+import clientConfig from '@webpack/webpack.config.client.babel.js';
+import serverConfig from '@webpack/webpack.config.server.babel.js';
 
 const { publicPath: clientPublicPath } = clientConfig.output;
 
