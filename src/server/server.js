@@ -33,13 +33,13 @@ const serverSideRender = clientStats => async (req, res) => {
         const html = ReactDOMServer.renderToString(jsx);
         // You can now collect your script tags
         const scriptTags = extractor.getScriptTags(); // or extractor.getScriptElements();
+        const styleTags = sheet.getStyleTags();
         // You can also collect your "preload/prefetch" links
-        console.log('TCL: scriptTags', scriptTags);
-
         res.send(`
                 <!doctype html>
                     <html>
                         <head>
+                            ${styleTags}
                         </head>
                         <body>
                             <div id="root">${html}</div>
@@ -50,6 +50,7 @@ const serverSideRender = clientStats => async (req, res) => {
     } catch (error) {
         // handle error
         logger.error(error);
+        res.send(error);
     } finally {
         sheet.seal();
     }

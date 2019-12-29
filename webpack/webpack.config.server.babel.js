@@ -19,7 +19,20 @@ const serverConfig = {
             {
                 test: /\.js$/,
                 exclude: /node_modules/,
-                use: 'babel-loader'
+                loader: 'babel-loader',
+                options: {
+                    /**
+                     * Extend the babel config by also using dynamic import node on the server.
+                     * This transpiles import() syntax to a Promise.resolve() call. The result
+                     * is that code splitting is disabled and only one chunk i.e. the main bundle will be emitted.
+                     *
+                     * Using webpack's LimitChunkCountPlugin is another option to do this, but comes with a
+                     * massive performance overhead. This is because it happens as a post-compilation step,
+                     * meaning that a lot of time is wasted calculating code split bundles that were
+                     * never going to be used on the server
+                     */
+                    plugins: ['dynamic-import-node']
+                }
             }
         ]
     },
@@ -32,6 +45,11 @@ const serverConfig = {
     },
     entry: development ? './src/server/server' : './src/server/app',
     devtool: development ? 'inline-module-source-map' : 'source-map',
+    // resolve: {
+    //     alias: {
+    //         fs: 'memfs'
+    //     }
+    // },
     optimization: development
         ? {}
         : {
@@ -49,12 +67,12 @@ const serverConfig = {
           },
     externals: undefined,
     plugins: [
-        new DotEnv(),
-        new webpack.optimize.LimitChunkCountPlugin({
-            // used due to react universal component chunking
-            // in reality we only need one chunk on the server
-            maxChunks: 1
-        })
+        new DotEnv()
+        // new webpack.optimize.LimitChunkCountPlugin({
+        //     // used due to react universal component chunking
+        //     // in reality we only need one chunk on the server
+        //     maxChunks: 1
+        // })
     ]
 };
 
