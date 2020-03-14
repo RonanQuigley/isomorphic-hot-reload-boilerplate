@@ -5,6 +5,7 @@ import UglifyJsPlugin from 'uglifyjs-webpack-plugin';
 import CompressionPlugin from 'compression-webpack-plugin';
 import BrotliPlugin from 'brotli-webpack-plugin';
 import LodashModuleReplacementPlugin from 'lodash-webpack-plugin';
+import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin';
 import path from 'path';
 import LoadablePlugin from '@loadable/webpack-plugin';
 
@@ -22,7 +23,14 @@ const clientConfig = {
             {
                 test: /\.js$/,
                 exclude: /node_modules/,
-                use: 'babel-loader'
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        cacheDirectory: true,
+                        cacheCompression: false,
+                        envName: 'browser'
+                    }
+                }
             }
         ]
     },
@@ -73,6 +81,9 @@ const clientConfig = {
     plugins: development
         ? [
               new webpack.HotModuleReplacementPlugin(),
+              new ReactRefreshWebpackPlugin({
+                  disableRefreshCheck: true
+              }),
               new webpack.NamedModulesPlugin(),
               new LoadablePlugin({
                   writeToDisk: true
