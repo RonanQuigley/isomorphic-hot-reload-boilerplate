@@ -31,7 +31,7 @@ function AppRouter() {
                 </ul>
             </nav>
             <Route path="/" exact>
-                {/* <A /> */}
+                <A />
             </Route>
             <Route path="/component-b">
                 <B />

@@ -12,7 +12,7 @@ const serverConfig = {
     mode: process.env.NODE_ENV,
     target: 'node',
     node: {
-        __dirname: false,
+        __dirname: false
     },
     module: {
         rules: [
@@ -31,17 +31,17 @@ const serverConfig = {
                      * meaning that a lot of time is wasted calculating code split bundles that were
                      * never going to be used on the server
                      */
-                    plugins: ['dynamic-import-node'],
-                },
-            },
-        ],
+                    plugins: ['dynamic-import-node']
+                }
+            }
+        ]
     },
     output: {
         path: path.join(__dirname, '../dist/server'),
         publicPath: '/',
         filename: '[name].js',
         // this module system is necessary for webpack hot server middleware
-        libraryTarget: 'commonjs2',
+        libraryTarget: 'commonjs2'
     },
     entry: development ? './src/server/server' : './src/server/app',
     devtool: development ? 'none' : 'source-map',
@@ -54,14 +54,14 @@ const serverConfig = {
                       sourceMap: true,
                       uglifyOptions: {
                           output: {
-                              comments: false,
-                          },
-                      },
-                  }),
-              ],
+                              comments: false
+                          }
+                      }
+                  })
+              ]
           },
     externals: [webpackNodeExternals()],
-    plugins: [new LodashModuleReplacementPlugin()],
+    plugins: [new LodashModuleReplacementPlugin()]
 };
 
 export default serverConfig;

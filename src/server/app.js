@@ -19,14 +19,14 @@ if (process.env.ENABLE_LOGGING === 'true') {
     app.use(morgan('dev'));
 }
 
-const listen = app => {
+const listen = (app) => {
     const port = process.env.PORT || 3000;
     app.listen(port);
     logger.info(`Server listening at port ${port}`);
 };
 
 if (process.env.NODE_ENV === 'development') {
-    setupDevApp(app).then(devApp => {
+    setupDevApp(app).then((devApp) => {
         listen(devApp);
         loadChrome();
     });

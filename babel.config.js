@@ -9,11 +9,11 @@ module.exports = (api) => {
                     corejs: '3.6.1',
                     // https://github.com/browserslist/browserslist#best-practices
                     targets: {
-                        browsers: ['defaults', '>0.5%', 'IE 11'],
-                    },
-                },
+                        browsers: ['defaults', '>0.5%', 'IE 11']
+                    }
+                }
             ],
-            '@babel/preset-react',
+            '@babel/preset-react'
         ],
         plugins: [
             'babel-plugin-styled-components',
@@ -31,10 +31,10 @@ module.exports = (api) => {
                         '@react-app': './src/react',
                         '@database': './src/database',
                         '@graphql': './src/graphql',
-                        '@webpack': './webpack',
-                    },
-                },
-            ],
+                        '@webpack': './webpack'
+                    }
+                }
+            ]
         ],
         // set retainLines and sourceMaps to true for proper debugging
         // otherwise you will get debugger errors for chrome
@@ -42,10 +42,10 @@ module.exports = (api) => {
         sourceMaps: true,
         env: {
             development: {
-                plugins: [],
+                plugins: []
             },
             test: {},
-            production: {},
-        },
+            production: {}
+        }
     };
 };

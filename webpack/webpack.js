@@ -8,12 +8,12 @@ import serverConfig from './webpack.config.server.babel';
 if (process.env.ANALYZE === 'true') {
     clientConfig.plugins.push(
         new BundleAnalyzerPlugin({
-            analyzerPort: 8888,
+            analyzerPort: 8888
         })
     );
     serverConfig.plugins.push(
         new BundleAnalyzerPlugin({
-            analyzerPort: 9999,
+            analyzerPort: 9999
         })
     );
 }
@@ -29,7 +29,7 @@ const compile = async (config) => {
         throw new Error(
             stats.toString({
                 errorDetails: true,
-                colors: true,
+                colors: true
             })
         );
     }
@@ -37,7 +37,7 @@ const compile = async (config) => {
         console.warn(
             stats.toString({
                 warnings: true,
-                colors: true,
+                colors: true
             })
         );
         return stats;

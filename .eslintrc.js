@@ -21,6 +21,6 @@ module.exports = {
         'prettier/prettier': 'error',
         'no-console': 'off',
         'no-unused-vars': ['error', { argsIgnorePattern: 'next' }],
-        'linebreak-style': ['error', 'windows']
+        'linebreak-style': 'off'
     }
 };
