@@ -8,12 +8,12 @@ import serverConfig from './webpack.config.server.babel';
 if (process.env.ANALYZE === 'true') {
     clientConfig.plugins.push(
         new BundleAnalyzerPlugin({
-            analyzerPort: 8888
+            analyzerPort: 8888,
         })
     );
     serverConfig.plugins.push(
         new BundleAnalyzerPlugin({
-            analyzerPort: 9999
+            analyzerPort: 9999,
         })
     );
 }
@@ -23,13 +23,13 @@ serverConfig.plugins.push(new CleanWebpackPlugin());
 
 const promisedWebpack = promisify(webpack);
 
-const compile = async config => {
+const compile = async (config) => {
     const stats = await promisedWebpack(config);
     if (stats.hasErrors()) {
         throw new Error(
             stats.toString({
                 errorDetails: true,
-                colors: true
+                colors: true,
             })
         );
     }
@@ -37,16 +37,12 @@ const compile = async config => {
         console.warn(
             stats.toString({
                 warnings: true,
-                colors: true
+                colors: true,
             })
         );
         return stats;
     }
-    console.log(
-        stats.toString({
-            colors: true
-        })
-    );
+
     return stats;
 };
 
@@ -58,18 +54,9 @@ const build = async () => {
         throw new Error(
             'Unable to convert client stats to json! We need this for Server Side Rendering.'
         );
-    /**
-     * Add the clientStats as an environment variable
-     * so that our server code can read it
-     */
-    serverConfig.plugins.push(
-        new webpack.DefinePlugin({
-            'process.env.CLIENT_STATS': JSON.stringify(clientStats.toJson())
-        })
-    );
     console.log('building server...');
     await compile(serverConfig);
     console.log('server build complete');
 };
 
-if (require.main === module) build().catch(err => console.error(err));
+if (require.main === module) build().catch((err) => console.error(err));

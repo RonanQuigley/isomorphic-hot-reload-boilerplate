@@ -22,14 +22,14 @@ const devMiddlewareRouter = express.Router();
  */
 const handleClientReloading = (mergedCompilers, clientMiddleware) => {
     const serverCompiler = find(mergedCompilers.compilers, {
-        name: 'server'
+        name: 'server',
     });
 
-    serverCompiler.hooks.afterEmit.tap('AfterServerHasRebuilt', comp => {
+    serverCompiler.hooks.afterEmit.tap('AfterServerHasRebuilt', (comp) => {
         const hasReactFileChanged = keys(
             comp.compiler.watchFileSystem.watcher.mtimes
         ).some(
-            file =>
+            (file) =>
                 file.includes(windowsReactPath) || file.includes(unixReactPath)
         );
         if (!hasReactFileChanged) {
@@ -39,13 +39,13 @@ const handleClientReloading = (mergedCompilers, clientMiddleware) => {
     });
 };
 
-export const setupDevApp = async baseApp => {
+export const setupDevApp = async (baseApp) => {
     const compilerInstance = webpack([clientConfig, serverConfig]);
 
     const devMiddleware = webpackDevMiddleware(compilerInstance, {
         publicPath: clientPublicPath,
         serverSideRender: true,
-        stats: 'errors-only'
+        stats: 'errors-only',
     });
 
     const clientCompiler = compilerInstance.compilers[0];
@@ -55,7 +55,7 @@ export const setupDevApp = async baseApp => {
      */
     const hotMiddleware = webpackHotMiddleware(clientCompiler, {
         stats: 'errors-only',
-        log: weblog
+        log: weblog,
     });
 
     /**
@@ -79,7 +79,7 @@ export const setupDevApp = async baseApp => {
     devMiddlewareRouter.use(hotServerMiddleware);
 
     const waitUntilServerIsValid = () =>
-        new Promise(resolve => devMiddleware.waitUntilValid(resolve));
+        new Promise((resolve) => devMiddleware.waitUntilValid(resolve));
 
     await waitUntilServerIsValid();
     handleClientReloading(compilerInstance, hotMiddleware);

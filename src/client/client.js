@@ -1,18 +1,18 @@
 import ReactDOM from 'react-dom';
 import React from 'react';
 import App from '@react-app/app';
+import { loadableReady } from '@loadable/component';
 import { BrowserRouter } from 'react-router-dom';
-const root = document.getElementById('root');
 
-ReactDOM.hydrate(
-    <BrowserRouter>
-        <App />
-    </BrowserRouter>,
-    root
-);
-
-// change me to another colour
-document.body.style.background = 'red';
+loadableReady(() => {
+    const root = document.getElementById('root');
+    ReactDOM.hydrate(
+        <BrowserRouter>
+            <App />
+        </BrowserRouter>,
+        root
+    );
+});
 
 if (module.hot) {
     module.hot.accept();

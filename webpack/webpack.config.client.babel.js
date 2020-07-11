@@ -16,7 +16,7 @@ const clientConfig = {
     mode: process.env.NODE_ENV,
     target: 'web',
     node: {
-        __dirname: false
+        __dirname: false,
     },
     module: {
         rules: [
@@ -28,20 +28,20 @@ const clientConfig = {
                     options: {
                         cacheDirectory: true,
                         cacheCompression: false,
-                        envName: 'browser'
-                    }
-                }
-            }
-        ]
+                        envName: 'browser',
+                    },
+                },
+            },
+        ],
     },
     entry: development
         ? [
               'webpack-hot-middleware/client',
               './src/dev-tools/client-dev-tools', // reloads in the event of server changes
-              './src/client/client'
+              './src/client/client',
           ]
         : './src/client/client',
-    devtool: development ? 'cheap-module-eval-source-map' : 'source-map',
+    devtool: development ? 'none' : 'source-map',
     optimization: development
         ? {}
         : {
@@ -56,38 +56,37 @@ const clientConfig = {
                       vendor: {
                           test: /[\\/]node_modules[\\/]/,
                           name: 'vendors',
-                          chunks: 'all'
-                      }
-                  }
+                          chunks: 'all',
+                      },
+                  },
               },
               minimizer: [
                   new UglifyJsPlugin({
                       sourceMap: true,
                       uglifyOptions: {
                           output: {
-                              comments: false
-                          }
-                      }
-                  })
-              ]
+                              comments: false,
+                          },
+                      },
+                  }),
+              ],
           },
     output: {
         path: path.resolve(__dirname, '../dist/client'),
         filename: '[name].js',
         chunkFilename: '[name].chunk.js',
-        publicPath: '/dist/client'
+        publicPath: '/dist/client',
     },
     cache: development ? false : true,
     plugins: development
         ? [
               new webpack.HotModuleReplacementPlugin(),
-              new ReactRefreshWebpackPlugin({
-                  disableRefreshCheck: true
-              }),
+              new ReactRefreshWebpackPlugin(),
               new webpack.NamedModulesPlugin(),
+              new LodashModuleReplacementPlugin(),
               new LoadablePlugin({
-                  writeToDisk: true
-              })
+                  writeToDisk: true,
+              }),
           ]
         : [
               new CleanWebpackPlugin(),
@@ -99,10 +98,11 @@ const clientConfig = {
               new ManifestPlugin(),
               new CompressionPlugin(),
               new BrotliPlugin(),
+              new LodashModuleReplacementPlugin(),
               new LoadablePlugin({
-                  writeToDisk: true
-              })
-          ]
+                  writeToDisk: true,
+              }),
+          ],
 };
 
 export default clientConfig;

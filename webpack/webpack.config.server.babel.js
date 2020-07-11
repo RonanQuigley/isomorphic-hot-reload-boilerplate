@@ -1,9 +1,9 @@
 import webpack from 'webpack';
-import DotEnv from 'dotenv-webpack';
 import UglifyJsPlugin from 'uglifyjs-webpack-plugin';
 import externals from 'webpack-node-externals';
 import LodashModuleReplacementPlugin from 'lodash-webpack-plugin';
 import path from 'path';
+import webpackNodeExternals from 'webpack-node-externals';
 
 const development = process.env.NODE_ENV === 'development';
 
@@ -12,7 +12,7 @@ const serverConfig = {
     mode: process.env.NODE_ENV,
     target: 'node',
     node: {
-        __dirname: false
+        __dirname: false,
     },
     module: {
         rules: [
@@ -31,25 +31,20 @@ const serverConfig = {
                      * meaning that a lot of time is wasted calculating code split bundles that were
                      * never going to be used on the server
                      */
-                    plugins: ['dynamic-import-node']
-                }
-            }
-        ]
+                    plugins: ['dynamic-import-node'],
+                },
+            },
+        ],
     },
     output: {
         path: path.join(__dirname, '../dist/server'),
         publicPath: '/',
         filename: '[name].js',
         // this module system is necessary for webpack hot server middleware
-        libraryTarget: 'commonjs2'
+        libraryTarget: 'commonjs2',
     },
     entry: development ? './src/server/server' : './src/server/app',
-    devtool: development ? 'inline-module-source-map' : 'source-map',
-    // resolve: {
-    //     alias: {
-    //         fs: 'memfs'
-    //     }
-    // },
+    devtool: development ? 'none' : 'source-map',
     optimization: development
         ? {}
         : {
@@ -59,21 +54,14 @@ const serverConfig = {
                       sourceMap: true,
                       uglifyOptions: {
                           output: {
-                              comments: false
-                          }
-                      }
-                  })
-              ]
+                              comments: false,
+                          },
+                      },
+                  }),
+              ],
           },
-    externals: undefined,
-    plugins: [
-        new DotEnv()
-        // new webpack.optimize.LimitChunkCountPlugin({
-        //     // used due to react universal component chunking
-        //     // in reality we only need one chunk on the server
-        //     maxChunks: 1
-        // })
-    ]
+    externals: [webpackNodeExternals()],
+    plugins: [new LodashModuleReplacementPlugin()],
 };
 
 export default serverConfig;
