@@ -1,12 +1,12 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
 const LoadMe = () => {
-    return <Element>Component B</Element>;
+  return <Element>Component B</Element>;
 };
 
 const Element = styled.div`
-    background: khaki;
+  background: khaki;
 `;
 
 export default LoadMe;

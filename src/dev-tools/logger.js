@@ -1,19 +1,19 @@
-import pino from 'pino';
+import pino from "pino";
 
 const environment = process.env.NODE_ENV;
 
 const prettyPrintConfig =
-    environment === 'development'
-        ? {
-              levelFirst: true,
-              translateTime: true,
-              ignore: 'pid,hostname'
-          }
-        : false;
+  environment === "development"
+    ? {
+        levelFirst: true,
+        translateTime: true,
+        ignore: "pid,hostname"
+      }
+    : false;
 
 const logger = pino({
-    prettyPrint: prettyPrintConfig,
-    environment: environment
+  prettyPrint: prettyPrintConfig,
+  environment: environment
 });
 
 export default logger;
