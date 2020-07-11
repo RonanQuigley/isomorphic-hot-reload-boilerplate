@@ -5,6 +5,17 @@
   "repository": "https://github.com/RonanQuigley/isomorphic-hot-reload-boilerplate.git",
   "author": "ronanquigley <info@ronanquigley.com>",
   "license": "MIT",
+  "husky": {
+    "hooks": {
+      "precommit": "lint-staged --subTaskConcurrency 1"
+    }
+  },
+  "lint-staged": {
+    "packages/**/*.js": [
+      "eslint",
+      "git add"
+    ]
+  },
   "dependencies": {
     "@babel/plugin-transform-regenerator": "^7.4.5",
     "@babel/runtime": "^7.4.5",
@@ -26,7 +37,9 @@
     "express": "^4.16.3",
     "express-static-gzip": "^2.0.5",
     "graphql": "^15.3.0",
+    "husky": "^4.2.5",
     "jest": "^26.1.0",
+    "lint-staged": "^10.2.11",
     "lodash": "^4.17.11",
     "morgan": "^1.9.0",
     "node-fetch": "^2.6.0",
